@@ -10,68 +10,97 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () { //homepage
+//homepage
+Route::get('/', function () { 
     return view('welcome');
 });
-
-Route::get('login', function () { //page inscription/connexion
+//page inscription/connexion
+Route::get('login', function () { 
         return view('welcome');
 });
-
-Route::group(['prefix' => 'ideasbox'], function () { //boite a idées
-    
-    Route::get('/', function() { //accueil
-            
+//handle inscription
+Route::post('login', function () { 
+    return view('welcome');
+});
+//boite a idées
+Route::group(['prefix' => 'ideasbox'], function () { 
+    //accueil
+    Route::get('/', function() { 
+        
     });
-    
-    Route::get('list', function() { //liste
+    //liste
+    Route::get('list', function() {
 
     }); 
-
-    Route::get('create', function() { //créer idée
+    //créer idée
+    Route::post('create', function() { 
 
     });
+    //créer idée par admin
+    Route::get('admin/create', function() { 
+
+    });
+    //post idée par admin
+    Route::post('admin/create', function () { 
+
 });
-
-Route::group(['prefix' => 'activitie'], function () { //activitées
-   
-    Route::get('/', function() { //accueil
+    //voir list idées par admin
+    Route::get('admin/manage', function() { 
 
     });
-
-    Route::get('liste', function() { //liste
+    //en faire une activité
+    Route::post('admin/manage', function() { 
 
     });
     
-    Route::get('signup/{id}', function() { //s'inscrire
+});
+//activités
+Route::group(['prefix' => 'activitie'], function () { 
+    //accueil
+    Route::get('/', function() {
 
     });
-
-    Route::get('past', function() { //liste anciennes
+    //liste
+    Route::get('liste', function() { 
 
     });
+    //s'inscrire
+    Route::post('signup/{id}', function() { 
 
-    Route::get('focus/{id}', function() { //focus sur ancienne
+    });
+    //liste anciennes
+    Route::get('past', function() { 
+
+    });
+    //focus sur ancienne
+    Route::get('focus/{id}', function() { 
+
+    });
+    //focus sur activité par admin
+    Route::get('admin/focus/{id}', function() { 
 
     });
 });
-
-Route::group(['prefix' => 'shop'], function () { //boutique
-    
-    Route::get('/', function() { //boutique accueil et liste
-
-    });
-
-    Route::get('shoppingcart', function() { //panier
+//boutique
+Route::group(['prefix' => 'shop'], function () { 
+    //boutique accueil et liste
+    Route::get('/', function() { 
 
     });
-
-    Route::get('order', function() { //commander
+    //panier
+    Route::get('shoppingcart', function() { 
 
     });
+    //commander
+    Route::get('order', function() { 
 
-    Route::get('admin/manage', function() { //gestion produit
+    });
+    //gestion produit
+    Route::get('admin/manage', function() { 
+
+    });
+    //admin créer produit
+    Route::get('create', function() { 
 
     });
 });
