@@ -11,6 +11,67 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function () { //homepage
     return view('welcome');
+});
+
+Route::get('login', function () { //page inscription/connexion
+        return view('welcome');
+});
+
+Route::group(['prefix' => 'ideasbox'], function () { //boite a idées
+    
+    Route::get('/', function() { //accueil
+            
+    });
+    
+    Route::get('list', function() { //liste
+
+    }); 
+
+    Route::get('create', function() { //créer idée
+
+    });
+});
+
+Route::group(['prefix' => 'activitie'], function () { //activitées
+   
+    Route::get('/', function() { //accueil
+
+    });
+
+    Route::get('liste', function() { //liste
+
+    });
+    
+    Route::get('signup/{id}', function() { //s'inscrire
+
+    });
+
+    Route::get('past', function() { //liste anciennes
+
+    });
+
+    Route::get('focus/{id}', function() { //focus sur ancienne
+
+    });
+});
+
+Route::group(['prefix' => 'shop'], function () { //boutique
+    
+    Route::get('/', function() { //boutique accueil et liste
+
+    });
+
+    Route::get('shoppingcart', function() { //panier
+
+    });
+
+    Route::get('order', function() { //commander
+
+    });
+
+    Route::get('admin/manage', function() { //gestion produit
+
+    });
 });
