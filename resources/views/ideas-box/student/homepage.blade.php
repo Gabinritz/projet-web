@@ -1,6 +1,31 @@
 @extends ('partials.layout', ['title' => 'Boite à idées'])
 
 @section ('content')
+<div class="container">
+<button class="btn" onclick="show()">AJOUTER UNE IDÉE</button>
+<div class="card hidden" id="addIdea">
+    <h2>Connexion</h2>
+    <form action="" method="post" class="form login__form">
+        <div class="group">      
+            <input type="text" required>
+            <span class="bar"></span>
+            <label>Adresse mail</label>
+        </div>
+        
+        <div class="group">      
+            <input type="password" required>
+            <span class="bar"></span>
+            <label>Mot de passe</label>
+        </div>
+
+        <div class="submit">
+            <button type="submit" class="btn login__submit">SE CONNECTER</button>
+        </div>
+    </form>
+    <p class="login__noaccount">Vous n'avez pas de compte ? <span class="login__change" onclick="changeLogin(1)">Inscrivez-vous</span></p>
+</div>
+</div>
+
 <div style="overflow-x: auto;">
 <table>
     <tr>
@@ -38,4 +63,12 @@
     </tr>
 </table>
 </div>
+
+<script>
+    function show() {
+        let card = document.getElementById('addIdea')
+        card.classList.remove('hidden')
+        card.classList.add('visible')
+    }
+</script>
 @endsection

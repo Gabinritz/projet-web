@@ -6,3 +6,20 @@ body {
 }
 h1,h2,h3,h4,h5,h6,p { margin: 0; }
 a { text-decoration: none; color: inherit; }
+
+.container {
+    width: 1200px;
+    margin: 32px auto 0 auto;
+}
+
+#addIdea .hidden {
+    height: 0;
+    transition-duration: 0.5s;
+    display: none;
+}
+
+#addIdea .visible {
+    height: auto;
+    transition-duration: 0.5s;
+    display: block;
+}
