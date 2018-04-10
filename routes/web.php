@@ -11,109 +11,134 @@
 |
 */
 //homepage
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [
+    'uses' => 'BdeController@getIndex',
+    'as' => 'index']);
+
 //page inscription/connexion
-Route::get('login', function () { 
-        return view('login');
-});
+Route::get('login',[
+    'uses' => 'BdeController@getLogin',
+    'as' => 'login']);
+
 //handle inscription
-Route::post('login', function () { 
-    return redirect()->route('welcome');
-});
+Route::post('login', [
+    'uses' => 'BdeController@postLogin',
+    'as' => 'login.post']);
+
 //boite a idées
 Route::group(['prefix' => 'ideasbox'], function () { 
+
     //accueil
-    Route::get('/', function() { 
-        return view('ideas-box.student.homepage');
-    });
+    Route::get('/', [
+        'uses' => 'IdeasBoxController@getIndex',
+        'as' => 'ideas.index']);
+
     //liste
-    Route::get('list', function() {
-        return view('ideas-box.student.list');
-    }); 
+    Route::get('list', [
+        'uses' => 'IdeasBoxController@getList',
+        'as' => 'ideas.list']);
+
     //créer idée
-    Route::post('create', function() { 
-        return view('ideas-box.student.create');
-    });
+    Route::post('create', [
+        'uses' => 'IdeasBoxController@postCreateIdea',
+        'as' => 'ideas.create.post']);
+
     //post idée par student 
     Route::post('create', function() { 
         return redirect()->route('ideas-box.student.create');
-    });
+    })->name('ideas.create.post');
+
     //créer idée par admin
-    Route::get('admin/create', function() { 
-        return view('ideas-box.admin.create');
-    });
+    Route::get('admin/create', [
+        'uses' => 'IdeasBoxController@getAdminCreateIdea',
+        'as' => 'ideas.admin.create']);
+
     //post idée par admin
-    Route::post('admin/create', function () { 
-        return redirect()->route('ideas-box.admin.create');
-});
+    Route::post('admin/create', [
+        'uses' => 'IdeasBoxController@postAdminCreateIdea',
+        'as' => 'ideas.admin.create.post']);
+
     //voir list idées par admin
     Route::get('admin/manage', function() { 
         return view('ideas-box.admin.manage');
-    });
+    })->name('ideas.admin.list');
+
     //en faire une activité
-    Route::post('admin/manage', function() { 
-        return redirect()->route('ideas-box.admin.manage');
-    });
+    Route::post('admin/manage', [
+        'uses' => 'IdeasBoxController@getAdminManage',
+        'as' => 'ideas.admin.manage']);
     
 });
+
 //activités
-Route::group(['prefix' => 'activitie'], function () { 
+Route::group(['prefix' => 'activities'], function () { 
+
     //accueil
-    Route::get('/', function() {
-        return view('activities.student.homepage');
-    });
+    Route::get('/', [
+        'uses' => 'ActivitiesController@getIndex',
+        'as' => 'activities.homepage']);
+
     //liste
-    Route::get('liste', function() { 
-        return view('activities.student.list');
-    });
+    Route::get('list', [
+        'uses' => 'ActivitiesController@getList',
+        'as' => 'activities.list']);
+
     //s'inscrire
-    Route::post('signup/{id}', function() { 
-        return redirect()->route('activities.student.list');
-    });
+    Route::post('signup/{id}', [
+        'uses' => 'ActivitiesController@postSignUp',
+        'as' => 'activities.signup.post']);
+
     //liste anciennes
-    Route::get('past', function() { 
-        return view('activities.student.past');
-    });
+    Route::get('past', [
+        'uses' => 'ActivitiesController@getIndex',
+        'as' => 'activities.past']);
+
     //focus sur ancienne
-    Route::get('focus/{id}', function() { 
-        return view('activities.student.focus');
-    });
+    Route::get('focus/{id}', [
+        'uses' => 'ActivitiesController@getIndex',
+        'as' => 'activities.focus']);
+
     //focus sur activité par admin
-    Route::get('admin/focus/{id}', function() { 
-        return view('activities.admin.past');
-    });
+    Route::get('admin/focus/{id}', [
+        'uses' => 'ActivitiesController@getIndex',
+        'as' => 'activities.admin.focus']);
 });
+
 //boutique
 Route::group(['prefix' => 'shop'], function () { 
-    //boutique accueil et liste
-    Route::get('/', function() { 
-        return view('shop.student.homepage');
-    });
-    //panier
-    Route::get('shoppingcart', function() { 
-        return view('shop.student.shoppingcart');
-    });
-    //commander
-    Route::get('order', function() { 
-        return view('shop.student.order');
-    });
-    //gestion produit
-    Route::get('admin/manage', function() { 
-        return view('shop.admin.manage');
-    });
-    //post gérer produit
-    Route::get('admin/manage', function() { 
-        return redirect()->route('shop.admin.manage');
-    });
-    //admin créer produit
-    Route::get('admin/create', function() { 
-        return view('shop.admin.create');
-    });
-    // post créer produit
-    Route::post('admin/create', function() { 
-        return redirect()->route('shop.student.homepage');
-    });
 
+    //boutique accueil et liste
+    Route::get('/', [
+        'uses' => 'ShopController@getIndex',
+        'as' => 'shop.homepage']);
+
+    //panier
+    Route::get('shoppingcart', [
+        'uses' => 'ShopController@getShoppingCart',
+        'as' => 'shop.shoppingcart']);
+
+    //commander
+    Route::get('order', [
+        'uses' => 'ShopController@getOrder',
+        'as' => 'shop.order']);
+
+    //gestion produit
+    Route::get('admin/manage', [
+        'uses' => 'ShopController@getAdminManage',
+        'as' => 'shop.admin.manage']);
+
+    //post gérer produit
+    Route::post('admin/manage', [
+        'uses' => 'ShopController@postAdminManage',
+        'as' => 'shop.admin.manage.post']);
+
+    //admin créer produit
+    Route::get('admin/create', [
+        'uses' => 'ShopController@getAdminCreate',
+        'as' => 'shop.admin.createe']);
+
+    // post créer produit
+    Route::post('admin/create', [
+        'uses' => 'ShopController@postAdminCreate',
+        'as' => 'shop.admin.create.post']);
 });
