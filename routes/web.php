@@ -22,7 +22,7 @@ Route::get('login', function () { //page inscription/connexion
 Route::group(['prefix' => 'ideasbox'], function () { //boite a idées
     
     Route::get('/', function() { //accueil
-            
+            return view('ideas-box.student.homepage');
     });
     
     Route::get('list', function() { //liste

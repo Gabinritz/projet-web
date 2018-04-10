@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>{{ $title or 'Welcome' }} | BDE eXia.CESI</title>
 </head>
 <body>
