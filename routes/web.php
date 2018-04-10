@@ -16,7 +16,7 @@ Route::get('/', function () { //homepage
 });
 
 Route::get('login', function () { //page inscription/connexion
-        return view('welcome');
+        return view('login');
 });
 
 Route::group(['prefix' => 'ideasbox'], function () { //boite a idées
