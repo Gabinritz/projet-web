@@ -1,0 +1,51 @@
+.hidden {
+    display: none;
+}
+
+.login__head {
+    width: 100vw;
+    display: flex;
+}
+
+.login__card {
+    margin: auto;
+    width: 75%;
+    position: absolute;
+    top: calc(50% + 64px);
+    left: 50%;
+    transform: translate(-50%,-50%);
+
+    h2 {
+        font-family: 'Roboto Slab', serif;
+        font-size: 2rem;
+        color: #F44336;
+        margin-bottom: 1rem;
+    }
+}
+
+.login__change {
+    color: #3F51B5;
+    cursor: pointer;
+}
+
+.top {
+    width: 100vw;
+    height: 50%;
+    background-color: #EEEEEE;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.bot {
+    width: 100vw;
+    height: 50%;
+    background-color: #d90119;
+    position: absolute;
+    top: 50%;
+    left: 0;
+}
+
+#login__logo {
+    width: 128px;
+    margin: 16px auto 0 auto;
+}

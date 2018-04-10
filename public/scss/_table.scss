@@ -1,0 +1,19 @@
+table {
+    margin: 3rem auto 0 auto;
+    border-collapse: collapse;
+    width: 90%;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    min-width: 128px;
+}
+
+.thumb {
+    cursor: pointer;
+    margin-right: 1rem;
+    transition: 0.4s;
+}
+.thumb:hover { color: #4CAF50; }

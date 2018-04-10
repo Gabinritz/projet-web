@@ -9,7 +9,7 @@
 
 <div class="card login__card" id="login">
     <h2>Connexion</h2>
-    <form action="" method="post" class="login__form">
+    <form action="" method="post" class="form login__form">
         <div class="group">      
             <input type="text" required>
             <span class="bar"></span>
@@ -31,7 +31,7 @@
 
 <div class="card login__card hidden" id="register">
     <h2>Inscription</h2>
-    <form action="" method="post" class="login__form">
+    <form action="" method="post" class="form login__form">
         <div class="group">      
             <input type="text" required>
             <span class="bar"></span>
