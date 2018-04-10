@@ -1,30 +1,132 @@
 header {
     background-color: #FFFFFF;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    height: 96px;
-    line-height: 96px;
-    z-index: 999;
+    padding: 16px 0 16px 32px;
+}
 
-    #logo {
-        height: 72px;
-        margin-top: 12px;
+#logo, nav, li {
+    display: inline-block;
+}
+
+#logo {
+    height: 72px;
+}
+
+
+nav {
+    float: right;
+    line-height: 48px;
+    vertical-align: top;
+}
+
+li {
+    margin-right: 32px;
+}
+li a, .button {
+    text-decoration: none;
+    color: #333;
+}
+
+.button {
+    text-transform: uppercase;
+    float: right;
+    margin-top: -16px;
+    line-height: 84px;
+    height: 84px;
+    text-decoration: none;
+    padding: 0 16px;
+}
+
+
+#hamburger, #hamburger-content {
+    display: inline;
+}
+
+#hamburger-button {
+    display: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 30px;
+    vertical-align: top;
+    padding: 0;
+    line-height: 47px;
+    float: right;
+    margin-right: 32px;
+    margin-top: 16px;
+}
+
+#hamburger-overlay {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .4);
+}
+
+#hamburger-sidebar {
+    display: none;
+    position: fixed;
+    width: 84%;
+    z-index: 20;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #FFF;
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform .2s ease-out;
+}
+#hamburger-sidebar li {
+    display: block;
+}
+#hamburger-sidebar-header {
+    background-color: red;
+    background-size: cover;
+    height: 128px;
+}
+#hamburger-sidebar-body {
+    padding: 16px 8px;
+}
+#hamburger-sidebar-body li:before {
+    content: ' ';
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 4px;
+    margin-right: 16px;
+    width: 24px;
+    height: 24px;
+}
+
+#hamburger-sidebar-body .button {
+    margin-top: 16px;
+    text-align: center;
+    float: none;
+    display: block;
+    height: auto;
+    line-height: inherit;
+    padding: 10px;
+}
+
+
+@media screen and (max-width: 1024px) {
+    nav {
+        float: none;
     }
 
-    nav {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        min-width: 50%;
-        a {
-            color: #F44336;
-            font-weight: 500;
-            font-size: 1rem;
-            margin-right: 32px;
-            &:last-child { margin-right: 0; }
-            &:hover { color: rgba(0,0,0,0.87); transition: ease-in-out 0.2s; }
-        }
+    #hamburger-content {
+        display: none;
+    }
+
+    #hamburger-button, #hamburger-sidebar,
+    .hamburger-activated #hamburger-overlay {
+        display: block;
+    }
+
+    .hamburger-activated #hamburger-sidebar {
+        transform: translateX(0);
     }
 }
