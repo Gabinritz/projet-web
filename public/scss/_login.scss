@@ -18,7 +18,7 @@
     h2 {
         font-family: 'Roboto Slab', serif;
         font-size: 2rem;
-        color: #F44336;
+        color: $mainColor;
         margin-bottom: 1rem;
     }
 }
@@ -48,4 +48,15 @@
 #login__logo {
     width: 128px;
     margin: 16px auto 0 auto;
+}
+
+.test {
+    animation-name: test;
+    animation-duration: 1s;
+    animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+  
+@keyframes test {
+    from {left: 0px;} 
+    to {left: 50%;}
 }

@@ -1,7 +1,14 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700|Roboto:300,400,500,700");
+::selection {
+  color: white;
+  background: #d90119; }
+
 * {
   box-sizing: border-box;
   outline: none; }
+
+html {
+  font-size: 100%; }
 
 body {
   margin: 0;
@@ -18,32 +25,29 @@ a {
 header {
   background-color: #FFFFFF;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  padding: 16px 0 16px 32px; }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 10vh;
+  padding: 0 5%; }
+  header a {
+    margin-right: 2rem; }
 
 #logo, nav, li {
   display: inline-block; }
 
 #logo {
-  height: 72px; }
-
-nav {
-  float: right;
-  line-height: 48px;
-  vertical-align: top; }
+  height: 8vh; }
 
 li {
-  margin-right: 32px; }
-
-li a, .button {
-  text-decoration: none;
-  color: #333; }
+  color: #212121;
+  font-weight: 500; }
+  li:last-child {
+    margin-right: 0; }
 
 .button {
   text-transform: uppercase;
   float: right;
-  margin-top: -16px;
-  line-height: 84px;
-  height: 84px;
   text-decoration: none;
   padding: 0 16px; }
 
@@ -56,17 +60,13 @@ li a, .button {
   background: none;
   border: none;
   font-size: 30px;
-  vertical-align: top;
   padding: 0;
-  line-height: 47px;
-  float: right;
-  margin-right: 32px;
-  margin-top: 16px; }
+  float: right; }
 
 #hamburger-overlay {
   display: none;
   position: fixed;
-  z-index: 10;
+  z-index: 998;
   top: 0;
   left: 0;
   width: 100%;
@@ -77,7 +77,7 @@ li a, .button {
   display: none;
   position: fixed;
   width: 84%;
-  z-index: 20;
+  z-index: 999;
   height: 100%;
   top: 0;
   left: 0;
@@ -87,12 +87,19 @@ li a, .button {
   transition: transform .2s ease-out; }
 
 #hamburger-sidebar li {
-  display: block; }
+  display: block;
+  padding-right: 1rem; }
+  #hamburger-sidebar li:hover {
+    background-color: #EEEEEE; }
 
 #hamburger-sidebar-header {
-  background-color: red;
-  background-size: cover;
-  height: 128px; }
+  background-color: #d90119;
+  height: 8rem;
+  display: flex; }
+  #hamburger-sidebar-header #logo-link {
+    margin: auto; }
+    #hamburger-sidebar-header #logo-link #hamburger-logo {
+      height: 6rem; }
 
 #hamburger-sidebar-body {
   padding: 16px 8px; }
@@ -106,6 +113,26 @@ li a, .button {
   width: 24px;
   height: 24px; }
 
+#hamburger-sidebar-body .menu-item-1:before {
+  background-image: url(../img/ic_event_busy_black_48px.svg);
+  background-size: contain; }
+
+#hamburger-sidebar-body .menu-item-2:before {
+  background-image: url(../img/ic_event_black_48px.svg);
+  background-size: contain; }
+
+#hamburger-sidebar-body .menu-item-3:before {
+  background-image: url(../img/ic_inbox_black_48px.svg);
+  background-size: contain; }
+
+#hamburger-sidebar-body .menu-item-4:before {
+  background-image: url(../img/ic_shopping_cart_black_48px.svg);
+  background-size: contain; }
+
+#hamburger-sidebar-body .menu-item-5:before {
+  background-image: url(../img/ic_account_circle_black_48px.svg);
+  background-size: contain; }
+
 #hamburger-sidebar-body .button {
   margin-top: 16px;
   text-align: center;
@@ -115,9 +142,11 @@ li a, .button {
   line-height: inherit;
   padding: 10px; }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1200px) {
   nav {
-    float: none; }
+    line-height: 4rem; }
+    nav a {
+      margin-right: 0; }
 
   #hamburger-content {
     display: none; }
@@ -128,6 +157,12 @@ li a, .button {
 
   .hamburger-activated #hamburger-sidebar {
     transform: translateX(0); } }
+@media screen and (max-height: 500px) {
+  header {
+    height: 6rem; }
+
+  #logo {
+    height: 5rem; } }
 .accueil {
   display: flex;
   height: calc(100vh - 128px);
@@ -138,10 +173,8 @@ li a, .button {
   .accueil h1 {
     font-size: 4rem;
     font-family: 'Roboto Slab', serif;
-    font-weight: 800; }
-
-.hidden {
-  display: none; }
+    font-weight: 800;
+    text-align: center; }
 
 .login__head {
   width: 100vw;
@@ -152,7 +185,7 @@ li a, .button {
   padding: 1rem;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   text-align: center;
-  z-index: 999; }
+  z-index: 100; }
   .card .form {
     text-align: center;
     padding: 2rem 0; }
@@ -162,12 +195,17 @@ li a, .button {
   margin-bottom: 4rem;
   display: inline-block;
   width: 66%; }
+  .group:last-child {
+    margin-bottom: 0; }
 
-.group:last-child {
-  margin-bottom: 0; }
+.group.half {
+  width: 40%;
+  margin-right: 2rem; }
+  .group.half:last-child {
+    margin-right: 0; }
 
 input {
-  font-size: 1.2rem;
+  font-size: 1rem;
   padding: 10px 0;
   display: block;
   width: 100%;
@@ -180,7 +218,7 @@ input:focus {
 
 label {
   color: #999;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: normal;
   position: absolute;
   pointer-events: none;
@@ -225,7 +263,7 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: 1rem;
   cursor: pointer;
   transition-duration: 0.4s; }
   .btn:hover {
@@ -293,5 +331,66 @@ th, td {
 #login__logo {
   width: 128px;
   margin: 16px auto 0 auto; }
+
+.test {
+  animation-name: test;
+  animation-duration: 1s;
+  animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1); }
+
+@keyframes test {
+  from {
+    left: 0px; }
+  to {
+    left: 50%; } }
+.addIdea__fixed {
+  cursor: pointer;
+  height: 2rem;
+  color: #FFFFFF;
+  line-height: 2rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  border-top: 2px solid #EEEEEE;
+  background-color: #F44336;
+  z-index: 200; }
+
+#addIdea {
+  position: fixed;
+  width: 100vw;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: none;
+  border: 2px solid #EEEEEE;
+  border-bottom: 0; }
+
+#addIdea.hidden {
+  display: none; }
+
+#addIdea.visible {
+  display: block; }
+
+.slideUp {
+  animation-name: slideUp;
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1); }
+
+@keyframes slideUp {
+  from {
+    bottom: -350px; }
+  to {
+    bottom: 2rem; } }
+.slideDown {
+  animation-name: slideDown;
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1); }
+
+@keyframes slideDown {
+  from {
+    bottom: 2rem; }
+  to {
+    bottom: -350px; } }
 
 /*# sourceMappingURL=main.css.map */

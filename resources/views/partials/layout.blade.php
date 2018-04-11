@@ -2,7 +2,7 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
@@ -16,18 +16,20 @@
             <div id="hamburger-content">
                 <nav>
                     <ul>
-                        <li><a href="./activite/past">ACTIVITÉS PASSÉES</a></li>
-                        <li><a href="./activite">ACTIVITÉS</a></li>
-                        <li><a href="./ideasbox">BOITE À IDÉES</a></li>
-                        <li><a href="./shop">BOUTIQUE</a></li>
-                        <li><a href="./login">S'INSCRIRE / SE CONNECTER</a></li>
+                        <a href="./activite/past"><li class="menu-item-1">ACTIVITÉS PASSÉES</li></a>
+                        <a href="./activite"><li class="menu-item-2">ACTIVITÉS</li></a>
+                        <a href="./ideasbox"><li class="menu-item-3">BOITE À IDÉES</li></a>
+                        <a href="./shop"><li class="menu-item-4">BOUTIQUE</li></a>
+                        <a href="./login"><li class="menu-item-5">S'INSCRIRE / SE CONNECTER</li></a>
                     </ul>
                     
                 </nav>
             </div>
-            <button id="hamburger-button">&#9776</button>
+            <button class="button" id="hamburger-button">&#9776</button>
             <div id="hamburger-sidebar">
-                <div id="hamburger-sidebar-header"></div>
+                <div id="hamburger-sidebar-header">
+                    <a href="./" id="logo-link"><img src="{{ asset('img/logo.png') }}" alt="Logo du BDE" id="hamburger-logo"></a>
+                </div>
                 <div id="hamburger-sidebar-body"></div>
             </div>
             <div id="hamburger-overlay"></div>

@@ -1,6 +1,15 @@
+::selection {
+    color: white;
+    background: $logoColor;
+}
+
 * {
     box-sizing: border-box;
     outline: none;
+}
+
+html {
+    font-size: 100%;
 }
 
 body {

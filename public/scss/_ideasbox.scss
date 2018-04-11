@@ -1,0 +1,33 @@
+.addIdea__fixed {
+    cursor: pointer;
+    height: 2rem;
+    color: #FFFFFF;
+    line-height: 2rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    border-top: 2px solid #EEEEEE;
+    background-color: $mainColor;
+    z-index: 200;
+}
+
+#addIdea {
+    position: fixed;
+    width: 100vw;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: none;
+    border: 2px solid #EEEEEE;
+    border-bottom: 0;
+}
+
+#addIdea.hidden {
+    display: none;
+}
+
+#addIdea.visible {
+    display: block;
+}

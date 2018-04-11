@@ -7,7 +7,7 @@
     </div>
 </div>
 
-<div class="card login__card" id="login">
+<div class="card login__card test" id="login">
     <h2>Connexion</h2>
     <form action="" method="post" class="form login__form">
         <div class="group">      
@@ -29,28 +29,32 @@
     <p class="login__noaccount">Vous n'avez pas de compte ? <span class="login__change" onclick="changeLogin(1)">Inscrivez-vous</span></p>
 </div>
 
-<div class="card login__card hidden" id="register">
+<div class="card login__card hidden test" id="register">
     <h2>Inscription</h2>
     <form action="" method="post" class="form login__form">
-        <div class="group">      
-            <input type="text" required>
-            <span class="bar"></span>
-            <label>Nom</label>
+        <div class="group-part">
+            <div class="group half">      
+                <input type="text" required>
+                <span class="bar"></span>
+                <label>Nom</label>
+            </div>
+            <div class="group half">      
+                <input type="text" required>
+                <span class="bar"></span>
+                <label>Prénom</label>
+            </div>
         </div>
-        <div class="group">      
-            <input type="text" required>
-            <span class="bar"></span>
-            <label>Prénom</label>
-        </div>
-        <div class="group">      
-            <input type="text" required>
-            <span class="bar"></span>
-            <label>Adresse mail</label>
-        </div>
-        <div class="group">      
-            <input type="password" required>
-            <span class="bar"></span>
-            <label>Mot de passe</label>
+        <div class="groupe-part">
+            <div class="group half">      
+                <input type="text" required>
+                <span class="bar"></span>
+                <label>Adresse mail</label>
+            </div>
+            <div class="group half">      
+                <input type="password" required>
+                <span class="bar"></span>
+                <label>Mot de passe</label>
+            </div>
         </div>
 
         <div class="submit">
