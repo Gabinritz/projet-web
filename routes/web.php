@@ -44,10 +44,10 @@ Route::group(['prefix' => 'ideasbox'], function () {
         'as' => 'ideas.create.post']);
 
     //post idée par student 
-    Route::post('create', function() { 
-        return redirect()->route('ideas-box.student.create');
-    })->name('ideas.create.post');
-
+    Route::post('create', [
+        'uses' => 'IdeasBoxController@postCreateIdea',
+        'as' => 'ideas.create.post']);
+    
     //créer idée par admin
     Route::get('admin/create', [
         'uses' => 'IdeasBoxController@getAdminCreateIdea',
@@ -59,14 +59,14 @@ Route::group(['prefix' => 'ideasbox'], function () {
         'as' => 'ideas.admin.create.post']);
 
     //voir list idées par admin
-    Route::get('admin/manage', function() { 
-        return view('ideas-box.admin.manage');
-    })->name('ideas.admin.list');
+    Route::get('admin/manage', [
+        'uses' => 'IdeasBoxController@getAdminManage',
+        'as' => 'ideas.admin.manage']);
 
     //en faire une activité
     Route::post('admin/manage', [
-        'uses' => 'IdeasBoxController@getAdminManage',
-        'as' => 'ideas.admin.manage']);
+        'uses' => 'IdeasBoxController@postAdminManage',
+        'as' => 'ideas.admin.manage.post']);
     
 });
 

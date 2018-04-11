@@ -16,5 +16,6 @@ class BdeController extends Controller
 
     public function postLogin() {
         return redirect()->route('welcome');
+        //validation
     }
 }
