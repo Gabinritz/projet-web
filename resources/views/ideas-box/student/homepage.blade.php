@@ -40,22 +40,21 @@
 </div>
 
 <div class="card hidden slideUp" id="addIdea">
-    <h2>Connexion</h2>
     <form action="" method="post" class="form login__form">
         <div class="group">      
             <input type="text" required>
             <span class="bar"></span>
-            <label>Adresse mail</label>
+            <label>Nom de l'activité</label>
         </div>
         
         <div class="group">      
-            <input type="password" required>
+            <input type="text" required>
             <span class="bar"></span>
-            <label>Mot de passe</label>
+            <label>Description (255 max)</label>
         </div>
 
         <div class="submit">
-            <button type="submit" class="btn login__submit">SE CONNECTER</button>
+            <button type="submit" class="btn login__submit">VALIDER</button>
         </div>
     </form>
 </div>

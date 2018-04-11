@@ -76,7 +76,7 @@ input:focus ~ label, input:valid ~ label {
 input:focus ~ .bar:before, input:focus ~ .bar:after { width:50%; }
 
 .btn {
-    background-color: #F44336; /* Green */
+    background-color: $logoColor;
     border: none;
     color: white;
     padding: 15px 32px;

@@ -256,8 +256,7 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
   width: 50%; }
 
 .btn {
-  background-color: #F44336;
-  /* Green */
+  background-color: #d90119;
   border: none;
   color: white;
   padding: 15px 32px;
