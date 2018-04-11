@@ -16,11 +16,11 @@
             <div id="hamburger-content">
                 <nav>
                     <ul>
-                        <a href="./activite/past"><li class="menu-item-1">ACTIVITÉS PASSÉES</li></a>
-                        <a href="./activite"><li class="menu-item-2">ACTIVITÉS</li></a>
-                        <a href="./ideasbox"><li class="menu-item-3">BOITE À IDÉES</li></a>
-                        <a href="./shop"><li class="menu-item-4">BOUTIQUE</li></a>
-                        <a href="./login"><li class="menu-item-5">S'INSCRIRE / SE CONNECTER</li></a>
+                        <a href="{{ route('activities.past') }}"><li class="menu-item-1">ACTIVITÉS PASSÉES</li></a>
+                        <a href="{{ route('activities.index') }}"><li class="menu-item-2">ACTIVITÉS</li></a>
+                        <a href="{{ route('ideas.index') }}"><li class="menu-item-3">BOITE À IDÉES</li></a>
+                        <a href="{{ route('shop.index') }}"><li class="menu-item-4">BOUTIQUE</li></a>
+                        <a href="{{ route('login') }}"><li class="menu-item-5">S'INSCRIRE / SE CONNECTER</li></a>
                     </ul>
                     
                 </nav>

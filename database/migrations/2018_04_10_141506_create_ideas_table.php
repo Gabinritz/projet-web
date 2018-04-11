@@ -17,6 +17,7 @@ class CreateIdeasTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('name');
+            $table->string('nominator');
             $table->text('description');
         });
     }

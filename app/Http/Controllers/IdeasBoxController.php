@@ -10,7 +10,7 @@ class IdeasBoxController extends Controller
 {
     public function getIndex() {
         $ideas = Idea::all();
-        return view('ideas-box.student.homepage', ['ideas' => $ideas]);
+        return view('ideas-box.student.index', ['ideas' => $ideas]);
     }
 
     public function getLikeIndex($id) {
@@ -20,9 +20,15 @@ class IdeasBoxController extends Controller
         return redirect()->back();
     }
 
-    public function postCreateIdea() {
-        return redirect()->view('ideas-box.student.homepage');
-        //validation et envoyer idée a bdd
+    public function postCreateIdea(Request $request) {
+        //validation a faire en java
+        $idea = new Idea([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'nominator' => 'GabinTest'
+        ]);
+        $idea->save();
+        return redirect()->route('ideas.index')->with('info', 'Idée Ajoutée :' . $request->input('name'));
     }
 
     public function postAdminCreateIdea() {

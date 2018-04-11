@@ -9,7 +9,7 @@ class ActivitiesController extends Controller
 {
     public function getIndex() {
         $activities = Activity::all();
-        return view('activities.student.homepage', ['activities' => $activities]);
+        return view('activities.student.index', ['activities' => $activities]);
     }
 
     public function postSignUp() {
@@ -18,7 +18,7 @@ class ActivitiesController extends Controller
     }
 
     public function getPast() {
-        $activities = Activity::where(); //trouver comment prendre anciennes
+        //$activities = Activity::where(); //trouver comment prendre anciennes
         return view('activities.student.past');
     }
 

@@ -67,7 +67,7 @@ Route::group(['prefix' => 'activities'], function () {
     //Index
     Route::get('/', [
         'uses' => 'ActivitiesController@getIndex',
-        'as' => 'activities.homepage']);
+        'as' => 'activities.index']);
 
     //Handle Inscription
     Route::post('signup/{id}', [
@@ -76,7 +76,7 @@ Route::group(['prefix' => 'activities'], function () {
 
     //Activities Old
     Route::get('past', [
-        'uses' => 'ActivitiesController@getIndex',
+        'uses' => 'ActivitiesController@getPast',
         'as' => 'activities.past']);
 
     //Focus Student Old
@@ -96,7 +96,7 @@ Route::group(['prefix' => 'shop'], function () {
     //boutique accueil et liste
     Route::get('/', [
         'uses' => 'ShopController@getIndex',
-        'as' => 'shop.homepage']);
+        'as' => 'shop.index']);
 
     //panier
     Route::get('shoppingcart', [

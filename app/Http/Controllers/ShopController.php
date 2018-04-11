@@ -9,7 +9,7 @@ class ShopController extends Controller
 {
     public function getIndex() {
         $products = Product::all();
-        return view('shop.student.homepage', ['products' => $products]);
+        return view('shop.student.index', ['products' => $products]);
     }
 
     public function getShoppingCart() {
@@ -37,7 +37,7 @@ class ShopController extends Controller
     }
 
     public function postAdminCreate() {
-        return redcirect()->route('shop.student.homepage');
+        return redcirect()->route('shop.student.index');
         //validation et faire produit
     }
 }
