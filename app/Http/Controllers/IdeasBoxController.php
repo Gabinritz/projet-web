@@ -20,19 +20,9 @@ class IdeasBoxController extends Controller
         return redirect()->back();
     }
 
-    public function getList() {
-        return view('ideas-box.student.list');
-        //récupérer liste idées edit page peut etre a supprimer
-    }
-
     public function postCreateIdea() {
-        return redirect()->view('ideas-box.student.list');
+        return redirect()->view('ideas-box.student.homepage');
         //validation et envoyer idée a bdd
-    }
-
-    public function getAdminCreateIdea() {
-        return view('ideas-box.admin.create');
-        
     }
 
     public function postAdminCreateIdea() {

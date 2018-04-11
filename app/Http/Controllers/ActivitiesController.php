@@ -12,11 +12,6 @@ class ActivitiesController extends Controller
         return view('activities.student.homepage', ['activities' => $activities]);
     }
 
-    public function getList() {
-        return view('activities.student.list');
-        //todo renvoyez activité edit pe supprimer cette page
-    }
-
     public function postSignUp() {
         return redirect()->route('activities.student.list');
         //validation et ajout user a evenement

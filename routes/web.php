@@ -10,105 +10,87 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-//homepage
+
+//Index
 Route::get('/', [
     'uses' => 'BdeController@getIndex',
     'as' => 'index']);
 
-//page inscription/connexion
+//Login page
 Route::get('login',[
     'uses' => 'BdeController@getLogin',
     'as' => 'login']);
 
-//handle inscription
+//Post Login
 Route::post('login', [
     'uses' => 'BdeController@postLogin',
     'as' => 'login.post']);
 
-//boite a idées
+//Ideas
 Route::group(['prefix' => 'ideasbox'], function () { 
 
-    //accueil
+    //Index Student Ideas
     Route::get('/', [
         'uses' => 'IdeasBoxController@getIndex',
         'as' => 'ideas.index']);
 
-    Route::post('/', [
-        'uses' => 'IdeasBoxController@getLikeIndex',
-        'as' => 'ideas.post.like']);
-    
-    //liste
-    Route::get('list', [
-        'uses' => 'IdeasBoxController@getList',
-        'as' => 'ideas.list']);
-
-    //créer idée
-    Route::post('create', [
-        'uses' => 'IdeasBoxController@postCreateIdea',
-        'as' => 'ideas.create.post']);
-
-    //post idée par student 
-    Route::post('create', [
-        'uses' => 'IdeasBoxController@postCreateIdea',
-        'as' => 'ideas.create.post']);
-    
-    //créer idée par admin
-    Route::get('admin/create', [
-        'uses' => 'IdeasBoxController@getAdminCreateIdea',
-        'as' => 'ideas.admin.create']);
-
-    //post idée par admin
-    Route::post('admin/create', [
-        'uses' => 'IdeasBoxController@postAdminCreateIdea',
-        'as' => 'ideas.admin.create.post']);
-
-    //voir list idées par admin
+    //Index Admin Ideas
     Route::get('admin/manage', [
         'uses' => 'IdeasBoxController@getAdminManage',
         'as' => 'ideas.admin.manage']);
 
-    //en faire une activité
+    //Handle Like
+    Route::get('/{id}/like', [
+        'uses' => 'IdeasBoxController@getLikeIndex',
+        'as' => 'ideas.like']);
+
+    //Post Student Idea
+    Route::post('create', [
+        'uses' => 'IdeasBoxController@postCreateIdea',
+        'as' => 'ideas.create.post']);
+
+    //Post Admin Idea
+    Route::post('admin/create', [
+        'uses' => 'IdeasBoxController@postAdminCreateIdea',
+        'as' => 'ideas.admin.create.post']);
+
+    //Post Admin Activity
     Route::post('admin/manage', [
         'uses' => 'IdeasBoxController@postAdminManage',
         'as' => 'ideas.admin.manage.post']);
     
 });
 
-//activités
+//Activities
 Route::group(['prefix' => 'activities'], function () { 
 
-    //accueil
+    //Index
     Route::get('/', [
         'uses' => 'ActivitiesController@getIndex',
         'as' => 'activities.homepage']);
 
-    //liste
-    Route::get('list', [
-        'uses' => 'ActivitiesController@getList',
-        'as' => 'activities.list']);
-
-    //s'inscrire
+    //Handle Inscription
     Route::post('signup/{id}', [
         'uses' => 'ActivitiesController@postSignUp',
         'as' => 'activities.signup.post']);
 
-    //liste anciennes
+    //Activities Old
     Route::get('past', [
         'uses' => 'ActivitiesController@getIndex',
         'as' => 'activities.past']);
 
-    //focus sur ancienne
+    //Focus Student Old
     Route::get('focus/{id}', [
         'uses' => 'ActivitiesController@getIndex',
         'as' => 'activities.focus']);
 
-    //focus sur activité par admin
+    //Focus Admin Old
     Route::get('admin/focus/{id}', [
         'uses' => 'ActivitiesController@getIndex',
         'as' => 'activities.admin.focus']);
 });
 
-//boutique
+//Shop
 Route::group(['prefix' => 'shop'], function () { 
 
     //boutique accueil et liste

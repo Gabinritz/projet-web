@@ -9,6 +9,6 @@ class Idea extends Model
     protected $fillable = ['name', 'description'];
 
     public function votes() {
-        return $this->hasMany('App\Vote', 'idea_id');
+        return $this->hasMany('App\Vote');
     }
 }
