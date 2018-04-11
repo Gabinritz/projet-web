@@ -33,6 +33,10 @@ Route::group(['prefix' => 'ideasbox'], function () {
         'uses' => 'IdeasBoxController@getIndex',
         'as' => 'ideas.index']);
 
+    Route::post('/', [
+        'uses' => 'IdeasBoxController@getLikeIndex',
+        'as' => 'ideas.post.like']);
+    
     //liste
     Route::get('list', [
         'uses' => 'IdeasBoxController@getList',

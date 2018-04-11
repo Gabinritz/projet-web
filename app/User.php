@@ -23,4 +23,5 @@ class User extends Model
     public function participates() {
         return $this->hasMany('App\Participate', 'user_id');
     }
+
 } 

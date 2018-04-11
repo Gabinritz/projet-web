@@ -3,17 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Activity;
 
 class ActivitiesController extends Controller
 {
     public function getIndex() {
-        return view('activities.student.homepage');
-        //todo renvoyer les activités
+        $activities = Activity::all();
+        return view('activities.student.homepage', ['activities' => $activities]);
     }
 
     public function getList() {
         return view('activities.student.list');
-        //todo renvoyez activité
+        //todo renvoyez activité edit pe supprimer cette page
     }
 
     public function postSignUp() {
@@ -22,17 +23,17 @@ class ActivitiesController extends Controller
     }
 
     public function getPast() {
+        $activities = Activity::where(); //trouver comment prendre anciennes
         return view('activities.student.past');
-        // récupérer anciennes
     }
 
-    public function getFocus() {
+    public function getFocus($id) {
+        $activity = Activity::find($id);
         return view('activities.student.focus', ['$id' => 'id']);
-        //récupérer une ancienne
     }
 
-    public function getAdminFocus() {
+    public function getAdminFocus($id) {
+        $activity = Activity::find($id);
         return view('activities.admin.focus', ['$id' => 'id']);
-        //récupérer ancienne avec vue admin
     }
 }

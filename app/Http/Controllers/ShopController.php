@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Product;
 
 class ShopController extends Controller
 {
     public function getIndex() {
-        return view('shop.student.homepage');
-        //récupérer produits
+        $products = Product::all();
+        return view('shop.student.homepage', ['products' => $products]);
     }
 
     public function getShoppingCart() {
@@ -17,8 +18,8 @@ class ShopController extends Controller
     }
 
     public function getOrder() {
-        return view('shop.student.order');
-        //récupérer panier pour commander
+        $products = Product::all();
+        return view('shop.student.order', ['products' => $products]);
     }
 
     public function getAdminManage() {

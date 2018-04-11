@@ -3,17 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Idea;
+use App\Vote;
 
 class IdeasBoxController extends Controller
 {
     public function getIndex() {
-        return view('ideas-box.student.homepage');
-        //récupérer idees
+        $ideas = Idea::all();
+        return view('ideas-box.student.homepage', ['ideas' => $ideas]);
+    }
+
+    public function getLikeIndex($id) {
+        $idea = Idea::where('id', $id)->first();
+        $vote = new Vote();
+        $idea->votes()->save($vote);
+        return redirect()->back();
     }
 
     public function getList() {
         return view('ideas-box.student.list');
-        //récupérer liste idées
+        //récupérer liste idées edit page peut etre a supprimer
     }
 
     public function postCreateIdea() {
