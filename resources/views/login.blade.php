@@ -9,15 +9,21 @@
 
 <div class="card login__card test" id="login">
     <h2>Connexion</h2>
-    <form action="" method="post" class="form login__form">
+    <form method="POST" class="form login__form" action="{{ route('logtry') }}">
+        @csrf
         <div class="group">      
-            <input type="mail" required>
+            <input type="email" 
+            name="email" 
+            value="{{ old('email') }}" 
+            required autofocus>
             <span class="bar"></span>
             <label>Adresse mail</label>
         </div>
         
         <div class="group">      
-            <input type="password" required>
+            <input type="password" 
+            name="password" 
+            required>
             <span class="bar"></span>
             <label>Mot de passe</label>
         </div>
@@ -31,27 +37,41 @@
 
 <div class="card login__card hidden test" id="register">
     <h2>Inscription</h2>
-    <form action="" method="post" class="form login__form">
-        <div class="group">      
-            <input type="text" required>
-            <span class="bar"></span>
-            <label>Nom</label>
+    <form method="POST" action="{{ route('registertry') }}" class="form login__form">
+        @csrf
+        <div class="group-part">
+            <div class="group half">      
+                <input type="text" 
+                name="name" 
+                value="{{ old('name') }}" required autofocus>
+                <span class="bar"></span>
+                <label>Nom</label>
+            </div>
+            <div class="group half">      
+                <input type="text" 
+                name="firstname" 
+                value="{{ old('firstname') }}"
+                required>
+                <span class="bar"></span>
+                <label>Prénom</label>
+            </div>
         </div>
-        <div class="group">      
-            <input type="text" required>
-            <span class="bar"></span>
-            <label>Prénom</label>
-        </div>
-
-        <div class="group">      
-            <input type="email" required>
-            <span class="bar"></span>
-            <label>Adresse mail</label>
-        </div>
-        <div class="group">      
-            <input type="password" required>
-            <span class="bar"></span>
-            <label>Mot de passe</label>
+        <div class="groupe-part">
+            <div class="group half">      
+                <input type="email"
+                name="email" 
+                value="{{ old('email') }}"
+                required>
+                <span class="bar"></span>
+                <label>Adresse mail</label>
+            </div>
+            <div class="group half">      
+                <input type="password"
+                name="password" 
+                required>
+                <span class="bar"></span>
+                <label>Mot de passe</label>
+            </div>
         </div>
 
         <div class="submit">

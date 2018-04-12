@@ -16,16 +16,6 @@ Route::get('/', [
     'uses' => 'BdeController@getIndex',
     'as' => 'index']);
 
-//Login page
-Route::get('login',[
-    'uses' => 'BdeController@getLogin',
-    'as' => 'login']);
-
-//Post Login
-Route::post('login', [
-    'uses' => 'BdeController@postLogin',
-    'as' => 'login.post']);
-
 //Ideas
 Route::group(['prefix' => 'ideasbox'], function () { 
 
@@ -128,3 +118,27 @@ Route::group(['prefix' => 'shop'], function () {
         'uses' => 'ShopController@postAdminCreate',
         'as' => 'shop.admin.create.post']);
 });
+
+Auth::routes();
+
+//Login page
+Route::get('login',[
+    'uses' => 'BdeController@getLogin',
+    'as' => 'login']);
+    
+//post login
+Route::post('login', [
+    'uses' => 'SigninController@userSignin',
+    'as' => 'logtry']);
+
+//post register
+Route::post('register', [
+    'uses' => 'SigninController@userRegister',
+    'as' => 'registertry'
+]);
+
+//logout
+Route::get('logout', [
+    'uses' => 'SigninController@logout',
+    'as' => 'logout'
+]);
