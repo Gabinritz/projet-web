@@ -38,30 +38,6 @@
 
     @yield('content')
 
-    <script>
-        let content = document.getElementById('hamburger-content')
-        let sidebarBody = document.getElementById('hamburger-sidebar-body')
-        let button = document.getElementById('hamburger-button')
-        let overlay = document.getElementById('hamburger-overlay')
-        let activatedClass = 'hamburger-activated'; 
-        
-        sidebarBody.innerHTML = content.innerHTML; 
-        button.addEventListener('click', function(e) { 
-            e.preventDefault()
-            this.parentNode.classList.add(activatedClass)
-        })
-
-        button.addEventListener('keydown', function(e) {
-            if (this.parentNode.classList.contains(activatedClass)) { 
-                if (e.repeat === false && e.which === 27) {
-                    this.parentNode.classList.remove(activatedClass)
-                }
-            } 
-        })
-        overlay.addEventListener('click', function(e) {
-            e.preventDefault()
-            this.parentNode.classList.remove(activatedClass)
-        })
-    </script>
+    <script src="{{ asset('js/main.js') }}"></script>
 </body>
 </html>

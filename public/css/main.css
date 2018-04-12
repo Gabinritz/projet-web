@@ -116,7 +116,7 @@ li {
   height: 24px; }
 
 #hamburger-sidebar-body .menu-item-1:before {
-  background-image: url(../img/ic_event_busy_black_48px.svg);
+  background-image: url(../img/ic_event_done_black_48px.svg);
   background-size: contain; }
 
 #hamburger-sidebar-body .menu-item-2:before {

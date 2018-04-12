@@ -11,7 +11,7 @@
     <h2>Connexion</h2>
     <form action="" method="post" class="form login__form">
         <div class="group">      
-            <input type="text" required>
+            <input type="mail" required>
             <span class="bar"></span>
             <label>Adresse mail</label>
         </div>
@@ -44,7 +44,7 @@
         </div>
 
         <div class="group">      
-            <input type="text" required>
+            <input type="email" required>
             <span class="bar"></span>
             <label>Adresse mail</label>
         </div>
@@ -62,6 +62,4 @@
     </div>
 
 <div class="bot"></div>
-
-<script src="{{ asset('js/main.js') }}"></script>
 @endsection
