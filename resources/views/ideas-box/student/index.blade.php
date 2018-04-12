@@ -1,7 +1,6 @@
 @extends ('partials.layout', ['title' => 'Boite à idées'])
 
 @section ('content')
-<?php $status = 1; ?>
 @if (!$ideas->isEmpty()) {{-- [MEMBRE DU BDE] --}}
     <?php $i = 0; ?>
     <div style="overflow-x: auto;" id="test">
@@ -18,7 +17,7 @@
                 <td id="idea-nominator-{{ $i }}">{{$idea->nominator}}</td>
                 <td id="idea-desc-{{ $i }}">{{$idea->description}}</td>
                 <td>
-                @if ($status) {{-- [MEMBRE DU BDE] --}}
+                @if ($user->status == 1) {{-- [MEMBRE DU BDE] --}}
                     <button class="btn accept__btn" id="btnAccept-{{ $i }}" onclick="accept()">ACCEPTER</button>
                 @else {{-- [ETUDIANT ET AUTRES] --}}
                     <i class="material-icons thumb"><a href="{{ route('ideas.like', ['id' => $idea->id]) }}">thumb_up</a></i>
@@ -34,7 +33,7 @@
     <p>Aucune idée n'a été proposée</p>
 @endif
 
-@if ($status)
+@if ($user->status == 1)
     <div class="card hidden slideUp" id="addIdea">
         <form method="post" class="form login__form" action="{{ route('ideas.create.post') }}" >
             <div class="group">   
@@ -88,7 +87,7 @@
 
 <div class="addIdea__fixed" id="addIdea__expand" onclick="expand()">
     <span>
-    @if ($status) {{-- [MEMBRE DU BDE] --}}
+    @if ($user->status == 1) {{-- [MEMBRE DU BDE] --}}
         Accepter une idée   
     @else {{-- [ETUDIANT ET AUTRES] --}}
         Soumettre une idée au BDE
