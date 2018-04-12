@@ -16,7 +16,7 @@ class IdeasBoxController extends Controller
         return view('ideas-box.student.index', ['ideas' => $ideas, 'user' => $user]);
     }
 
-    public function getLikeIndex($id) {
+    public function getVoteIndex($id) {
         $user = Auth::user();
         $idea = Idea::where('id', $id)->first();
         $vote = new Vote([

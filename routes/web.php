@@ -26,7 +26,7 @@ Route::group(['prefix' => 'ideasbox'], function () {
         
     //Handle Like
     Route::get('/{id}/like', [
-        'uses' => 'IdeasBoxController@getLikeIndex',
+        'uses' => 'IdeasBoxController@getVoteIndex',
         'as' => 'ideas.like']);
 
     //Post Student Idea
@@ -59,15 +59,11 @@ Route::group(['prefix' => 'activities'], function () {
         'uses' => 'ActivitiesController@getPast',
         'as' => 'activities.past']);
 
-    //Focus Student Old
+    //Focus
     Route::get('focus/{id}', [
         'uses' => 'ActivitiesController@getIndex',
         'as' => 'activities.focus']);
 
-    //Focus Admin Old
-    Route::get('admin/focus/{id}', [
-        'uses' => 'ActivitiesController@getIndex',
-        'as' => 'activities.admin.focus']);
 });
 
 //Shop
