@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Idea;
 use App\Vote;
+use Auth;
 
 class IdeasBoxController extends Controller
 {
     public function getIndex() {
+        $user = Auth::user();
         $ideas = Idea::all();
-        return view('ideas-box.student.index', ['ideas' => $ideas]);
+        return view('ideas-box.student.index', ['ideas' => $ideas, 'user' => $user]);
     }
 
     public function getLikeIndex($id) {
@@ -37,7 +39,8 @@ class IdeasBoxController extends Controller
     }
     
     public function getAdminManage() {
-        return view('ideas-box.admin.manage');
+        $user = Auth::user();
+        return view('ideas-box.admin.manage', ['user' => $user]);
         //validation et envoier idée en activité
     }
 }

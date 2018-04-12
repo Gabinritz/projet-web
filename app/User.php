@@ -2,11 +2,30 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class User extends Authenticatable
 {
-    protected $fillable = ['name', 'firstname', 'mail', 'password'];
+    use Notifiable;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'email', 'password', 'status', 'firstname'
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
 
     public function votes() {
         return $this->hasMany('App\Vote', 'user_id');
@@ -23,5 +42,4 @@ class User extends Model
     public function participates() {
         return $this->hasMany('App\Participate', 'user_id');
     }
-
-} 
+}

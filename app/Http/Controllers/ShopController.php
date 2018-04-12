@@ -4,26 +4,31 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use Auth;
 
 class ShopController extends Controller
 {
     public function getIndex() {
         $products = Product::all();
-        return view('shop.student.index', ['products' => $products]);
+        $user = Auth::user();
+        return view('shop.student.index', ['products' => $products, 'user' => $user]);
     }
 
     public function getShoppingCart() {
-        return view('shop.student.shoppingcart');
+        $user = Auth::user();
+        return view('shop.student.shoppingcart', ['user' => $user]);
         //récupérer le panier
     }
 
     public function getOrder() {
         $products = Product::all();
-        return view('shop.student.order', ['products' => $products]);
+        $user = Auth::user();
+        return view('shop.student.order', ['products' => $products, 'user' => $user]);
     }
 
     public function getAdminManage() {
-        return view('shop.admin.manage');
+        $user = Auth::user();
+        return view('shop.admin.manage', ['user' => $user]);
         //récupérer produits et manager
     }
 
@@ -33,7 +38,8 @@ class ShopController extends Controller
     } 
 
     public function getAdminCreate() {
-        return view('shop.admin.create');
+        $user = Auth::user();
+        return view('shop.admin.create', ['user' => $user]);
     }
 
     public function postAdminCreate() {
