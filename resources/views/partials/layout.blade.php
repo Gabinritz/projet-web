@@ -21,8 +21,8 @@
                         <a href="{{ route('ideas.index') }}"><li class="menu-item-3">BOITE À IDÉES</li></a>
                         <a href="{{ route('shop.index') }}"><li class="menu-item-4">BOUTIQUE</li></a>
                         @if($user)
-                        <a href="#"><li class="menu-item-5">{{ strtoupper($user->firstname .' '. $user->name)}}</li></a>
                         <a href="{{ route('logout') }}"><li class="menu-item-6">SE DÉCONNECTER</li></a>
+                        <a href="#"><li class="menu-item-5">{{ strtoupper($user->firstname .' '. $user->name)}}</li></a>
                         @else
                         <a href="{{ route('login') }}"><li class="menu-item-5">S'INSCRIRE / SE CONNECTER</li></a>
                         @endif

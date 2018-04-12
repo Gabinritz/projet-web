@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Idea;
 use App\Vote;
+use App\Activity;
 use Auth;
 
 class IdeasBoxController extends Controller
@@ -16,31 +17,38 @@ class IdeasBoxController extends Controller
     }
 
     public function getLikeIndex($id) {
+        $user = Auth::user();
         $idea = Idea::where('id', $id)->first();
-        $vote = new Vote();
+        $vote = new Vote([
+            'user_id' => $user->id
+        ]);
         $idea->votes()->save($vote);
         return redirect()->back();
     }
 
     public function postCreateIdea(Request $request) {
-        //validation a faire en java
+        $user = Auth::user();
+        $nominator = $user->firstname .' '. $user->name;
         $idea = new Idea([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'nominator' => 'GabinTest'
+            'nominator' => $nominator
         ]);
         $idea->save();
         return redirect()->route('ideas.index')->with('info', 'Idée Ajoutée :' . $request->input('name'));
     }
 
-    public function postAdminCreateIdea() {
-        return redirect()->route('ideas-box.admin.manage');
-        //validation et envoyer activité a bdd
-    }
-    
-    public function getAdminManage() {
+    public function postAdminManage(Request $request) {
         $user = Auth::user();
-        return view('ideas-box.admin.manage', ['user' => $user]);
-        //validation et envoier idée en activité
+        $activity = new Activity([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'date' => $request->input('date'),
+            'place' => $request->input('place')
+        ]);
+        $idea = Idea::where('id', $request->input('idea_id'))->first();
+        $idea->delete();
+        $activity->save();
+        return redirect()->back();
     }
 }

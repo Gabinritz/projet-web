@@ -20,7 +20,11 @@
                 @if ($user->status == 1) {{-- [MEMBRE DU BDE] --}}
                     <button class="btn accept__btn" id="btnAccept-{{ $i }}" onclick="accept()">ACCEPTER</button>
                 @else {{-- [ETUDIANT ET AUTRES] --}}
-                    <i class="material-icons thumb"><a href="{{ route('ideas.like', ['id' => $idea->id]) }}">thumb_up</a></i>
+                    @if($idea->votes->where('user_id', $user->id)->first())
+                        <i class="material-icons thumb-green">thumb_up</i>
+                    @else
+                        <i class="material-icons thumb-black"><a href="{{ route('ideas.like', ['id' => $idea->id]) }}">thumb_up</a></i>
+                    @endif
                     <span class="likes">{{ count($idea->votes) }}</span>
                 @endif
                 </td>
@@ -35,7 +39,7 @@
 
 @if ($user->status == 1)
     <div class="card hidden slideUp" id="addIdea">
-        <form method="post" class="form login__form" action="{{ route('ideas.create.post') }}" >
+        <form method="post" class="form login__form" action="{{ route('ideas.admin.manage.post') }}" >
             <div class="group">   
                 <input type="text" id="name" name="name" required>
                 <span class="bar"></span>
@@ -53,6 +57,14 @@
                 <span class="bar"></span>
                 <label>Date</label>
             </div>
+
+            <div class="group">      
+                <input type="text"  id="place" name="place" required>
+                <span class="bar"></span>
+                <label>Lieu</label>
+            </div>
+
+        <input type="hidden" name="idea_id" value="{{ $idea->id }}">
 
             {{ csrf_field() }}
 

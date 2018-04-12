@@ -23,12 +23,7 @@ Route::group(['prefix' => 'ideasbox'], function () {
     Route::get('/', [
         'uses' => 'IdeasBoxController@getIndex',
         'as' => 'ideas.index']);
-
-    //Index Admin Ideas
-    Route::get('admin/manage', [
-        'uses' => 'IdeasBoxController@getAdminManage',
-        'as' => 'ideas.admin.manage']);
-
+        
     //Handle Like
     Route::get('/{id}/like', [
         'uses' => 'IdeasBoxController@getLikeIndex',
@@ -38,11 +33,6 @@ Route::group(['prefix' => 'ideasbox'], function () {
     Route::post('create', [
         'uses' => 'IdeasBoxController@postCreateIdea',
         'as' => 'ideas.create.post']);
-
-    //Post Admin Idea
-    Route::post('admin/create', [
-        'uses' => 'IdeasBoxController@postAdminCreateIdea',
-        'as' => 'ideas.admin.create.post']);
 
     //Post Admin Activity
     Route::post('admin/manage', [

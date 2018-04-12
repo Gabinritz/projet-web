@@ -289,10 +289,17 @@ th, td {
   border-bottom: 1px solid #ddd;
   min-width: 128px; }
 
-.thumb {
+.thumb-black{
   cursor: pointer;
   margin-right: 1rem;
   transition: 0.4s; }
+
+.thumb-green{
+    cursor: pointer;
+    margin-right: 1rem;
+    transition: 0.4s; 
+    color: #4CAF50;
+  }
 
 .thumb:hover {
   color: #4CAF50; }
