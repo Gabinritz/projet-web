@@ -1,10 +1,14 @@
 .accueil {
+    ::selection { background: #FFFFFF; color: $logoColor; }
     display: flex;
-    height: calc(100vh - 128px);
+    height: 90vh;
     width: 100vw;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: $light;
+    background: linear-gradient(0deg, rgba($logoColor, 0.8), rgba($logoColor, 0.8)), url("../img/background.jpg") no-repeat center;
+    background-size: cover;
 
     h1 {
         font-size: 4rem;
@@ -14,3 +18,8 @@
     }
 }
 
+@media screen and (max-height: 500px) {
+    .accueil {
+        height: calc(100vh - 6rem);
+    }
+}

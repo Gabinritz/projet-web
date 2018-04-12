@@ -20,12 +20,6 @@
     &:last-child { margin-bottom: 0; }
 }
 
-.group.half {
-    width: 40%;
-    margin-right: 2rem;
-    &:last-child { margin-right: 0; }
-}
-
 input {
     font-size:1rem;
     padding:10px 0;
@@ -88,3 +82,10 @@ input:focus ~ .bar:before, input:focus ~ .bar:after { width:50%; }
     
     &:hover { box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 5px 10px rgba(0,0,0,0.22); }
 } 
+
+@media screen and (max-width: 1200px) {
+    .group {
+        width: 95%;
+        margin-bottom: 2.5rem;
+    }
+}

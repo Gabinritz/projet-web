@@ -44,6 +44,8 @@ li {
   font-weight: 500; }
   li:last-child {
     margin-right: 0; }
+  li:hover {
+    color: #d90119; }
 
 .button {
   text-transform: uppercase;
@@ -146,7 +148,8 @@ li {
   nav {
     line-height: 4rem; }
     nav a {
-      margin-right: 0; }
+      margin-right: 0;
+      font-size: 0.9rem; }
 
   #hamburger-content {
     display: none; }
@@ -165,17 +168,26 @@ li {
     height: 5rem; } }
 .accueil {
   display: flex;
-  height: calc(100vh - 128px);
+  height: 90vh;
   width: 100vw;
   flex-direction: column;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  color: #FAFAFA;
+  background: linear-gradient(0deg, rgba(217, 1, 25, 0.8), rgba(217, 1, 25, 0.8)), url("../img/background.jpg") no-repeat center;
+  background-size: cover; }
+  .accueil ::selection {
+    background: #FFFFFF;
+    color: #d90119; }
   .accueil h1 {
     font-size: 4rem;
     font-family: 'Roboto Slab', serif;
     font-weight: 800;
     text-align: center; }
 
+@media screen and (max-height: 500px) {
+  .accueil {
+    height: calc(100vh - 6rem); } }
 .login__head {
   width: 100vw;
   display: flex; }
@@ -197,12 +209,6 @@ li {
   width: 66%; }
   .group:last-child {
     margin-bottom: 0; }
-
-.group.half {
-  width: 40%;
-  margin-right: 2rem; }
-  .group.half:last-child {
-    margin-right: 0; }
 
 input {
   font-size: 1rem;
@@ -268,6 +274,10 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
   .btn:hover {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 5px 10px rgba(0, 0, 0, 0.22); }
 
+@media screen and (max-width: 1200px) {
+  .group {
+    width: 95%;
+    margin-bottom: 2.5rem; } }
 table {
   margin: 3rem auto 0 auto;
   border-collapse: collapse;
@@ -304,8 +314,7 @@ th, td {
   .login__card h2 {
     font-family: 'Roboto Slab', serif;
     font-size: 2rem;
-    color: #F44336;
-    margin-bottom: 1rem; }
+    color: #F44336; }
 
 .login__change {
   color: #3F51B5;
@@ -314,7 +323,7 @@ th, td {
 .top {
   width: 100vw;
   height: 50%;
-  background-color: #EEEEEE;
+  background-color: #d90119;
   position: absolute;
   top: 0;
   left: 0; }
@@ -322,7 +331,7 @@ th, td {
 .bot {
   width: 100vw;
   height: 50%;
-  background-color: #d90119;
+  background-color: #EEEEEE;
   position: absolute;
   top: 50%;
   left: 0; }
@@ -341,6 +350,20 @@ th, td {
     left: 0px; }
   to {
     left: 50%; } }
+@media screen and (max-width: 1200px) {
+  .login__card {
+    width: 95%; } }
+@media screen and (max-height: 780px) {
+  .login__card#register {
+    position: absolute;
+    top: 6rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem; }
+
+  #login__logo {
+    margin-top: 8px;
+    width: 5rem; } }
 .addIdea__fixed {
   cursor: pointer;
   height: 2rem;
@@ -352,7 +375,7 @@ th, td {
   width: 100%;
   text-align: center;
   border-top: 2px solid #EEEEEE;
-  background-color: #F44336;
+  background-color: #d90119;
   z-index: 200; }
 
 #addIdea {

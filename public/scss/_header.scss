@@ -21,6 +21,7 @@ li {
     color: $dark;
     font-weight: 500;
     &:last-child { margin-right: 0; }
+    &:hover { color: $logoColor; }
 }
 
 .button {
@@ -131,7 +132,7 @@ li {
 @media screen and (max-width: 1200px) {
     nav {
         line-height: 4rem;
-        a { margin-right: 0;}
+        a { margin-right: 0; font-size: 0.9rem;}
     }
 
     #hamburger-content {

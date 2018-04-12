@@ -19,7 +19,6 @@
         font-family: 'Roboto Slab', serif;
         font-size: 2rem;
         color: $mainColor;
-        margin-bottom: 1rem;
     }
 }
 
@@ -31,7 +30,7 @@
 .top {
     width: 100vw;
     height: 50%;
-    background-color: #EEEEEE;
+    background-color: $logoColor;
     position: absolute;
     top: 0;
     left: 0;
@@ -39,7 +38,7 @@
 .bot {
     width: 100vw;
     height: 50%;
-    background-color: #d90119;
+    background-color: #EEEEEE;
     position: absolute;
     top: 50%;
     left: 0;
@@ -59,4 +58,24 @@
 @keyframes test {
     from {left: 0px;} 
     to {left: 50%;}
+}
+
+@media screen and (max-width: 1200px) {
+    .login__card {
+        width: 95%;
+    }
+}
+
+@media screen and (max-height: 780px) {
+    .login__card#register {
+        position: absolute;
+        top: 6rem;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.8rem;
+    }
+    #login__logo {
+        margin-top: 8px;
+        width: 5rem;
+    }
 }
