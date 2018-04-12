@@ -1,1 +1,0 @@
-activités passées

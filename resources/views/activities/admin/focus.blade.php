@@ -1,0 +1,1 @@
+focus sur activité en vue admin
