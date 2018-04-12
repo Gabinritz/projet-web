@@ -1,6 +1,7 @@
 @extends ('partials.layout', ['title' => 'Boite à idées'])
 
 @section ('content')
+<div class="container">
 @if (!$ideas->isEmpty()) {{-- [MEMBRE DU BDE] --}}
     <?php $i = 0; ?>
     <div style="overflow-x: auto;" id="test">
@@ -36,6 +37,7 @@
 @else {{-- [ETUDIANT] --}}
     <p>Aucune idée n'a été proposée</p>
 @endif
+</div>
 
 @if ($user->status == 1)
     <div class="card hidden slideUp" id="addIdea">

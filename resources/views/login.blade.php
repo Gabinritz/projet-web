@@ -39,40 +39,28 @@
     <h2>Inscription</h2>
     <form method="POST" action="{{ route('registertry') }}" class="form login__form">
         @csrf
-        <div class="group-part">
-            <div class="group half">      
+            <div class="group">      
                 <input type="text" 
                 name="name" 
                 value="{{ old('name') }}" required autofocus>
                 <span class="bar"></span>
                 <label>Nom</label>
             </div>
-            <div class="group half">      
-                <input type="text" 
-                name="firstname" 
-                value="{{ old('firstname') }}"
-                required>
+            <div class="group">      
+                <input type="text" name="firstname" value="{{ old('firstname') }}" required>
                 <span class="bar"></span>
                 <label>Prénom</label>
             </div>
-        </div>
-        <div class="groupe-part">
-            <div class="group half">      
-                <input type="email"
-                name="email" 
-                value="{{ old('email') }}"
-                required>
+            <div class="group">      
+                <input type="email" name="email" value="{{ old('email') }}" required>
                 <span class="bar"></span>
                 <label>Adresse mail</label>
             </div>
-            <div class="group half">      
-                <input type="password"
-                name="password" 
-                required>
+            <div class="group">      
+                <input type="password" name="password" required>
                 <span class="bar"></span>
                 <label>Mot de passe</label>
             </div>
-        </div>
 
         <div class="submit">
             <button type="submit" class="btn login__submit">S'INSCRIRE</button>
