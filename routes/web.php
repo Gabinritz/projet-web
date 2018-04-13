@@ -50,7 +50,7 @@ Route::group(['prefix' => 'activities'], function () {
         'as' => 'activities.index']);
 
     //Handle Inscription
-    Route::post('signup/{id}', [
+    Route::get('signup/{id}', [
         'uses' => 'ActivitiesController@postSignUp',
         'as' => 'activities.signup.post']);
 
