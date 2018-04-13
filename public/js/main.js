@@ -40,6 +40,7 @@ function accept(e) {
     let accepts = document.getElementsByClassName('accept__btn');
     let name = document.getElementById('name')
     let desc = document.getElementById('description')
+    let id = document.getElementById('id')
 
     for (let i=0; i<accepts.length; i++)  {
         accepts[i].onclick = function(e) {
@@ -48,6 +49,7 @@ function accept(e) {
             }
         name.value = document.getElementById('idea-name-' + i).innerHTML
         desc.value = document.getElementById('idea-desc-' + i).innerHTML
+        id.value = document.getElementById('idea-id-' + i).innerHTML
         }
     }
 }

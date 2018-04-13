@@ -2,7 +2,7 @@
 
 @section ('content')
 <div class="container">
-@if (!$ideas->isEmpty()) {{-- [MEMBRE DU BDE] --}}
+@if (!$ideas->isEmpty()) {{-- [DONNEES DANS IDEES] --}}
     <?php $i = 0; ?>
     <div style="overflow-x: auto;" id="test">
         <table>
@@ -22,24 +22,25 @@
                     <button class="btn accept__btn" id="btnAccept-{{ $i }}" onclick="accept()">ACCEPTER</button>
                 @else {{-- [ETUDIANT ET AUTRES] --}}
                     @if($idea->votes->where('user_id', $user->id)->first())
-                        <i class="material-icons thumb-green">thumb_up</i>
+                        <i class="material-icons thumb" id="thumb-green">thumb_up</i>
                     @else
-                        <i class="material-icons thumb-black"><a href="{{ route('ideas.like', ['id' => $idea->id]) }}">thumb_up</a></i>
+                        <i class="material-icons thumb" id="thumb-black"><a href="{{ route('ideas.like', ['id' => $idea->id]) }}">thumb_up</a></i>
                     @endif
                     <span class="likes">{{ count($idea->votes) }}</span>
                 @endif
                 </td>
+            <span id="idea-id-{{ $i }}" style="display: none">{{ $idea->id }}</span>
             </tr>
             <?php $i++ ?>
         @endforeach
         </table>
     </div>
-@else {{-- [ETUDIANT] --}}
+@else {{-- [PAS DE DONNEES] --}}
     <p>Aucune idée n'a été proposée</p>
 @endif
 </div>
 
-@if ($user->status == 1)
+@if ($user->status == 1) {{-- [MEMBRE DU BDE] --}}
     <div class="card hidden slideUp" id="addIdea">
         <form method="post" class="form login__form" action="{{ route('ideas.admin.manage.post') }}" >
             <div class="group">   
@@ -65,8 +66,12 @@
                 <span class="bar"></span>
                 <label>Lieu</label>
             </div>
-
-        <input type="hidden" name="idea_id" value="{{ $idea->id }}">
+        
+        
+        <input type="hidden" id="id" name="idea_id" value=
+        @if (!$ideas->isEmpty())
+        "{{ $idea->id }}">
+        @endif
 
             {{ csrf_field() }}
 

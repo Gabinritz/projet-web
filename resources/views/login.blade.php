@@ -21,9 +21,7 @@
         </div>
         
         <div class="group">      
-            <input type="password" 
-            name="password" 
-            required>
+            <input type="password" name="password" required>
             <span class="bar"></span>
             <label>Mot de passe</label>
         </div>
@@ -57,7 +55,9 @@
                 <label>Adresse mail</label>
             </div>
             <div class="group">      
-                <input type="password" name="password" required>
+                <input type="password" name="password" required 
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}"
+                title="Le mot de passe doit contenir au moins 4 caractères, une majuscule et un chiffre">
                 <span class="bar"></span>
                 <label>Mot de passe</label>
             </div>
