@@ -65,10 +65,21 @@ Route::group(['prefix' => 'activities'], function () {
         'as' => 'activities.focus']);
 
     //PostImage
-
     Route::post('focus/{id}/image', [
         'uses' => 'ActivitiesController@postImage',
         'as' => 'activites.focus.image.post'
+    ]);
+
+    //PostLike
+    Route::post('image/{id}/like', [
+        'uses' => 'ActivitiesController@postLike',
+        'as' => 'image.post.like'
+    ]);
+
+    //PostComment
+    Route::post('image/{id}/comment', [
+        'uses' => 'ActivitiesController@postComment',
+        'as' => 'image.post.com'
     ]);
 
 });

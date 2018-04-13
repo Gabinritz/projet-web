@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Activity;
 use App\Participate;
 use App\Image;
+use App\Like;
+use App\Comment;
 use Auth;
 
 class ActivitiesController extends Controller
@@ -47,6 +49,27 @@ class ActivitiesController extends Controller
             'user_id' => $user->id
         ]);
         $activity->images()->save();
+        return redirect()->back();
+    }
+
+    public function postLike($id) {
+        $user = Auth::user();
+        $image = Image::where('id', $id)->first();
+        $like = new Like([
+            'user_id' => $user->id
+        ]);
+        $image->likes()->save();
+        return redirect()->back();
+    }
+
+    public function postComment($id, Request $request) {
+        $user = Auth::user();
+        $image = Image::where('id', $id)->first();
+        $comment = new Comment([
+            'user_id' => $user->id,
+            'content' => $request->input('content')
+        ]);
+        $image->comments()->save();
         return redirect()->back();
     }
 }
