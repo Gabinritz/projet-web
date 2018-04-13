@@ -11,17 +11,25 @@
                 <th>Date</th>
                 <th>Description</th>
                 <th>Lieu</th>
+                <th>Nombre de participants</th>
                 <th>S'inscrire</th>
             </tr>
-        
+            
+            @foreach($activities as $activity)
             <tr id="activity-1">
-                <td id="activity-name-1">Foot</td>
-                <td id="activity-date-1">{{ date('d-m-Y') }}</td>
-                <td id="activity-desc-1">Qui met des petits ponts à Amine</td>
-                <td id="activity-place-1">Strasbourg</td>
-                <td><button class="btn accept__btn" id="btnAccept-1" onclick="accept()">S'INSCRIRE</button></td>
+                <td id="activity-name-1">{{ $activity->name }}</td>
+                <td id="activity-date-1">{{ $activity->date }}</td>
+                <td id="activity-desc-1">{{ $activity->description}}</td>
+                <td id="activity-place-1">{{ $activity->place}}</td>
+                <td id="activity-participants-1">{{ count($activity->participates) }}</td>
+                @if($activity->participates->where('user_id', $user->id)->first())
+                <td><div>Inscrit</div></td>
+                @else
+                <td><a href="{{ route('activities.signup.post', ['id' => $activity->id]) }}"><button class="btn accept__btn" id="btnAccept-1" onclick="accept()">S'INSCRIRE</button></a></td>
+                @endif
             </tr>
             <?php $i++ ?>
+            @endforeach
         </table>
     </div>
 {{-- @else

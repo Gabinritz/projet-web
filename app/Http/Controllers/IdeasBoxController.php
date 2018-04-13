@@ -46,7 +46,7 @@ class IdeasBoxController extends Controller
             'date' => $request->input('date'),
             'place' => $request->input('place')
         ]);
-        $idea = Idea::where('id', $request->input('idea_id'))->first();
+        $idea = Idea::where('id', $request->input('id'))->first();
         $idea->delete();
         $activity->save();
         return redirect()->back();
