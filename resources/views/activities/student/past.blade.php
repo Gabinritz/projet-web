@@ -22,7 +22,7 @@
                 <td id="activity-desc-1">{{ $activity->description}}</td>
                 <td id="activity-place-1">{{ $activity->place}}</td>
                 <td id="activity-participants-1">{{ count($activity->participates) }}
-                @if($activity->participates->where('user_id', $user->id)->first())
+                @if($user && $activity->participates->where('user_id', $user->id)->first())
                 | Vous y avez participé
                 @else
                 | Vous n'y avez pas participé
