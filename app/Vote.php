@@ -9,7 +9,7 @@ class Vote extends Model
     protected $fillable = ['idea_id', 'user_id'];
 
     public function idea() {
-        return $this->belongsTo('App\Idea');
+        return $this->belongsTo('App\Idea', 'idea_id');
     }
 
     public function user() {

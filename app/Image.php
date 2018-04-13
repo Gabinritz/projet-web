@@ -6,8 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Image extends Model
 {
+    protected $fillable = ['activity_id', 'user_id', 'imgUrl', 'name'];
+
     public function activity() {
         return $this->belongsTo('App\Activity', 'activity_id');
+    }
+
+    public function user() {
+        return $this->belongsTo('App\User', 'user_id');
     }
 
     public function likes() {

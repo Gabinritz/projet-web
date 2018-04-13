@@ -27,12 +27,20 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function ideas() {
+        return $this->hasMany('App\Idea', 'user_id');
+    }
+
     public function votes() {
         return $this->hasMany('App\Vote', 'user_id');
     }
 
     public function likes() {
         return $this->hasMany('App\Like', 'user_id');
+    }
+
+    public function images() {
+        return $this->hasMany('App\Image', 'user_id');
     }
 
     public function comments() {

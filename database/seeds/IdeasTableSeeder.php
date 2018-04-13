@@ -14,21 +14,21 @@ class IdeasTableSeeder extends Seeder
     {
         $idea = new App\Idea([
             'name' => 'AfterWork',
-            'nominator' => 'Pierre Dumangin',
+            'user_id' => 2,
             'description' => 'Aller boire dans les bars de Strasbourg'
         ]);
         $idea->save();
         $idea = new App\Idea(
         [
             'name' => 'Faire un foot',
-            'nominator' => 'Clément Acker',
+            'user_id' => 3,
             'description' => 'Faire un foot avec les tuteurs'
         ]);
         $idea->save();
         $idea = new App\Idea(
         [
             'name' => 'Tuto Cuisine',
-            'nominator' => 'Corentin Nussbaum',
+            'user_id' => 1,
             'description' => 'Regardez mon tuto cuisine sur mon snap : coconus'
         ]);
         $idea->save();

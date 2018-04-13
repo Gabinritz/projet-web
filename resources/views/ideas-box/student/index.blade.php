@@ -15,7 +15,8 @@
         @foreach($ideas as $idea)
             <tr id="idea-{{ $i }}">
                 <td id="idea-name-{{ $i }}">{{$idea->name}}</td>
-                <td id="idea-nominator-{{ $i }}">{{$idea->nominator}}</td>
+                <td id="idea-nominator-{{ $i }}">{{$idea->user->where('id', $idea->user_id)->first()->firstname}} 
+                    {{$idea->user->where('id', $idea->user_id)->first()->name}}</td>
                 <td id="idea-desc-{{ $i }}">{{$idea->description}}</td>
                 <td>
                 @if ($user->status == 1) {{-- [MEMBRE DU BDE] --}}

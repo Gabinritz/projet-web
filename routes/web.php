@@ -61,8 +61,15 @@ Route::group(['prefix' => 'activities'], function () {
 
     //Focus
     Route::get('focus/{id}', [
-        'uses' => 'ActivitiesController@getIndex',
+        'uses' => 'ActivitiesController@getFocus',
         'as' => 'activities.focus']);
+
+    //PostImage
+
+    Route::post('focus/{id}/image', [
+        'uses' => 'ActivitiesController@postImage',
+        'as' => 'activites.focus.image.post'
+    ]);
 
 });
 

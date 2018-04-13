@@ -6,14 +6,16 @@ use Illuminate\Http\Request;
 use App\Idea;
 use App\Vote;
 use App\Activity;
+use App\User;
 use Auth;
 
 class IdeasBoxController extends Controller
 {
     public function getIndex() {
         $user = Auth::user();
+        $users = User::all();
         $ideas = Idea::all();
-        return view('ideas-box.student.index', ['ideas' => $ideas, 'user' => $user]);
+        return view('ideas-box.student.index', ['ideas' => $ideas, 'user' => $user, 'users' => $users]);
     }
 
     public function getVoteIndex($id) {
@@ -35,7 +37,7 @@ class IdeasBoxController extends Controller
             'nominator' => $nominator
         ]);
         $idea->save();
-        return redirect()->route('ideas.index')->with('info', 'Idée Ajoutée :' . $request->input('name'));
+        return redirect()->route('ideas.index');
     }
 
     public function postAdminManage(Request $request) {
