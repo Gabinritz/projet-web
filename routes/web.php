@@ -71,7 +71,7 @@ Route::group(['prefix' => 'activities'], function () {
     ]);
 
     //PostLike
-    Route::post('image/{id}/like', [
+    Route::get('image/{id}/like', [
         'uses' => 'ActivitiesController@postLike',
         'as' => 'image.post.like'
     ]);
