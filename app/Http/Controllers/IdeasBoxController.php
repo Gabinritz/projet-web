@@ -15,11 +15,21 @@ class IdeasBoxController extends Controller
         $user = Auth::user();
         $users = User::all();
         $ideas = Idea::all();
+
+        if(!$user) {
+            return redirect()->route('login');
+        }
+
         return view('ideas-box.student.index', ['ideas' => $ideas, 'user' => $user, 'users' => $users]);
     }
 
     public function getVoteIndex($id) {
         $user = Auth::user();
+
+        if(!$user) {
+            return redirect()->route('login');
+        }
+
         $idea = Idea::where('id', $id)->first();
         $vote = new Vote([
             'user_id' => $user->id
@@ -30,11 +40,15 @@ class IdeasBoxController extends Controller
 
     public function postCreateIdea(Request $request) {
         $user = Auth::user();
-        $nominator = $user->firstname .' '. $user->name;
+
+        if(!$user) {
+            return redirect()->route('login');
+        }
+
         $idea = new Idea([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'nominator' => $nominator
+            'user_id' => $user->id
         ]);
         $idea->save();
         return redirect()->route('ideas.index');
@@ -42,6 +56,11 @@ class IdeasBoxController extends Controller
 
     public function postAdminManage(Request $request) {
         $user = Auth::user();
+
+        if(!$user) {
+            return redirect()->route('login');
+        }
+        
         $activity = new Activity([
             'name' => $request->input('name'),
             'description' => $request->input('description'),

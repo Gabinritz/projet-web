@@ -14,12 +14,22 @@ class ActivitiesController extends Controller
 {
     public function getIndex() {
         $user = Auth::user();
+
+        if(!$user) {
+            return redirect()->route('login');
+        }
+
         $activities = Activity::where('date', '>=', date('Y-m-d'))->take(20)->get();
         return view('activities.student.index', ['activities' => $activities, 'user' => $user]);
     }
 
     public function postSignUp($id) {
         $user =  Auth::user();
+
+        if(!$user) {
+            return redirect()->route('login');
+        }
+
         $activity = Activity::where('id', $id)->first();
         $participation = new Participate([
             'user_id' => $user->id
@@ -42,6 +52,11 @@ class ActivitiesController extends Controller
 
     public function postImage($id, Request $request) {
         $user = Auth::user();
+
+        if(!$user) {
+            return redirect()->route('login');
+        }
+
         $activity = Activity::where('id', $id)->first();
         $image = new Image([
             'imgUrl' => $request->input('imgUrl'),
@@ -54,6 +69,11 @@ class ActivitiesController extends Controller
 
     public function postLike($id) {
         $user = Auth::user();
+
+        if(!$user) {
+            return redirect()->route('login');
+        }
+
         $image = Image::where('id', $id)->first();
         $like = new Like([
             'user_id' => $user->id
@@ -64,6 +84,11 @@ class ActivitiesController extends Controller
 
     public function postComment($id, Request $request) {
         $user = Auth::user();
+
+        if(!$user) {
+            return redirect()->route('login');
+        }
+        
         $image = Image::where('id', $id)->first();
         $comment = new Comment([
             'user_id' => $user->id,
