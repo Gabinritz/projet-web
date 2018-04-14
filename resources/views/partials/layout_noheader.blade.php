@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <title>{{ $title or 'Welcome' }} | BDE eXia.CESI</title>
 </head>
-<body>
+<body id="body">
     @yield('content')
 
     <script src="{{ asset('js/main.js') }}"></script>

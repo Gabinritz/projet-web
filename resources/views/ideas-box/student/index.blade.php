@@ -41,17 +41,23 @@
 @endif
 </div>
 
-@if ($user->status == 1) {{-- [MEMBRE DU BDE] --}}
+@if ($user->status == 1 && !$ideas->isEmpty()) {{-- [MEMBRE DU BDE] --}}
     <div class="card hidden slideUp" id="addIdea">
         <form method="post" class="form login__form" action="{{ route('ideas.admin.manage.post') }}" >
             <div class="group">   
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="name" name="name" required
+                @if (!$ideas->isEmpty())
+                    value="{{$idea->name}}">
+                @endif
                 <span class="bar"></span>
                 <label>Nom de l'activité</label>
             </div>
 
             <div class="group">      
-                <input type="text"  id="description" name="description" required>
+                <input type="text"  id="description" name="description" required
+                @if (!$ideas->isEmpty())
+                    value="{{$idea->description}}">
+                @endif
                 <span class="bar"></span>
                 <label>Description (255 max)</label>
             </div>
@@ -81,7 +87,7 @@
             </div>
         </form>
     </div>
-@else {{-- [ETUDIANT] --}}
+@elseif ($user->status != 1) {{-- [ETUDIANT] --}}
     <div class="card hidden slideUp" id="addIdea">
         <form method="post" class="form login__form" action="{{ route('ideas.create.post') }}" >
             <div class="group">      
@@ -105,14 +111,18 @@
     </div>
 @endif
 
-<div class="addIdea__fixed" id="addIdea__expand" onclick="expand()">
-    <span>
-    @if ($user->status == 1) {{-- [MEMBRE DU BDE] --}}
-        Accepter une idée   
-    @else {{-- [ETUDIANT ET AUTRES] --}}
-        Soumettre une idée au BDE
-    @endif
-    </span>
-</div>
+@if ($user->status == 1 && !$ideas->isEmpty()) {{-- [MEMBRE DU BDE] --}}
+    <div class="addIdea__fixed" id="addIdea__expand" onclick="expand()">
+        <span>
+            Accepter une idée
+        </span>
+    </div>
+@elseif ($user->status != 1) {{-- [ETUDIANT ET AUTRES] --}}
+    <div class="addIdea__fixed" id="addIdea__expand" onclick="expand()">
+        <span>
+            Soumettre une idée au BDE
+        </span>
+    </div>
+@endif
 
 @endsection

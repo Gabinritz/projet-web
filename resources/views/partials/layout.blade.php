@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>{{ $title or 'Welcome' }} | BDE eXia.CESI</title>
 </head>
-<body>
+<body id="body">
     <header>
         <a href="./"><img src="{{ asset('img/logo.png') }}" alt="Logo du BDE" id="logo"></a>
         <div id="hamburger">
