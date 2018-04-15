@@ -1,0 +1,76 @@
+.container.container-activity {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;    
+}
+
+.card__activity {
+    padding: 0;
+    display: inline-block;
+    margin: 0.5rem;
+    flex: 0 0 calc(33.333% - 1rem);
+}
+
+@media screen and (max-width: 1200px) {
+    .card__activity { flex: 0 0 calc(50% - 1rem) }
+}
+@media screen and (max-width: 992px) {
+    .card__activity { flex: 0 0 calc(100% - 1rem) }
+}
+@media screen and (max-width: 768px) {
+    .container { width: 540px; }
+}
+@media screen and (max-width: 576px) {
+    .container { width: auto; }
+}
+
+.card__header {
+    height: 200px;
+    background-color: $logoColor;
+}
+
+.card__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+}
+
+.card__content {
+    padding: 1rem;
+}
+
+.card__content-mid {
+    text-align: justify;
+}
+
+.card__content-top {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: space-around;
+}
+.card__content-bot {
+    margin-top: 1rem;
+}
+
+.card__title, .card__date {
+    display: inline-block;
+}
+
+.card__date::before, .card__participants::before {
+    content: ' ';
+    display: inline-block;
+    vertical-align: middle;
+    width: 24px;
+    height: 24px;
+}
+.card__date::before {
+    background-image: url(../img/ic_event_black_48px.svg);
+    background-size: contain;
+}
+.card__participants::before {
+    background-image: url(../img/ic_account_circle_black_48px.svg);
+    background-size: contain;
+}
