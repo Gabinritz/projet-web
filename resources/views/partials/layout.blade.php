@@ -2,8 +2,9 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0 maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#d90119" />
     <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -43,6 +44,7 @@
 
     @yield('content')
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="{{ asset('js/main.js') }}"></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 @extends ('partials.layout', ['title' => 'Boite à idées'])
 
 @section ('content')
-<div class="container">
+<div class="container" style="text-align: center; margin-top: 2rem;">
 @if (!$ideas->isEmpty()) {{-- [DONNEES DANS IDEES] --}}
     <?php $i = 0; ?>
     <div style="overflow-x: auto;" id="test">
@@ -43,7 +43,7 @@
 
 @if ($user->status == 1 && !$ideas->isEmpty()) {{-- [MEMBRE DU BDE] --}}
     <div class="card hidden slideUp" id="addIdea">
-        <form method="post" class="form login__form" action="{{ route('ideas.admin.manage.post') }}" >
+        <form method="post" class="form login__form" enctype="multipart/form-data" action="{{ route('ideas.admin.manage.post') }}" >
             <div class="group">   
                 <input type="text" id="name" name="name" required
                 @if (!$ideas->isEmpty())
@@ -72,6 +72,12 @@
                 <input type="text"  id="place" name="place" required>
                 <span class="bar"></span>
                 <label>Lieu</label>
+            </div>
+
+            <div class="group">
+                <input type="file" name="image" id="image">
+                <span class="bar"></span>
+                <label>Ajouter une image</label>
             </div>
         
         

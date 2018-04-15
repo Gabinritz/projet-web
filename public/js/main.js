@@ -64,3 +64,70 @@ function expand(e) {
         form.classList.replace('visible', 'hidden')
     }
 }
+
+
+
+
+
+
+let modals = document.getElementsByClassName('modal')
+let closes = document.getElementsByClassName('close')
+let body = document.getElementById('body')
+
+function modal(id) {
+    for (let i = 0; i < modals.length; i++) {
+        let modal = document.getElementById('modal-' + id)
+        let close = document.getElementById('close-' + id)
+        let preview = document.getElementById('preview-' + id)
+        let react = document.getElementById('react-' + id)
+        let image = document.getElementById('img-' + id)
+
+        modal.style.display = "flex"
+        body.style.overflow = "hidden"
+
+        close.onclick = function (event) {
+            modal.style.display = "none"
+            body.style.overflow = "auto"
+        }
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none"
+                body.style.overflow = "auto"
+            }
+        }
+
+
+        if (window.innerWidth < 992) {
+            react.style.display = "none"
+            image.style.display = "flex"
+            close.style.color = "#d90119"
+            preview.style.backgroundColor = "transparent"
+
+            close.onclick = function (event) {
+                modal.style.display = "none"
+                body.style.overflow = "auto"
+                react.style.display = "none"
+                image.style.display = "flex"
+                close.style.color = "#D90119"
+                preview.style.backgroundColor = "transparent"
+            }
+            preview.onclick = function (event) {
+                if (react.style.display == "none") {
+                    react.style.display = "block"
+                    image.style.display = "none"
+                    close.style.color = "#212121"
+                    preview.style.backgroundColor = "#212121"
+                } else {
+                    react.style.display = "none"
+                    image.style.display = "flex"
+                    close.style.color = "#D90119"
+                    preview.style.backgroundColor = "transparent"
+                }
+            }
+        } else {
+            react.style.display = "block"
+            image.style.display = "flex"
+            close.style.color = "#d90119"
+        }
+    }
+}
