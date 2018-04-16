@@ -63,7 +63,9 @@ class IdeasBoxController extends Controller
         $idea = new Idea([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'user_id' => $user->id
+            'user_id' => $user->id,
+            'price' => $request->input('price'),
+            'recurrent' => $request->input('recurrent')
         ]);
         $idea->save();
         return redirect()->route('ideas.index');

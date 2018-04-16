@@ -75,6 +75,19 @@
             </div>
 
             <div class="group">
+                <input type="number" name="price" id="price">
+                <span class="bar"></span>
+                <label>Ajouter un prix</label>
+            </div>
+
+            <div class="group">
+                <input type="radio" name="recurrent" id="recurrent" value="1" required>Oui
+                <input type="radio" name="recurrent" id="recurrent" value="0" required>Non
+                <span class="bar"></span>
+                <label>Activité récurrente</label>
+            </div>
+
+            <div class="group">
                 <input type="file" name="image" id="image">
                 <span class="bar"></span>
                 <label>Ajouter une image</label>
