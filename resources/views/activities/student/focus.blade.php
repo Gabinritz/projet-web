@@ -41,11 +41,11 @@
                 <div class="section-react-likes">
                     <span class="section-react-likes-content">
                     @if(!$image->likes->where('user_id', $user->id)->first())
-                        <i class="material-icons">
+                        <i class="material-icons fav">
                             <a href="{{ route('image.get.like', ['imgId' => $image->id, 'activityId' => $activity->id]) }}">favorite</a>
                         </i> {{ count($image->likes) }}
                     @else
-                        <i class="material-icons">
+                        <i class="material-icons fav-color">
                                 <a href="{{ route('image.get.unlike', ['imgId' => $image->id, 'activityId' => $activity->id]) }}">favorite</a>
                         </i> {{ count($image->likes) }}
                     @endif
@@ -60,7 +60,7 @@
                                 {{$comment->user->where('id', $comment->user_id)->first()->firstname}} {{$comment->user->where('id', $comment->user_id)->first()->name}}
                             </span>
                             <span class="section-react-comments-content">{{$comment->content}}</span>
-                            @if ($user->status == 1) <a href="{{ route('image.post.uncom', ['activityId' => $activity->id, 'comId' => $comment->id]) }}"><i class="material-icons xx">more_vert</   i></a> @endif
+                            @if ($user->status == 1) <a href="{{ route('image.post.uncom', ['activityId' => $activity->id, 'comId' => $comment->id]) }}"><i class="material-icons xx">clear</i></a> @endif
                         </div>
                     @endforeach
                     <form action="{{ route('image.post.com', ['imgid' => $image->id, 'id' => $activity->id]) }}" method="post">
@@ -104,9 +104,7 @@
     </div>
 
     <div class="addIdea__fixed" id="addIdea__expand" onclick="expand()">
-            <span>
-                Ajouter une photo
-            </span>
+            <span>Ajouter une photo</span>
         </div>
 @endif
 

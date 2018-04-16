@@ -311,7 +311,7 @@ th, td {
   margin-right: 1rem;
   transition: 0.4s; }
 
-.thumb:hover, #thumb-green {
+.thumb:hover, .thumb-green {
   color: #4CAF50; }
 
 .hidden {
@@ -441,7 +441,8 @@ th, td {
   padding: 0;
   display: inline-block;
   margin: 0.5rem;
-  flex: 0 0 calc(33.333% - 1rem); }
+  flex: 0 0 calc(33.333% - 1rem);
+  border-radius: 4px; }
 
 @media screen and (max-width: 1200px) {
   .card__activity {
@@ -457,36 +458,57 @@ th, td {
     width: auto; } }
 .card__header {
   height: 200px;
-  background-color: #d90119; }
+  background-color: #d90119;
+  border-radius: 4px 4px 0 0; }
 
 .card__image {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.8; }
+  opacity: 0.8;
+  border-radius: 4px 4px 0 0; }
+
+.card__title {
+  color: #d90119; }
+
+.card__item {
+  font-size: 1.1rem;
+  font-weight: 300; }
 
 .card__content {
   padding: 1rem; }
 
 .card__content-mid {
-  text-align: justify; }
+  text-align: justify;
+  max-height: 200px;
+  overflow: auto; }
+
+.card__content-admin {
+  margin: 1rem 0 0.5rem 0; }
 
 .card__content-top {
+  text-align: left;
+  font-size: 1rem;
   margin: 1rem 0;
   display: flex;
-  justify-content: space-around; }
+  align-items: center;
+  justify-content: space-around;
+  background-color: #EEEEEE;
+  padding: 1rem; }
 
 .card__content-bot {
-  margin-top: 1rem; }
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 80px; }
 
-.card__title, .card__date {
-  display: inline-block; }
-
-.card__date::before, .card__participants::before {
+.card__date::before, .card__participants::before, .card__prix::before {
   content: ' ';
   display: inline-block;
-  vertical-align: middle;
+  vertical-align: text-bottom;
+  margin-right: 0.5rem;
   width: 24px;
   height: 24px; }
 
@@ -497,6 +519,13 @@ th, td {
 .card__participants::before {
   background-image: url(../img/ic_account_circle_black_48px.svg);
   background-size: contain; }
+
+.card__prix::before {
+  background-image: url(../img/ic_euro_symbol_black_48px.svg);
+  background-size: contain; }
+
+.card__list {
+  color: #2196F3; }
 
 .wrapper {
   margin: 2em auto;
@@ -761,5 +790,10 @@ th, td {
       margin-right: 2rem; }
       .section-react-preview span:last-child {
         margin-right: 0; } }
+.fav, .fav-color:hover {
+  color: #212121; }
+
+.fav:hover, .fav-color {
+  color: #F44336; }
 
 /*# sourceMappingURL=main.css.map */

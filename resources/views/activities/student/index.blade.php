@@ -9,24 +9,31 @@
         <img alt="1" class="card__image" src="{{asset('storage/'.$activity->imgUrl.'')}}">
     </div>
     <div class="card__content">
-        <h3 class="card__title">{{$activity->name}}</h3>
+        <h3 class="card__title">
+            @if ($activity->recurrent == 1)
+                [RECURRENT] {{$activity->name}}
+            @else
+                {{$activity->name}}
+            @endif
+        </h3>
         <div class="card__content-top">
-            <span class="card__date">{{$activity->date}}</span>
-            <span class="card__participants">{{count($activity->participates)}}</span>
+            <span class="card__item card__date">{{$activity->date}}</span>
+            <span class="card__item card__participants">{{count($activity->participates)}}</span>
+            <span class="card__item card__prix">{{$activity->price}} €</span>
         </div>
         <div class="card__content-mid">
-            <span class="card__description">
-                {{$activity->description}}
-            </span>
+            <span class="card__description">{{$activity->description}}</span>
+        </div>
+        <div class="card__content-admin">
+            @if($user->status = 1)
+                <a class="card__list" href="{{ route('activities.list', ['id' => $activity->id]) }}">Liste des inscrits</a>
+            @endif
         </div>
         <div class="card__content-bot">
             @if($activity->participates->where('user_id', $user->id)->first())
                 <span>Inscrit</span>
             @else
                 <a href="{{ route('activities.signup.post', ['id' => $activity->id]) }}"><button class="btn accept__btn" id="btnAccept-1" onclick="accept()">S'INSCRIRE</button></a>
-            @endif
-            @if($user->status = 1)
-                <a href="{{ route('activities.list', ['id' => $activity->id]) }}"><button class="btn accept__btn" id="btnAccept-1" onclick="accept()">LISTE INSCRITS</button></a></td>
             @endif
         </div>
     </div>
