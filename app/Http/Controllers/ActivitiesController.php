@@ -82,6 +82,18 @@ class ActivitiesController extends Controller
         return redirect()->back();
     }
 
+    public function getUnlike($imgid, $id) {
+        $user = Auth::user();
+
+        if(!$user) {
+            return redirect()->route('login');
+        }
+
+        $like = Like::where('user_id', $user->id)->where('image_id', $imgid)->first();
+        $like->delete();
+        return redirect()->back();
+    }
+
     public function postComment(Request $request, $id, $imgId) {
         $user = Auth::user();
 
@@ -95,6 +107,18 @@ class ActivitiesController extends Controller
             'content' => $request->input('comment')
         ]);
         $image->comments()->save($comment);
+        return redirect()->back();
+    }
+
+    public function getUncomment($activityId, $comId) {
+        $user = Auth::user();
+
+        if(!$user || $user->status != 1) {
+            return redirect()->route('login');
+        }
+
+        $comment = Comment::find($comId);
+        $comment->delete();
         return redirect()->back();
     }
 

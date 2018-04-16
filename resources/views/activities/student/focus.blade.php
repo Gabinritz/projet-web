@@ -46,7 +46,7 @@
                         </i> {{ count($image->likes) }}
                     @else
                         <i class="material-icons">
-                            favorite
+                                <a href="{{ route('image.get.unlike', ['imgId' => $image->id, 'activityId' => $activity->id]) }}">favorite</a>
                         </i> {{ count($image->likes) }}
                     @endif
                         @if (count($image->likes) <=1 ) | personne aime cette photo @else | personnes aiment cette photo @endif
@@ -60,7 +60,7 @@
                                 {{$comment->user->where('id', $comment->user_id)->first()->firstname}} {{$comment->user->where('id', $comment->user_id)->first()->name}}
                             </span>
                             <span class="section-react-comments-content">{{$comment->content}}</span>
-                            @if ($user->status == 1) <i class="material-icons xx">more_vert</   i> @endif
+                            @if ($user->status == 1) <a href="{{ route('image.post.uncom', ['activityId' => $activity->id, 'comId' => $comment->id]) }}"><i class="material-icons xx">more_vert</   i></a> @endif
                         </div>
                     @endforeach
                     <form action="{{ route('image.post.com', ['imgid' => $image->id, 'id' => $activity->id]) }}" method="post">
