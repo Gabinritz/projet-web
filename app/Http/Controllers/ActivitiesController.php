@@ -67,18 +67,18 @@ class ActivitiesController extends Controller
         return redirect()->back();
     }
 
-    public function postLike($id) {
+    public function getLike($imgid, $id) {
         $user = Auth::user();
 
         if(!$user) {
             return redirect()->route('login');
         }
 
-        $image = Image::where('id', $id)->first();
+        $image = Image::where('id', $imgid)->first();
         $like = new Like([
             'user_id' => $user->id
         ]);
-        $image->likes()->save();
+        $image->likes()->save($like);
         return redirect()->back();
     }
 
@@ -94,7 +94,7 @@ class ActivitiesController extends Controller
             'user_id' => $user->id,
             'content' => $request->input('content')
         ]);
-        $image->comments()->save();
+        $image->comments()->save($comment);
         return redirect()->back();
     }
 }

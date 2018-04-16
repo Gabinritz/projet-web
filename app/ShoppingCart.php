@@ -13,6 +13,6 @@ class ShoppingCart extends Model
     }
 
     public function products() {
-        return $this->hasMany('App\P roduct', 'product_id');
+        return $this->hasMany('App\P roduct', 'product_id')->withTimestampts();
     }
 }

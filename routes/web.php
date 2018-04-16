@@ -24,10 +24,10 @@ Route::group(['prefix' => 'ideasbox'], function () {
         'uses' => 'IdeasBoxController@getIndex',
         'as' => 'ideas.index']);
         
-    //Handle Like
-    Route::get('/{id}/like', [
+    //Handle vote
+    Route::get('/{id}/vote', [
         'uses' => 'IdeasBoxController@getVoteIndex',
-        'as' => 'ideas.like']);
+        'as' => 'ideas.vote']);
 
     //Post Student Idea
     Route::post('create', [
@@ -60,24 +60,24 @@ Route::group(['prefix' => 'activities'], function () {
         'as' => 'activities.past']);
 
     //Focus
-    Route::get('focus/{id}', [
+    Route::get('past/{id}', [
         'uses' => 'ActivitiesController@getFocus',
         'as' => 'activities.focus']);
 
     //PostImage
-    Route::post('focus/{id}/image', [
+    Route::post('past/{id}/image', [
         'uses' => 'ActivitiesController@postImage',
         'as' => 'activites.focus.image.post'
     ]);
 
-    //PostLike
-    Route::post('image/{id}/like', [
-        'uses' => 'ActivitiesController@postLike',
-        'as' => 'image.post.like'
+    //HandleLike
+    Route::get('past/{id}/like/{imgid}', [
+        'uses' => 'ActivitiesController@getLike',
+        'as' => 'image.get.like'
     ]);
 
     //PostComment
-    Route::post('image/{id}/comment', [
+    Route::post('past/{id}/comment/{imgid}', [
         'uses' => 'ActivitiesController@postComment',
         'as' => 'image.post.com'
     ]);
