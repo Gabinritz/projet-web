@@ -43,38 +43,6 @@
     </header>
 
     @yield('content')
-
-
-    <footer>
-        <div class="footer__container">
-            <div class="footer__top">
-                <div class="footer__section footer__about">
-                    <h4 class="footer__title">À propos du BDE eXia.CESI Strasbourg</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet rem amet quaerat earum porro totam ea doloremque, sunt ipsam. Consequuntur officiis suscipit cum quisquam necessitatibus, optio corporis porro laudantium ducimus!</p>
-                </div>
-        
-                <div class="footer__section footer__plan">
-                    <h4 class="footer__title">Plan du site</h4>
-                        <ul class=footer__list>
-                            <a href="./"><li>Accueil</li></a>
-                            <a href="{{ route('activities.past') }}"><li>Activités passées</li></a>
-                            <a href="{{ route('activities.index') }}"><li>Activités à venir</li></a>
-                            <a href="{{ route('shop.index') }}"><li>Boutique</li></a>
-                        </ul>
-                </div>
-    
-                <div class="footer__section footer__info">
-                    <h4 class="footer__title">Localisation</h4>
-                    <iframe class="footer__map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d165.03565963863176!2d7.694327887073894!3d48.56062011900846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xcdb8d090067b0191!2sexia.CESI+Strasbourg!5e0!3m2!1sfr!2sfr!4v1523873506920" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-                </div>
-            </div>
-    
-            <div class="footer__bot">
-                © 2018 - BDE eXia.CESI Strasbourg | <a href="#">Mentions légales</a>
-            </div>
-        </div>
-    </footer>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="{{ asset('js/main.js') }}"></script>
 </body>
