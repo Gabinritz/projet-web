@@ -29,6 +29,11 @@ Route::group(['prefix' => 'ideasbox'], function () {
         'uses' => 'IdeasBoxController@getVoteIndex',
         'as' => 'ideas.vote']);
 
+    //Handle unvote
+    Route::get('/{id}/unvote', [
+        'uses' => 'IdeasBoxController@getUnvoteIndex',
+        'as' => 'ideas.unvote']);
+
     //Post Student Idea
     Route::post('create', [
         'uses' => 'IdeasBoxController@postCreateIdea',

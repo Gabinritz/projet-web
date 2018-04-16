@@ -41,6 +41,18 @@ class IdeasBoxController extends Controller
         return redirect()->back();
     }
 
+    public function getUnvoteIndex($id) {
+        $user = Auth::user();
+
+        if(!$user) {
+            return redirect()->route('login');
+        }
+
+        $vote = Vote::where('idea_id', $id)->where('user_id', $user->id);
+        $vote->delete();
+        return redirect()->back();
+    }
+
     public function postCreateIdea(Request $request) {
         $user = Auth::user();
 
