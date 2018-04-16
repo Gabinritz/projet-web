@@ -62,8 +62,9 @@ class IdeasBoxController extends Controller
         if ($request->hasFile('image')) {
             $request->file('image');
             $path = Storage::putFile('public', $request->file('image'));
+            $path = str_replace('public/', '', $path);
         } else {
-            return 'No file';
+            $path = 'background.jpg';
         }
 
         if(!$user) {
@@ -80,6 +81,6 @@ class IdeasBoxController extends Controller
         $idea = Idea::where('id', $request->input('idea_id'))->first();
         $idea->delete();
         $activity->save();
-        /* return redirect()->back(); */
+        return redirect()->back();
     }
 }
