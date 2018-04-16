@@ -24,7 +24,7 @@
 @foreach($activity->images as $image)
     <div id="modal-{{$j}}" class="modal">
         <div class="modal-content">
-        <span class="close" id="close-{{$j}}">&times;</span>
+        <span class="close" id="close-{{$j}}">&times;</span>    
             <section class="section-img" id="img-{{$j}}">
                 <img src="{{ $image->imgUrl }}" alt="{{$j}}" id="img-{{$j}}" class="modal-img">
             </section>
@@ -35,13 +35,21 @@
             <section class="section-react" id="react-{{$j}}">
                 @if ($user->status == 1)
                     <div class="section-admin">
-                        <span>Supprimer la photo</span>
+                        <span><a href="{{ route('delete.img', ['activityId' => $activity->id, 'imgId' => $image->id]) }}">Supprimer la photo {{$image->id}}</a></span>
                     </div>
                 @endif
                 <div class="section-react-likes">
                     <span class="section-react-likes-content">
-                        <i class="material-icons">favorite</i> {{ count($image->likes) }} 
-                        @if (count($image->likes) <=1 ) personne aime cette photo @else personnes aiment cette photo @endif
+                    @if(!$image->likes->where('user_id', $user->id)->first())
+                        <i class="material-icons">
+                            <a href="{{ route('image.get.like', ['imgId' => $image->id, 'activityId' => $activity->id]) }}">favorite</a>
+                        </i> {{ count($image->likes) }}
+                    @else
+                        <i class="material-icons">
+                            favorite
+                        </i> {{ count($image->likes) }}
+                    @endif
+                        @if (count($image->likes) <=1 ) | personne aime cette photo @else | personnes aiment cette photo @endif
                     </span>
                 </div>
 
@@ -52,10 +60,15 @@
                                 {{$comment->user->where('id', $comment->user_id)->first()->firstname}} {{$comment->user->where('id', $comment->user_id)->first()->name}}
                             </span>
                             <span class="section-react-comments-content">{{$comment->content}}</span>
-                            @if ($user->status == 1) <i class="material-icons xx">more_vert</i> @endif
+                            @if ($user->status == 1) <i class="material-icons xx">more_vert</   i> @endif
                         </div>
                     @endforeach
-                    <input class="section-react-comments-add" type="text" placeholder="Ajouter un commentaire">
+                    <form action="{{ route('image.post.com', ['imgid' => $image->id, 'id' => $activity->id]) }}" method="post">
+                        @csrf
+                        <input class="section-react-comments-add" type="text" placeholder="Ajouter un commentaire" name="comment" required>
+                        <input type="submit" placeholder="valider">
+                    </form>
+                    
                 </div>
             </section>
         </div>

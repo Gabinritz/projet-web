@@ -40,7 +40,7 @@ class ActivitiesController extends Controller
 
     public function getPast() {
         $user = Auth::user();
-        $activities = Activity::where('date', '<=', date('Y-m-d'))->take(20)->get();
+        $activities = Activity::where('date', '<', date('Y-m-d'))->take(20)->get();
         return view('activities.student.past', ['user' => $user, 'activities' => $activities]);
     }
 
@@ -82,19 +82,31 @@ class ActivitiesController extends Controller
         return redirect()->back();
     }
 
-    public function postComment($id, Request $request) {
+    public function postComment(Request $request, $id, $imgId) {
         $user = Auth::user();
 
         if(!$user) {
             return redirect()->route('login');
         }
         
-        $image = Image::where('id', $id)->first();
+        $image = Image::find($imgId);
         $comment = new Comment([
             'user_id' => $user->id,
-            'content' => $request->input('content')
+            'content' => $request->input('comment')
         ]);
         $image->comments()->save($comment);
         return redirect()->back();
+    }
+
+    public function deleteImg($activityId, $imgId) {
+        $user = Auth::user();
+
+        if(!$user || $user->status != 1) {
+            return redirect()->route('login');
+        }
+
+        $image = Image::find($imgId);
+        $image->delete();
+        return redirect()->route('activities.focus', ['id' => $activityId]);
     }
 }

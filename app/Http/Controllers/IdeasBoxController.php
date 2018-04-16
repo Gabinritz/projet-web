@@ -61,9 +61,9 @@ class IdeasBoxController extends Controller
         $user = Auth::user();
         if ($request->hasFile('image')) {
             $request->file('image');
-            $path = Storage::putFile('public', $request->file('image'));
+            $path = Storage::putFile('/', $request->file('image'));
         } else {
-            return 'No file';
+            $path = 'background.jpg';
         }
 
         if(!$user) {
@@ -75,11 +75,13 @@ class IdeasBoxController extends Controller
             'description' => $request->input('description'),
             'date' => $request->input('date'),
             'place' => $request->input('place'),
-            'imgUrl' => $path
+            'imgUrl' => $path,
+            'price' => $request->input('price'),
+            'recurrent' => $request->input('recurrent')
         ]);
         $idea = Idea::where('id', $request->input('idea_id'))->first();
         $idea->delete();
         $activity->save();
-        /* return redirect()->back(); */
+        return redirect()->back();
     }
 }

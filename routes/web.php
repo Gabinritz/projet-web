@@ -82,6 +82,12 @@ Route::group(['prefix' => 'activities'], function () {
         'as' => 'image.post.com'
     ]);
 
+    //DeleteImg
+    Route::get('past/{activityId}/deleteimg/{imgId}', [
+        'uses' => 'ActivitiesController@deleteImg',
+        'as' => 'delete.img'
+    ]);
+
 });
 
 //Shop

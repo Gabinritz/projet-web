@@ -16,7 +16,10 @@ class ActivitiesTableSeeder extends Seeder
             'name' => 'Piscine',
             'description' => 'Emmenez vos maillot de bains !!!',
             'date' => '2018-04-08',
-            'place' => 'Piscine de Lingolsheim'
+            'place' => 'Piscine de Lingolsheim',
+            'imgUrl' => 'background.jpg',
+            'price' => '3',
+            'recurrent' => false
         ]);
         $activity->save();
         $activity = new App\Activity(
@@ -24,7 +27,10 @@ class ActivitiesTableSeeder extends Seeder
             'name' => 'Médecin du Sommeil',
             'description' => 'Antoine va chez le médecin du sommeil car il dort en prosit',
             'date' => '2018-02-12',
-            'place' => 'Hopital de Strasbourg'
+            'place' => 'Hopital de Strasbourg',
+            'imgUrl' => 'background.jpg',
+            'price' => '5',
+            'recurrent' => true
         ]);
         $activity->save();
         $activity = new App\Activity(
@@ -32,7 +38,10 @@ class ActivitiesTableSeeder extends Seeder
             'name' => 'Barbecue',
             'description' => 'Barbecue entre exars pendant le stage',
             'date' => '2018-06-15',
-            'place' => 'eXia Cesi Strasbourg'
+            'place' => 'eXia Cesi Strasbourg',
+            'imgUrl' => 'background.jpg',
+            'price' => '7',
+            'recurrent' => false
         ]);
         $activity->save();
         $activity = new App\Activity(
@@ -40,7 +49,10 @@ class ActivitiesTableSeeder extends Seeder
             'name' => 'Evenement Petit pain',
             'description' => 'Un petit pain offert par personne pour la fin de l\'année',
             'date' => '2018-04-20',
-            'place' => 'eXia Cesi Strasbourg'
+            'place' => 'eXia Cesi Strasbourg',
+            'imgUrl' => 'background.jpg',
+            'price' => '1',
+            'recurrent' => false
         ]);
         $activity->save();
 
