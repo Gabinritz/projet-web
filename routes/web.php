@@ -110,6 +110,12 @@ Route::group(['prefix' => 'activities'], function () {
         'as' => 'delete.img'
     ]);
 
+    //downlaodPDF
+    Route::get('/pdf/{activity}', 
+    ['as' => 'list.pdf',
+    'uses' => 'ActivitiesController@dwPDF']
+    );
+
 });
 
 //Shop

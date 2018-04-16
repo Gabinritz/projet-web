@@ -1,15 +1,20 @@
-@extends ('partials.layout', ['title' => 'Activités à venir'])
-
-@section ('content')
-<div class="container" style="text-align: center; margin-top: 2rem;">
-        @if ($activity->participates) {{-- [DONNEES DANS IDEES] --}}
-            <?php $i = 0; ?>
-            <div class="card__content-bot" style="display: flex; justify-content : space-around;">
-                <a href="{{ route('list.pdf', ['activity' => $activity->id]) }}"><button class="btn accept__btn" id="btnAccept-1" onclick="accept()">Télécharger la liste au format CSV</button></a>
-                <a href="{{ route('list.pdf', ['activity' => $activity->id]) }}"><button class="btn accept__btn" id="btnAccept-1" onclick="accept()">Télécharger la liste au format PDF</button></a>
-            </div>
-            <div style="overflow-x: auto;" id="test">
-                <table>
+<!DOCTYPE html>
+<html lang="{{ app()->getLocale() }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0 maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#d90119" />
+    <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>{{ $title or 'Welcome' }} | BDE eXia.CESI</title>
+</head>
+<body id="body">
+        <?php $i = 0; ?>
+    <div style="overflow-x: auto;" id="test">
+    <h1>Activité : {{ $activity->name }}</h1>
+            <table>
                     <tr>
                         <th>Nom</th>
                         <th>Prénom</th>
@@ -34,8 +39,6 @@
                     <?php $i++ ?>
                 @endforeach
                 </table>
-            </div>
-        @else {{-- [PAS DE DONNEES] --}}
-            <p>Aucun participant pour cette activité</p>
-        @endif
-@endsection
+    </div>
+</body>
+</html>

@@ -9,6 +9,9 @@ use App\Image;
 use App\Like;
 use App\Comment;
 use Auth;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
+use PDF;
 
 class ActivitiesController extends Controller
 {
@@ -164,5 +167,19 @@ class ActivitiesController extends Controller
         $image = Image::find($imgId);
         $image->delete();
         return redirect()->route('activities.focus', ['id' => $activityId]);
+    }
+
+    public function dwPDF($id) {
+        $user = Auth::user();
+
+        if(!$user || $user->status != 1) {
+            return redirect()->route('login');
+        }
+
+        $activityName = Activity::find($id)->name;
+        $list= Participate::where('activity_id', $id)->get();
+        $pdf = PDF::loadView('downloads.list_pdf', compact('order'), ['activity' => Activity::find($id)]);
+        $name = "listeActivité-".$activityName.".pdf";
+        return $pdf->download($name);
     }
 }
