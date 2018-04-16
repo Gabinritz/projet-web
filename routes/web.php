@@ -69,6 +69,11 @@ Route::group(['prefix' => 'activities'], function () {
         'uses' => 'ActivitiesController@getFocus',
         'as' => 'activities.focus']);
 
+    //List
+    Route::get('past/list/{id}', [
+        'uses' => 'ActivitiesController@getList',
+        'as' => 'activities.list']);
+        
     //PostImage
     Route::post('past/{id}/image', [
         'uses' => 'ActivitiesController@postImage',
@@ -81,10 +86,22 @@ Route::group(['prefix' => 'activities'], function () {
         'as' => 'image.get.like'
     ]);
 
+    //HandleUnlike
+    Route::get('past/{id}/unlike/{imgid}', [
+        'uses' => 'ActivitiesController@getUnlike',
+        'as' => 'image.get.unlike'
+    ]);
+
     //PostComment
     Route::post('past/{id}/comment/{imgid}', [
         'uses' => 'ActivitiesController@postComment',
         'as' => 'image.post.com'
+    ]);
+
+    //Uncomment
+    Route::get('past/{activityId}/uncomment/{comId}', [
+        'uses' => 'ActivitiesController@getUncomment',
+        'as' => 'image.post.uncom'
     ]);
 
     //DeleteImg

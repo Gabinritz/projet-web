@@ -25,6 +25,9 @@
             @else
                 <a href="{{ route('activities.signup.post', ['id' => $activity->id]) }}"><button class="btn accept__btn" id="btnAccept-1" onclick="accept()">S'INSCRIRE</button></a>
             @endif
+            @if($user->status = 1)
+                <a href="{{ route('activities.list', ['id' => $activity->id]) }}"><button class="btn accept__btn" id="btnAccept-1" onclick="accept()">LISTE INSCRITS</button></a></td>
+            @endif
         </div>
     </div>
 </div>

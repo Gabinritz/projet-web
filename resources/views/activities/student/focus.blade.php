@@ -35,7 +35,7 @@
             <section class="section-react" id="react-{{$j}}">
                 @if ($user->status == 1)
                     <div class="section-admin">
-                        <span><a href="{{ route('delete.img', ['activityId' => $activity->id, 'imgId' => $image->id]) }}">Supprimer la photo {{$image->id}}</a></span>
+                        <span><a href="{{ route('delete.img', ['activityId' => $activity->id, 'imgId' => $image->id]) }}">Supprimer la photo</a></span>
                     </div>
                 @endif
                 <div class="section-react-likes">
@@ -46,7 +46,7 @@
                         </i> {{ count($image->likes) }}
                     @else
                         <i class="material-icons">
-                            favorite
+                                <a href="{{ route('image.get.unlike', ['imgId' => $image->id, 'activityId' => $activity->id]) }}">favorite</a>
                         </i> {{ count($image->likes) }}
                     @endif
                         @if (count($image->likes) <=1 ) | personne aime cette photo @else | personnes aiment cette photo @endif
