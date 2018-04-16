@@ -79,7 +79,7 @@
 {{-- @if($user && $activity->participates->where('user_id', $user->id)->first()) --}}
 @if (1)
 <div class="card hidden slideUp" id="addIdea">
-        <form method="post" class="form login__form" enctype="multipart/form-data" action="{{ route('activities.focus', ['id' => $activity->id])}}" >
+        <form method="post" class="form login__form" enctype="multipart/form-data" action="{{ route('activites.focus.image.post', ['id' => $activity->id]) }}" >
             <div class="group">   
                 <input type="text" id="name" name="name" required
                 <span class="bar"></span>
@@ -93,7 +93,7 @@
             </div>
         
         
-        <input type="hidden" id="id" name="idea_id" value={{$user->id}}
+        <input type="hidden" id="id" name="idea_id" value={{$user->id}}>
 
             {{ csrf_field() }}
 

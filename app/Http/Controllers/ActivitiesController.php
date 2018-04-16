@@ -9,6 +9,8 @@ use App\Image;
 use App\Like;
 use App\Comment;
 use Auth;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 
 class ActivitiesController extends Controller
 {

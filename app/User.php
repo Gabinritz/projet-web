@@ -50,4 +50,8 @@ class User extends Authenticatable
     public function participates() {
         return $this->hasMany('App\Participate', 'user_id');
     }
+
+    public function notifications() {
+        return $this->hasMany('App\Notification', 'user_id');
+    }
 }
