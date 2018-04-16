@@ -11,7 +11,7 @@
                     <i class="material-icons">comment</i> {{ count($image->comments) }}
                     <i class="material-icons">favorite</i> {{ count($image->likes) }}
                 </span>
-                <img src="{{ $image->imgUrl }}" alt="Photo {{$activity->name}} {{$i}}" id="masonry-img-{{$i}}" class="masonry-img">
+                <img src="{{asset('storage/'.$image->imgUrl.'')}}" alt="Photo {{$activity->name}} {{$i}}" id="masonry-img-{{$i}}" class="masonry-img">
             </figure>
             <?php $i++; ?>
         @endforeach
@@ -26,7 +26,7 @@
         <div class="modal-content">
         <span class="close" id="close-{{$j}}">&times;</span>    
             <section class="section-img" id="img-{{$j}}">
-                <img src="{{ $image->imgUrl }}" alt="{{$j}}" id="img-{{$j}}" class="modal-img">
+                <img src="{{asset('storage/'.$image->imgUrl.'')}}" alt="{{$j}}" id="img-{{$j}}" class="modal-img">
             </section>
             <div class="section-react-preview" id="preview-{{$j}}">
                 <span><i class="material-icons">favorite</i> {{ count($image->likes) }}</span>
@@ -66,7 +66,7 @@
                     <form action="{{ route('image.post.com', ['imgid' => $image->id, 'id' => $activity->id]) }}" method="post">
                         @csrf
                         <input class="section-react-comments-add" type="text" placeholder="Ajouter un commentaire" name="comment" required>
-                        <input type="submit" placeholder="valider">
+                        <button class="comment-send" type="submit"></button>
                     </form>
                     
                 </div>
@@ -76,9 +76,38 @@
     <?php $j++; ?>
 @endforeach
 
-@if($user && $activity->participates->where('user_id', $user->id)->first())
-Faire un form pour remplir image avec le nom et l'image si l'utilisateur a participé
-<div><a href="{{ route('activities.focus', ['id' => $activity->id])}}">Poster une image</a></div>
+{{-- @if($user && $activity->participates->where('user_id', $user->id)->first()) --}}
+@if (1)
+<div class="card hidden slideUp" id="addIdea">
+        <form method="post" class="form login__form" enctype="multipart/form-data" action="{{ route('activities.focus', ['id' => $activity->id])}}" >
+            <div class="group">   
+                <input type="text" id="name" name="name" required
+                <span class="bar"></span>
+                <label>Titre de la photo</label>
+            </div>
+
+            <div class="group">
+                <input type="file" name="image" id="image">
+                <span class="bar"></span>
+                <label>Ajouter une image</label>
+            </div>
+        
+        
+        <input type="hidden" id="id" name="idea_id" value={{$user->id}}
+
+            {{ csrf_field() }}
+
+            <div class="submit">
+                <button type="submit" class="btn login__submit">VALIDER</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="addIdea__fixed" id="addIdea__expand" onclick="expand()">
+            <span>
+                Ajouter une photo
+            </span>
+        </div>
 @endif
 
 @endsection
