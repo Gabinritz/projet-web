@@ -1,7 +1,7 @@
 @extends ('partials.layout', ['title' => 'Boite à idées'])
 
 @section ('content')
-<div class="container">
+<div class="container" style="text-align: center; margin-top: 2rem;">
 @if (!$ideas->isEmpty()) {{-- [DONNEES DANS IDEES] --}}
     <?php $i = 0; ?>
     <div style="overflow-x: auto;" id="test">
@@ -41,17 +41,23 @@
 @endif
 </div>
 
-@if ($user->status == 1) {{-- [MEMBRE DU BDE] --}}
+@if ($user->status == 1 && !$ideas->isEmpty()) {{-- [MEMBRE DU BDE] --}}
     <div class="card hidden slideUp" id="addIdea">
-        <form method="post" class="form login__form" action="{{ route('ideas.admin.manage.post') }}" >
+        <form method="post" class="form login__form" enctype="multipart/form-data" action="{{ route('ideas.admin.manage.post') }}" >
             <div class="group">   
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="name" name="name" required
+                @if (!$ideas->isEmpty())
+                    value="{{$idea->name}}">
+                @endif
                 <span class="bar"></span>
                 <label>Nom de l'activité</label>
             </div>
 
             <div class="group">      
-                <input type="text"  id="description" name="description" required>
+                <input type="text"  id="description" name="description" required
+                @if (!$ideas->isEmpty())
+                    value="{{$idea->description}}">
+                @endif
                 <span class="bar"></span>
                 <label>Description (255 max)</label>
             </div>
@@ -67,6 +73,12 @@
                 <span class="bar"></span>
                 <label>Lieu</label>
             </div>
+
+            <div class="group">
+                <input type="file" name="image" id="image">
+                <span class="bar"></span>
+                <label>Ajouter une image</label>
+            </div>
         
         
         <input type="hidden" id="id" name="idea_id" value=
@@ -81,7 +93,7 @@
             </div>
         </form>
     </div>
-@else {{-- [ETUDIANT] --}}
+@elseif ($user->status != 1) {{-- [ETUDIANT] --}}
     <div class="card hidden slideUp" id="addIdea">
         <form method="post" class="form login__form" action="{{ route('ideas.create.post') }}" >
             <div class="group">      
@@ -105,14 +117,18 @@
     </div>
 @endif
 
-<div class="addIdea__fixed" id="addIdea__expand" onclick="expand()">
-    <span>
-    @if ($user->status == 1) {{-- [MEMBRE DU BDE] --}}
-        Accepter une idée   
-    @else {{-- [ETUDIANT ET AUTRES] --}}
-        Soumettre une idée au BDE
-    @endif
-    </span>
-</div>
+@if ($user->status == 1 && !$ideas->isEmpty()) {{-- [MEMBRE DU BDE] --}}
+    <div class="addIdea__fixed" id="addIdea__expand" onclick="expand()">
+        <span>
+            Accepter une idée
+        </span>
+    </div>
+@elseif ($user->status != 1) {{-- [ETUDIANT ET AUTRES] --}}
+    <div class="addIdea__fixed" id="addIdea__expand" onclick="expand()">
+        <span>
+            Soumettre une idée au BDE
+        </span>
+    </div>
+@endif
 
 @endsection

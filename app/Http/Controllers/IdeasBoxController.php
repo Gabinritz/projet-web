@@ -8,6 +8,9 @@ use App\Vote;
 use App\Activity;
 use App\User;
 use Auth;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
+
 
 class IdeasBoxController extends Controller
 {
@@ -56,6 +59,12 @@ class IdeasBoxController extends Controller
 
     public function postAdminManage(Request $request) {
         $user = Auth::user();
+        if ($request->hasFile('image')) {
+            $request->file('image');
+            $path = Storage::putFile('public', $request->file('image'));
+        } else {
+            return 'No file';
+        }
 
         if(!$user) {
             return redirect()->route('login');
@@ -65,11 +74,12 @@ class IdeasBoxController extends Controller
             'name' => $request->input('name'),
             'description' => $request->input('description'),
             'date' => $request->input('date'),
-            'place' => $request->input('place')
+            'place' => $request->input('place'),
+            'imgUrl' => $path
         ]);
         $idea = Idea::where('id', $request->input('idea_id'))->first();
         $idea->delete();
         $activity->save();
-        return redirect()->back();
+        /* return redirect()->back(); */
     }
 }
