@@ -12,7 +12,7 @@
 </head>
 <body id="body">
     <header>
-    <a href="{{ route('index') }}"><img src="{{ asset('img/logo.png') }}" alt="Logo du BDE" id="logo"></a>
+        <a href="/"><img src="{{ asset('img/logo.png') }}" alt="Logo du BDE" id="logo"></a>
         <div id="hamburger">
             <div id="hamburger-content">
                 <nav>

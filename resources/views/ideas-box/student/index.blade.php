@@ -23,9 +23,9 @@
                     <button class="btn accept__btn" id="btnAccept-{{ $i }}" onclick="accept()">ACCEPTER</button>
                 @else {{-- [ETUDIANT ET AUTRES] --}}
                     @if($idea->votes->where('user_id', $user->id)->first())
-                    <i class="material-icons thumb" id="thumb-green"><a href="{{ route('ideas.unvote', ['id' => $idea->id]) }}">thumb_up</a></i>
+                    <i class="material-icons thumb thumb-green"><a href="{{ route('ideas.unvote', ['id' => $idea->id]) }}">thumb_up</a></i>
                     @else
-                        <i class="material-icons thumb" id="thumb-black"><a href="{{ route('ideas.vote', ['id' => $idea->id]) }}">thumb_up</a></i>
+                        <i class="material-icons thumb thumb-black"><a href="{{ route('ideas.vote', ['id' => $idea->id]) }}">thumb_up</a></i>
                     @endif
                     <span class="likes">{{ count($idea->votes) }}</span>
                 @endif

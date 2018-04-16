@@ -22,11 +22,14 @@
                         {{$activity->description}}
                     </span>
                 </div>
-                <div class="card__content-bot">
-                        <a href="{{ route('activities.focus', ['id' => $activity->id]) }}"><button class="btn accept__btn" id="btnAccept-1" onclick="accept()">DÉTAILS</button></a></td>
+                <div class="card__content-admin">
                     @if($user->status = 1)
-                    <a href="{{ route('activities.list', ['id' => $activity->id]) }}"><button class="btn accept__btn" id="btnAccept-1" onclick="accept()">LISTE INSCRITS</button></a></td>
+                        <a class="card__list" href="{{ route('activities.list', ['id' => $activity->id]) }}">Liste des inscrits</a>
                     @endif
+                </div>            
+                {{-- <hr> FAUT FAIRE DES HR --}}
+                <div class="card__content-bot">
+                    <a href="{{ route('activities.focus', ['id' => $activity->id]) }}"><button class="btn accept__btn" id="btnAccept-1" onclick="accept()">DÉTAILS</button></a>
                </div>
             </div>
         </div>
