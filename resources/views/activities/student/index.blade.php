@@ -6,8 +6,7 @@
 @foreach($activities as $activity)
 <div class="card card__activity">
     <div class="card__header">
-        <img alt="1" class="card__image" @if ($activity->imgUrl != 'noimage') src="{{asset('storage/'.$activity->imgUrl.'')}}"> @else src="{{ asset('img/background.jpg') }}"> @endif
-
+        <img alt="1" class="card__image" src="{{asset('storage/'.$activity->imgUrl.'')}}">
     </div>
     <div class="card__content">
         <h3 class="card__title">{{$activity->name}}</h3>

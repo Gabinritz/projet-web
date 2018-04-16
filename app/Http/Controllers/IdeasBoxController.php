@@ -73,7 +73,8 @@ class IdeasBoxController extends Controller
         $user = Auth::user();
         if ($request->hasFile('image')) {
             $request->file('image');
-            $path = Storage::putFile('/', $request->file('image'));
+            $path = Storage::putFile('public', $request->file('image'));
+            $path = str_replace('public/', '', $path);
         } else {
             $path = 'background.jpg';
         }

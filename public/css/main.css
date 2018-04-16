@@ -13,7 +13,8 @@ html {
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
-  min-height: 100vh; }
+  min-height: 100vh;
+  background-color: #F5F5F5; }
 
 h1, h2, h3, h4, h5, h6, p {
   margin: 0; }
@@ -185,7 +186,7 @@ li {
 .accueil {
   display: flex;
   height: 90vh;
-  width: 100vw;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -432,7 +433,8 @@ th, td {
     bottom: -350px; } }
 .wrapper {
   margin: 2em auto;
-  max-width: 1500px; }
+  max-width: 1500px;
+  min-height: 90vh; }
   .wrapper img {
     vertical-align: middle;
     max-width: 100%; }
