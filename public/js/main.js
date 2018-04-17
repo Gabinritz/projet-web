@@ -178,3 +178,18 @@ function checkForm(form) {
         alert("Veuillez remplir correctement tous les champs")
     }
 }
+
+
+function showNotif(a) {
+    let top = a.offsetTop
+    let left = a.offsetLeft
+    let box = document.getElementById('notif__box')
+
+    if (box.style.display == 'none') {
+        box.style.display = 'block'
+        box.style.top = 'calc(12px + '+top+'px)'
+        box.style.right = 'calc(100vw - '+left+'px - 12px)'
+    } else {
+        box.style.display = 'none'
+    }
+}
