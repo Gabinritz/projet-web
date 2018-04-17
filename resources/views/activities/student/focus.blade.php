@@ -40,7 +40,9 @@
                 @endif
                 <div class="section-react-likes">
                     <span class="section-react-likes-content">
-                    @if(!$image->likes->where('user_id', $user->id)->first())
+                    @if($image->user_id == $user->id)
+                        <i class="material-icons fav"></i> {{ count($image->likes) }}
+                    @elseif(!$image->likes->where('user_id', $user->id)->first())
                         <i class="material-icons fav">
                             <a href="{{ route('image.get.like', ['imgId' => $image->id, 'activityId' => $activity->id]) }}">favorite</a>
                         </i> {{ count($image->likes) }}
