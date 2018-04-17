@@ -170,6 +170,16 @@ class ActivitiesController extends Controller
         return redirect()->route('activities.focus', ['id' => $activityId]);
     }
 
+    public function deleteActivity($activityId) {
+        $user = Auth::user();
+        //check si BDE
+        if(!$user || $user->status != 1) {
+            return redirect()->route('login');
+        }
+        $activity = Activity::find($activityId);
+        $activity->delete();
+    }
+
     //télécharger au fomat PDF
     public function dwPDF($id) {
         $user = Auth::user();

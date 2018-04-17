@@ -8,6 +8,7 @@ use App\Vote;
 use App\Activity;
 use App\User;
 use Auth;
+use Notification;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -96,6 +97,12 @@ class IdeasBoxController extends Controller
         ]);
         $idea = Idea::where('id', $request->input('idea_id'))->first();
         $idea->delete();
+        $notification = new Notification([
+            'message' => 'votre idée '.$idea->name.' a été retenue',
+            'user_id' => $idea->user_id,
+            'unread' => true
+        ]);
+        $notification->save();
         $activity->save();
         return redirect()->back();
     }

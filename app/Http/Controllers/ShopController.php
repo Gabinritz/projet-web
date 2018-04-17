@@ -10,8 +10,9 @@ class ShopController extends Controller
 {
     public function getIndex() {
         $products = Product::all();
+        $bestSellers = Product::orderBy('soldnumber', 'DESC')->take(3)->get();
         $user = Auth::user();
-        return view('shop.student.index', ['products' => $products, 'user' => $user]);
+        return view('shop.student.index', ['products' => $products, 'user' => $user, 'bestsellers' => $bestSellers]);
     }
 
     public function getShoppingCart() {
@@ -31,7 +32,7 @@ class ShopController extends Controller
         return view('shop.student.order', ['products' => $products, 'user' => $user]);
     }
 
-    public function postAdminDelete() {
+    public function getAdminDelete() {
         return redirect()->route('shop.admin.manage');
     } 
 

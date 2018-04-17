@@ -18,6 +18,7 @@ class CreateNotificationsTable extends Migration
             $table->timestamps();
             $table->string('message');
             $table->integer('user_id');
+            $table->boolean('unread');
         });
     }
 
