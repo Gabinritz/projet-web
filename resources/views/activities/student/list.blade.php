@@ -13,8 +13,8 @@
                     <tr>
                         <th>Nom</th>
                         <th>Prénom</th>
-                        <th>Email</th>
                         <th>Date Inscription</th>
+                        <th>Email</th>
                         <th>Statut</th>
                     </tr>
                 @foreach($activity->participates as $participant)

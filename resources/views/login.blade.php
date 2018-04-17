@@ -9,19 +9,18 @@
 
 <div class="card login__card test" id="login">
     <h2>Connexion</h2>
-    <form method="POST" class="form login__form" action="{{ route('logtry') }}">
+    <form method="POST" class="form login__form" action="{{ route('logtry') }}" onsubmit="return checkForm(this)">
         @csrf
         <div class="group">      
-            <input type="email" 
-            name="email" 
-            value="{{ old('email') }}" 
-            required autofocus>
+            <input type="email" name="email" value="{{ old('email') }}" required autofocus
+                onkeyup="checkMail(this)">
             <span class="bar"></span>
             <label>Adresse mail</label>
         </div>
         
         <div class="group">      
-            <input type="password" name="password" required>
+            <input type="password" name="password" required
+                onkeyup="checkPassword(this)">
             <span class="bar"></span>
             <label>Mot de passe</label>
         </div>
@@ -35,7 +34,7 @@
 
 <div class="card login__card hidden test" id="register">
     <h2>Inscription</h2>
-    <form method="POST" action="{{ route('registertry') }}" class="form login__form">
+    <form method="POST" action="{{ route('registertry') }}" class="form login__form" onsubmit="return checkForm(this)">
         @csrf
             <div class="group">      
                 <input type="text" 
@@ -50,14 +49,14 @@
                 <label>Prénom</label>
             </div>
             <div class="group">      
-                <input type="email" name="email" value="{{ old('email') }}" required>
+                <input type="email" name="email" value="{{ old('email') }}" required 
+                    onkeyup="checkMail(this)" >
                 <span class="bar"></span>
                 <label>Adresse mail</label>
             </div>
             <div class="group">      
                 <input type="password" name="password" required 
-                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}"
-                title="Le mot de passe doit contenir au moins 4 caractères, une majuscule et un chiffre">
+                    onkeyup="checkRegex(this)">
                 <span class="bar"></span>
                 <label>Mot de passe</label>
             </div>

@@ -22,8 +22,9 @@
                         <a href="{{ route('ideas.index') }}"><li class="menu-item-3">BOITE À IDÉES</li></a>
                         <a href="{{ route('shop.index') }}"><li class="menu-item-4">BOUTIQUE</li></a>
                         @if($user)
-                        <a href="{{ route('logout') }}"><li class="menu-item-6">SE DÉCONNECTER</li></a>
-                        <a href="#"><li class="menu-item-5">{{ $user->firstname .' '. $user->name }}</li></a>
+                            <a href="#"><i class="material-icons" id="notif__button" onclick="showNotif(this)">email</i></a>
+                            <div id="notif__box" class="card card__activity" style="display: none; position: absolute; width: 400px; height: 200px; z-index: 9999;"></div>
+                            <a href="{{ route('logout') }}"><li class="menu-item-5">{{ $user->firstname .' '. $user->name }}</li></a>
                         @else
                         <a href="{{ route('login') }}"><li class="menu-item-5">S'INSCRIRE / SE CONNECTER</li></a>
                         @endif

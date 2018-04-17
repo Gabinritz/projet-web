@@ -47,11 +47,11 @@
                             <a href="{{ route('image.get.like', ['imgId' => $image->id, 'activityId' => $activity->id]) }}">favorite</a>
                         </i> {{ count($image->likes) }}
                     @else
-                        <i class="material-icons fav-color">
-                                <a href="{{ route('image.get.unlike', ['imgId' => $image->id, 'activityId' => $activity->id]) }}">favorite</a>
-                        </i> {{ count($image->likes) }}
+                        <a href="{{ route('image.get.unlike', ['imgId' => $image->id, 'activityId' => $activity->id]) }}">
+                            <i class="material-icons fav-color">favorite</i>
+                        </a> {{ count($image->likes) }}
                     @endif
-                        @if (count($image->likes) <=1 ) | personne aime cette photo @else | personnes aiment cette photo @endif
+                        @if (count($image->likes) <=1 ) personne aime cette photo @else personnes aiment cette photo @endif
                     </span>
                 </div>
 

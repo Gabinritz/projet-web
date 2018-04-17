@@ -131,3 +131,65 @@ function modal(id) {
         }
     }
 }
+
+
+function inputValid(input, valid) {
+    if (valid) {
+        if (input.classList.contains('input__invalid')) {
+            input.classList.replace('input__invalid', 'input__valid')
+        } else { input.classList.add('input__valid') }
+    } else {
+        if (input.classList.contains('input__valid')) {
+            input.classList.replace('input__valid', 'input__invalid')
+        } else { input.classList.add('input__invalid') }
+    }
+}
+
+function checkMail(input) {
+    let regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/
+
+    if (!regex.test(input.value)) {
+        inputValid(input, false)
+        return false
+    } else {
+        inputValid(input, true)
+        return true
+    }
+}
+function checkPassword(input) {
+    let regex = /^(?=.*\d)(?=.*[A-Z])(?!.*[^a-zA-Z0-9@#$^+=])(.{4,16})$/
+
+    if (!regex.test(input.value)) {
+        inputValid(input, false)
+        return false
+    } else {
+        inputValid(input, true)
+        return true
+    }
+}
+
+function checkForm(form) {
+    let mail = checkMail(form.email)
+    let password = checkMail(form.password)
+
+    if (mail && password) {
+        return true
+    } else { 
+        alert("Veuillez remplir correctement tous les champs")
+    }
+}
+
+
+function showNotif(a) {
+    let top = a.offsetTop
+    let left = a.offsetLeft
+    let box = document.getElementById('notif__box')
+
+    if (box.style.display == 'none') {
+        box.style.display = 'block'
+        box.style.top = 'calc(12px + '+top+'px)'
+        box.style.right = 'calc(100vw - '+left+'px - 12px)'
+    } else {
+        box.style.display = 'none'
+    }
+}

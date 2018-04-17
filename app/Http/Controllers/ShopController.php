@@ -30,7 +30,9 @@ class ShopController extends Controller
             return redirect()->route('login');
         }
 
-        return view('shop.student.shoppingcart', ['user' => $user]);
+        $shoppingCart = ShoppingCart::where('user_id', $user->id)->get();
+
+        return view('shop.student.shoppingcart', ['user' => $user, 'shopcart' => $shoppingcart]);
     }
 
     public function addToShoppingCart($productId) {
