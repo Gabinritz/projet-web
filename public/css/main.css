@@ -823,4 +823,32 @@ hr {
 i {
   vertical-align: text-bottom; }
 
+.btn__shop:before {
+  content: ' ';
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+  width: 24px;
+  height: 24px;
+  background: url(../img/ic_add_shopping_cart_black_48px.svg);
+  background-size: contain; }
+
+.card__primary-shop {
+  display: flex;
+  justify-content: space-between; }
+
+.card__left, .card__right {
+  display: inline-block; }
+
+.card__right {
+  padding: 24px 16px 0 0; }
+
+.text-shop {
+  height: auto; }
+
+.card__price {
+  font-size: 24px;
+  font-weight: 500;
+  color: #4CAF50; }
+
 /*# sourceMappingURL=main.css.map */
