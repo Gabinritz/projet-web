@@ -10,40 +10,33 @@ class ShopController extends Controller
 {
     public function getIndex() {
         $products = Product::all();
+        $bestSellers = Product::orderBy('soldnumber', 'DESC')->take(3)->get();
         $user = Auth::user();
-        return view('shop.student.index', ['products' => $products, 'user' => $user]);
+        return view('shop.student.index', ['products' => $products, 'user' => $user, 'bestsellers' => $bestSellers]);
     }
 
     public function getShoppingCart() {
         $user = Auth::user();
         return view('shop.student.shoppingcart', ['user' => $user]);
-        //récupérer le panier
     }
 
-    public function getOrder() {
+    public function addToShoppingCart() {
+
+    }
+
+    public function removeFromShoppingCart() {}
+
+    public function postOrder() {
         $products = Product::all();
         $user = Auth::user();
         return view('shop.student.order', ['products' => $products, 'user' => $user]);
     }
 
-    public function getAdminManage() {
-        $user = Auth::user();
-        return view('shop.admin.manage', ['user' => $user]);
-        //récupérer produits et manager
-    }
-
-    public function postAdminManage() {
+    public function getAdminDelete() {
         return redirect()->route('shop.admin.manage');
-        //validation manageent
     } 
-
-    public function getAdminCreate() {
-        $user = Auth::user();
-        return view('shop.admin.create', ['user' => $user]);
-    }
 
     public function postAdminCreate() {
         return redcirect()->route('shop.student.index');
-        //validation et faire produit
     }
 }

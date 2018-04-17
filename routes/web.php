@@ -16,6 +16,10 @@ Route::get('/', [
     'uses' => 'BdeController@getIndex',
     'as' => 'index']);
 
+Route::get('mail', [
+    'uses' => 'BdeController@sendEmailOrder',
+    'as' => 'mail']);
+
 //Ideas
 Route::group(['prefix' => 'ideasbox'], function () { 
 
@@ -114,6 +118,12 @@ Route::group(['prefix' => 'activities'], function () {
     Route::get('/pdf/{activity}', 
     ['as' => 'list.pdf',
     'uses' => 'ActivitiesController@dwPDF']
+    );
+
+    //downlaodCSV
+    Route::get('/csv/{activity}', 
+    ['as' => 'list.csv',
+    'uses' => 'ActivitiesController@dwCSV']
     );
 
 });

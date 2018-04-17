@@ -12,6 +12,7 @@ use Auth;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 use PDF;
+use League\Csv\Writer;
 
 class ActivitiesController extends Controller
 {
@@ -169,6 +170,17 @@ class ActivitiesController extends Controller
         return redirect()->route('activities.focus', ['id' => $activityId]);
     }
 
+    public function deleteActivity($activityId) {
+        $user = Auth::user();
+        //check si BDE
+        if(!$user || $user->status != 1) {
+            return redirect()->route('login');
+        }
+        $activity = Activity::find($activityId);
+        $activity->delete();
+    }
+
+    //télécharger au fomat PDF
     public function dwPDF($id) {
         $user = Auth::user();
 
@@ -179,7 +191,50 @@ class ActivitiesController extends Controller
         $activityName = Activity::find($id)->name;
         $list= Participate::where('activity_id', $id)->get();
         $pdf = PDF::loadView('downloads.list_pdf', compact('order'), ['activity' => Activity::find($id)]);
-        $name = "listeActivité-".$activityName.".pdf";
+        $name = "listeParticipantsActivité-".$activityName.".pdf";
         return $pdf->download($name);
+    }
+
+    //télécharger au format CSV
+    public function dwCSV($id) {
+        $user = Auth::user();
+
+        if(!$user || $user->status != 1) {
+            return redirect()->route('login');
+        }
+
+        $activity = Activity::find($id);
+        $list= Participate::where('activity_id', $id)->get();
+
+        $csv = Writer::createFromFileObject(new \SplTempFileObject());
+        $csv->setNewline("\r\n");
+        $csv->insertOne(['Nom', 'Prenom', 'Email', 'Date Inscription', 'Statut',]);
+        $csv->getNewLine();
+        $status = 0;
+         
+
+        foreach($activity->participates as $participant) {
+
+            if($participant->user->where('id', $participant->user_id)->first()->status = 0) {
+                $status = 'Etudiant'; 
+            }
+            elseif($participant->user->where('id', $participant->user_id)->first()->status = 1) {
+                $status = 'Membre BDE';
+            }
+            else {
+                $status = 'Salarié Cesi';
+            }
+            $csv->insertOne([
+                $participant->user->where('id', $participant->user_id)->first()->name,
+                $participant->user->where('id', $participant->user_id)->first()->firstname,
+                $participant->user->where('id', $participant->user_id)->first()->email,
+                $participant->where('user_id', $participant->user_id)->first()->created_at,
+                $status,
+                
+            ]);
+            $csv->getNewLine();
+        }
+
+        $csv->output('listeParticipantsActivité-'.$activity->name.'.csv');  
     }
 }
