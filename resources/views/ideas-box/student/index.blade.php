@@ -3,17 +3,17 @@
 @section ('content')
 <div class="container" style="text-align: center; margin-top: 2rem;">
 @if (!$ideas->isEmpty()) {{-- [DONNEES DANS IDEES] --}}
-    <?php $i = 0; ?>
-    <div style="overflow-x: auto;" id="test">
-        <table>
-            <tr>
-                <th>Idée</th>
-                <th>Organisateur</th>
-                <th>Description</th>
-                <th>Voter</th>
-            </tr>
+<div style="overflow-x: auto;" id="test">
+    <table>
+        <tr>
+            <th>Idée</th>
+            <th>Organisateur</th>
+            <th>Description</th>
+            <th>Voter</th>
+        </tr>
+        <?php $i = 1; ?>
         @foreach($ideas as $idea)
-            <tr id="idea-{{ $i }}">
+        <tr id="idea-{{ $i }}">
                 <td id="idea-name-{{ $i }}">{{$idea->name}}</td>
                 <td id="idea-nominator-{{ $i }}">{{$idea->user->where('id', $idea->user_id)->first()->firstname}} 
                     {{$idea->user->where('id', $idea->user_id)->first()->name}}</td>
@@ -23,13 +23,11 @@
                     <button class="btn accept__btn" id="btnAccept-{{ $i }}" onclick="accept()">ACCEPTER</button>
                 @else {{-- [ETUDIANT ET AUTRES] --}}
                     @if($idea->votes->where('user_id', $user->id)->first())
-                        <i class="material-icons thumb thumb-green" id="thumb-green-{{$i}}">thumb_up</i>
-                    @else
-                    <a href="{{ route('ideas.vote', ['id' => $idea->id]) }}">                        
-                        <i class="material-icons thumb thumb-black" id="thumb-black">thumb_up</i>
-                    </a>
+                        <i class="material-icons thumb thumb-green" id="thumb-{{$i}}" onclick="unvote({{$idea->id}})">thumb_up</i>
+                    @else              
+                        <i class="material-icons thumb thumb-black" id="thumb-{{$i}}" onclick="vote({{$idea->id}})">thumb_up</i>
                     @endif
-                    <span class="likes">{{ count($idea->votes) }}</span>
+                    <span class="likes" id="vote_count-{{$i}}">{{ count($idea->votes) }}</span>
                 @endif
                 </td>
             <span id="idea-id-{{ $i }}" style="display: none">{{ $idea->id }}</span>
@@ -146,6 +144,10 @@
     </div>
 @endif
 
+@endsection
+
+@section ('scripts')
+    <script src="{{ asset('js/ideas_ajax.js') }}"></script>
 @endsection
 
 

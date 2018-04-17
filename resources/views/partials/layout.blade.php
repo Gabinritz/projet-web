@@ -47,33 +47,7 @@
     @yield('content')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="{{ asset('js/main.js') }}"></script>
-
-    <script>
-        $(document).ready(function() {
-            let url = '/ajax/ideas'
-
-            $('#thumb-green-0').click(function() {
-                let id = 1
-
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-
-                $.ajax({
-                    type: 'DELETE',
-                    url: url + '/' + 1,
-                    success: function(data) {
-                        console.log(data)
-                        $('#thumb-green-0').css('color', '#212121')
-                    },
-                    error: function(data) {
-                        console.log('Error : ', data)
-                    }
-                })
-            })
-        })
-    </script>
+    
+    @yield('scripts')
 </body>
 </html>

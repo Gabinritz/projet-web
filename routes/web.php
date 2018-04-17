@@ -22,15 +22,26 @@ Route::get('/', [
     'uses' => 'BdeController@getIndex',
     'as' => 'index']);
 
-Route::delete('/ajax/ideas/{id?}', function($id) {
+Route::delete('/ideas/{id?}', function($id) {
     $user = Auth::user();
-    if(!$user) {
-        return redirect()->route('login');
-    }
+    if(!$user) { return redirect()->route('login'); }
 
-    $vote = Vote::where('idea_id', $id)->where('user_id', 3);
+    $vote = Vote::where('idea_id', $id)->where('user_id', $user->id);
     $vote->delete();
     return Response::json($vote);
+});
+
+Route::post('/ideas', function(Request $request) {
+    $user = Auth::user();
+    if(!$user) { return redirect()->route('login'); }
+
+    $data = $request->all();
+    $id = $data['id'];
+
+    $idea = Idea::where('id', $id)->first();
+    $vote = new Vote(['user_id' => $user->id]);
+    $idea->votes()->save($vote);
+    return Response::json(json_encode($idea));
 });
 
 
