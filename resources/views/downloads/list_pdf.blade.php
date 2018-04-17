@@ -19,6 +19,7 @@
                         <th>Nom</th>
                         <th>Prénom</th>
                         <th>Date Inscription</th>
+                        <th>Email</th>
                         <th>Statut</th>
                     </tr>
                 @foreach($activity->participates as $participant)
@@ -26,6 +27,7 @@
                     <td>{{$participant->user->where('id', $participant->user_id)->first()->name}}</td>
                     <td>{{$participant->user->where('id', $participant->user_id)->first()->firstname}}</td>
                     <td>{{$participant->where('user_id', $participant->user_id)->first()->created_at}}</td>
+                    <td>{{$participant->user->where('id', $participant->user_id)->first()->email}}</td>
                     <td>
                         @if($participant->user->where('id', $participant->user_id)->first()->status = 0)
                         Etudiant

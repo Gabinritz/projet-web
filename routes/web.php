@@ -116,6 +116,12 @@ Route::group(['prefix' => 'activities'], function () {
     'uses' => 'ActivitiesController@dwPDF']
     );
 
+    //downlaodCSV
+    Route::get('/csv/{activity}', 
+    ['as' => 'list.csv',
+    'uses' => 'ActivitiesController@dwCSV']
+    );
+
 });
 
 //Shop
