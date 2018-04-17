@@ -4,33 +4,36 @@
 
 <div class="container container-activity">
     {{-- @if (1) (!$ideas->isEmpty()) [MEMBRE DU BDE] --}}
-    @foreach($activities as $activity)
+    @foreach($activities as $activity)    
         <div class="card card__activity">
             <div class="card__header">
-                <img alt="1" class="card__image" src="{{asset('storage/'.$activity->imgUrl.'')}}">
+                <img alt="Image {{$activity->name}}" class="card__image" src="{{asset('storage/'.$activity->imgUrl.'')}}">
             </div>
             <div class="card__content">
-                <h3 class="card__title">{{$activity->name}}</h3>
-                <div class="card__content-top">
-                    <span class="card__date">{{$activity->date}}</span>
-                    <span class="card__participants">
-                        {{count($activity->participates)}} @if($activity->participates->where('user_id', $user->id)->first()) | Inscrit @endif
-                    </span>
+                <div class="card__primary">
+                    <h3 class="card__title">{{$activity->name}}</h3>
+                    <h4 class="card__subtitle">@if ($activity->recurrent == 1) Récurrent @else Ponctuel @endif</h4>
                 </div>
-                <div class="card__content-mid">
-                    <span class="card__description">
-                        {{$activity->description}}
-                    </span>
+                <div class="card__text">
+                    <span class="card__description">{{$activity->description}}</span>
                 </div>
-                <div class="card__content-admin">
+                <hr>
+                <div class="card__datas">
+                    <div class="card__data">
+                        <h5 class="card__data-title">Date</h5>
+                        <span class="card__data-value card__date">{{date("d/m/Y", strtotime($activity->date))}}</span>
+                    </div>
+                    <div class="card__data">
+                        <h5 class="card__data-title">Participants</h5>
+                        <span class="card__data-value card__participants">{{count($activity->participates)}} @if($activity->participates->where('user_id', $user->id)->first()) | Participé @endif</span>
+                    </div>
+                </div>
+                <div class="card__actions">
+                    <a href="{{ route('activities.focus', ['id' => $activity->id]) }}"><button class="card__btn">DÉTAILS</button></a>
                     @if($user->status = 1)
                         <a class="card__list" href="{{ route('activities.list', ['id' => $activity->id]) }}">Liste des inscrits</a>
                     @endif
-                </div>            
-                {{-- <hr> FAUT FAIRE DES HR --}}
-                <div class="card__content-bot">
-                    <a href="{{ route('activities.focus', ['id' => $activity->id]) }}"><button class="btn accept__btn" id="btnAccept-1" onclick="accept()">DÉTAILS</button></a>
-               </div>
+                </div>
             </div>
         </div>
     @endforeach

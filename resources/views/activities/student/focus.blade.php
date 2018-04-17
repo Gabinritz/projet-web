@@ -41,15 +41,15 @@
                 <div class="section-react-likes">
                     <span class="section-react-likes-content">
                     @if(!$image->likes->where('user_id', $user->id)->first())
-                        <i class="material-icons fav">
-                            <a href="{{ route('image.get.like', ['imgId' => $image->id, 'activityId' => $activity->id]) }}">favorite</a>
-                        </i> {{ count($image->likes) }}
+                        <a href="{{ route('image.get.like', ['imgId' => $image->id, 'activityId' => $activity->id]) }}">
+                            <i class="material-icons fav">favorite</i>
+                        </a> {{ count($image->likes) }}
                     @else
-                        <i class="material-icons fav-color">
-                                <a href="{{ route('image.get.unlike', ['imgId' => $image->id, 'activityId' => $activity->id]) }}">favorite</a>
-                        </i> {{ count($image->likes) }}
+                        <a href="{{ route('image.get.unlike', ['imgId' => $image->id, 'activityId' => $activity->id]) }}">
+                            <i class="material-icons fav-color">favorite</i>
+                        </a> {{ count($image->likes) }}
                     @endif
-                        @if (count($image->likes) <=1 ) | personne aime cette photo @else | personnes aiment cette photo @endif
+                        @if (count($image->likes) <=1 ) personne aime cette photo @else personnes aiment cette photo @endif
                     </span>
                 </div>
 
