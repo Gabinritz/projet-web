@@ -16,6 +16,10 @@ Route::get('/', [
     'uses' => 'BdeController@getIndex',
     'as' => 'index']);
 
+Route::get('mail', [
+    'uses' => 'BdeController@sendEmailOrder',
+    'as' => 'mail']);
+
 //Ideas
 Route::group(['prefix' => 'ideasbox'], function () { 
 

@@ -31,7 +31,7 @@ class SigninController extends Controller
         ]);
 
         if(User::where('email', '=', $request->input('email'))->first()) {
-            return $request->input('email');
+            return $request->input('email').' déja prit';
         }
         $user = new User([
             'name' => $request->input('name'),
