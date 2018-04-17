@@ -11,8 +11,9 @@
                 console.log(data)
                 $('#thumb-'+id).css('color', '#212121')
                 $('#thumb-' + id).attr('onclick', 'vote(' + id + ')')
-                let x = $('#vote_count-'+id)
-                x.textContent--
+                var newNumber = Number($('#x').val()) - 1;
+                $('#vote_count-' + id).text(newNumber);
+                $('#count_val-' + id).val(newNumber);
             },
             error: function(data) {
                 console.log('Error : ', data)
@@ -32,8 +33,9 @@
                 console.log(data)
                 $('#thumb-' + id).css('color', '#4CAF50')
                 $('#thumb-' + id).attr('onclick', 'unvote('+id+')')
-                let x = $('#vote_count-2')
-                x.textContent++
+                var newNumber = Number($('#x').val()) + 1;
+                $('#vote_count-'+id).text(newNumber);
+                $('#count_val-'+id).val(newNumber);
             },
             error: function(data) {
                 console.log('Error : ', data)

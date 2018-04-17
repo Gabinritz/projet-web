@@ -27,7 +27,8 @@
                     @else              
                         <i class="material-icons thumb thumb-black" id="thumb-{{$i}}" onclick="vote({{$idea->id}})">thumb_up</i>
                     @endif
-                    <span class="likes" id="vote_count-{{$i}}">{{ count($idea->votes) }}</span>
+                    <span class="likes" id="vote_count-{{$idea->id}}">{{ count($idea->votes) }}</span>
+                    <input type="hidden" id="count_val-{{$idea->id}}" value="{{count($idea->votes) }}">
                 @endif
                 </td>
             <span id="idea-id-{{ $i }}" style="display: none">{{ $idea->id }}</span>
@@ -36,6 +37,7 @@
         @endforeach
         </table>
     </div>
+    <span id="span">1</span>
 @else {{-- [PAS DE DONNEES] --}}
     <p>Aucune idée n'a été proposée</p>
 @endif
