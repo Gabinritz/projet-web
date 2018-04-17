@@ -11,10 +11,28 @@
 |
 */
 
+use Illuminate\Http\Request;
+use App\Idea;
+use App\Vote;
+use App\Activity;
+use App\User;
+
 //Index
 Route::get('/', [
     'uses' => 'BdeController@getIndex',
     'as' => 'index']);
+
+Route::delete('/ajax/ideas/{id?}', function($id) {
+    $user = Auth::user();
+    if(!$user) {
+        return redirect()->route('login');
+    }
+
+    $vote = Vote::where('idea_id', $id)->where('user_id', 3);
+    $vote->delete();
+    return Response::json($vote);
+});
+
 
 Route::get('mail', [
     'uses' => 'BdeController@sendEmailOrder',

@@ -551,88 +551,62 @@ hr {
   .card__list:hover {
     color: #3F51B5; }
 
-.wrapper {
+.focus__wrapper {
   margin: 2em auto;
   max-width: 1500px;
   min-height: 90vh; }
-  .wrapper img {
+  .focus__wrapper img {
     vertical-align: middle;
     max-width: 100%; }
-  .wrapper h2 {
+  .focus__wrapper .focus__title {
     text-align: center;
     color: #d90119;
     font-size: 2rem;
     margin-bottom: 2rem; }
 
-.masonry {
+.focus__grid {
   display: flex;
-  width: 100%; }
-
-.masonry--h {
-  flex-flow: row wrap; }
-
-.masonry--v {
-  flex-flow: column wrap;
-  max-height: 1080px; }
-
-.masonry--h, .masonry--v {
+  width: 100%;
+  flex-flow: row wrap;
   counter-reset: brick; }
 
-.masonry-brick {
+.grid__item {
   overflow: hidden;
   margin: 0;
   background-color: #333;
   color: white;
-  position: relative; }
-
-.masonry-brick--h {
+  position: relative;
   flex: auto;
   height: 250px;
   min-width: 150px; }
 
 @media only screen and (min-width: 1024px) {
   /* Horizontal masonry bricks on desktop-sized screen */
-  .masonry-brick--h:nth-child(4n+1) {
+  .grid__item:nth-child(4n+1) {
     width: 250px; }
 
-  .masonry-brick--h:nth-child(4n+2) {
+  .grid__item:nth-child(4n+2) {
     width: 325px; }
 
-  .masonry-brick--h:nth-child(4n+3) {
+  .grid__item:nth-child(4n+3) {
     width: 180px; }
 
-  .masonry-brick--h:nth-child(4n+4) {
-    width: 380px; }
-
-  /* Adjusting vertical masonry height on desktop-sized screen */
-  .masonry--v {
-    max-height: 1600px; }
-
-  /* Vertical masonry bricks on desktop-sized screen */
-  .masonry-brick--v {
-    width: 33.33333%; } }
+  .grid__item:nth-child(4n+4) {
+    width: 380px; } }
 @media only screen and (max-width: 1023px) and (min-width: 768px) {
   /* Horizontal masonry bricks on tabled-sized screen */
-  .masonry-brick--h:nth-child(4n+1) {
+  .grid__item:nth-child(4n+1) {
     width: 200px; }
 
-  .masonry-brick--h:nth-child(4n+2) {
+  .grid__item:nth-child(4n+2) {
     width: 250px; }
 
-  .masonry-brick--h:nth-child(4n+3) {
+  .grid__item:nth-child(4n+3) {
     width: 120px; }
 
-  .masonry-brick--h:nth-child(4n+4) {
-    width: 280px; }
-
-  /* Adjusting vertical masonry height on tablet-sized screen */
-  .masonry--v {
-    max-height: 2000px; }
-
-  /* Vertical masonry bricks on tablet-sized screen */
-  .masonry-brick--v {
-    width: 50%; } }
-.masonry-text {
+  .grid__item:nth-child(4n+4) {
+    width: 280px; } }
+.item__text {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -641,20 +615,20 @@ hr {
   font-weight: 700;
   opacity: .5;
   font-size: 0.8rem; }
-  .masonry-text .material-icons {
+  .item__text .material-icons {
     font-size: 0.8rem;
     margin-left: 1rem; }
-    .masonry-text .material-icons:first-child {
+    .item__text .material-icons:first-child {
       margin-left: 0; }
 
-.masonry-img {
+.item__img {
   object-fit: cover;
   object-position: center;
   width: 100%;
   height: 100%;
   cursor: pointer;
   transition-duration: 0.4s; }
-  .masonry-img:hover {
+  .item__img:hover {
     filter: brightness(50%); }
 
 /* ===== MODAL ===== */

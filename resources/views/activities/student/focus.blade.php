@@ -1,17 +1,17 @@
 @extends ('partials.layout', ['title' => 'Activités à venir'])
 
 @section ('content')
-<div class="wrapper">
+<div class="focus__wrapper">
     <h2 class="focus__title">{{ $activity->name }}</h2>
-    <div class="masonry masonry--h">
+    <div class="focus__grid">
         <?php $i = 0; ?>
         @foreach($activity->images as $image)
-            <figure class="masonry-brick masonry-brick--h" onclick="modal({{$i}})">
-                <span class="masonry-text">
+            <figure class="grid__item" onclick="modal({{$i}})">
+                <span class="item__text">
                     <i class="material-icons">comment</i> {{ count($image->comments) }}
                     <i class="material-icons">favorite</i> {{ count($image->likes) }}
                 </span>
-                <img src="{{asset('storage/'.$image->imgUrl.'')}}" alt="Photo {{$activity->name}} {{$i}}" id="masonry-img-{{$i}}" class="masonry-img">
+                <img src="{{asset('storage/'.$image->imgUrl.'')}}" alt="Photo {{$activity->name}} {{$i}}" class="item__img">
             </figure>
             <?php $i++; ?>
         @endforeach
