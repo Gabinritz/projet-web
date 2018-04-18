@@ -1,1 +1,0 @@
-page pour commander apres le panier

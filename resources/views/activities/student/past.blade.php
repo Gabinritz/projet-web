@@ -30,7 +30,7 @@
                 </div>
                 <div class="card__actions">
                     <a href="{{ route('activities.focus', ['id' => $activity->id]) }}"><button class="card__btn">DÉTAILS</button></a>
-                    @if($user->status = 1)
+                    @if($user->status == 1)
                         <a class="card__list" href="{{ route('activities.list', ['id' => $activity->id]) }}">Liste des inscrits</a>
                     @endif
                 </div>
