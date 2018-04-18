@@ -101,7 +101,14 @@ $('#submitStudent').click(function(e) {
         contentType: false,
         success: function(data) {
             console.log(data)
-            $('#idea-'+(data.id-1)).append('test')
+            $('tbody').append('<tr>\
+                <td>'+data.name+'</td>\
+                <td>'+data.organisateur+'</td>\
+                <td>'+data.description+'</td>\
+                <td><i class="material-icons thumb thumb-black" id="thumb-'+data.id+'" onclick="vote('+data.id+')">thumb_up</i>\
+                    <span class="likes" id="vote_count-'+data.id+'">0</span>\
+                </td>\
+            </tr>')
         },
         error: function(data) {
             console.log('Error : ', data)
@@ -126,17 +133,5 @@ function acceptt(e) {
         desc.value = document.getElementById('idea-desc-' + i).innerHTML
         id.value = document.getElementById('idea-id-' + i).innerHTML
         }
-    }
-}
-
-
-function expand(e) {
-    let form = document.getElementById('addIdea')
-    let expand = document.getElementById('addIdea__expand')
-    
-    if (form.classList.contains('hidden')) {
-        form.classList.replace('hidden', 'visible')
-    } else {
-        form.classList.replace('visible', 'hidden')
     }
 }

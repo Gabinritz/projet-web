@@ -31,6 +31,10 @@ Route::get('/ideas/{id?}', 'IdeasBoxController@getIdea');
 Route::delete('/ideas/{id?}', 'IdeasBoxController@delete');
 Route::post('/ideas', 'IdeasBoxController@valid');
 
+// [FOCUS] LIKE
+Route::delete('/activities/{id?}/like/{photo?}', 'ActivitiesController@unlike');
+Route::post('/activities/{id?}/like/{photo?}', 'ActivitiesController@like');
+
 Route::get('mail', [
     'uses' => 'BdeController@sendEmailOrder',
     'as' => 'mail']);

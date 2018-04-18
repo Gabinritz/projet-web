@@ -38,6 +38,17 @@ overlay.addEventListener('click', function(e) {
 
 
 
+function expand(e) {
+    let form = document.getElementById('addIdea')
+    let expand = document.getElementById('addIdea__expand')
+    
+    if (form.classList.contains('hidden')) {
+        form.classList.replace('hidden', 'visible')
+    } else {
+        form.classList.replace('visible', 'hidden')
+    }
+}
+
 
 
 

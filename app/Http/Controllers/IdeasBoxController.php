@@ -74,25 +74,14 @@ class IdeasBoxController extends Controller
             'user_id' => $user->id
         ]);
         $idea->save();
-        return Response::json($idea->id);
-    }
+        $result = [
+            'name' => $idea->name,
+            'description' => $idea->description,
+            'place' => $idea->place,
+            'organisateur' => ''.$user->firstname.' '.$user->name.''
+        ];
 
-    public function postCreateIdea(Request $request) {
-        $user = Auth::user();
-
-        if(!$user) {
-            return redirect()->route('login');
-        }
-
-        $idea = new Idea([
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'user_id' => $user->id,
-            'price' => $request->input('price'),
-            'recurrent' => $request->input('recurrent')
-        ]);
-        $idea->save();
-        return redirect()->route('ideas.index');
+        return Response::json($result);
     }
 
 

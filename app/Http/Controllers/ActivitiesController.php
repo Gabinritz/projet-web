@@ -13,6 +13,7 @@ use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 use PDF;
 use League\Csv\Writer;
+use Response;
 
 class ActivitiesController extends Controller
 {
@@ -27,6 +28,36 @@ class ActivitiesController extends Controller
         $activities = Activity::where('date', '>=', date('Y-m-d'))->take(20)->get();
         return view('activities.student.index', ['activities' => $activities, 'user' => $user]);
     }
+
+
+    public function like(Request $request) {
+        $user = Auth::user();
+        if(!$user) { return redirect()->route('login'); }
+    
+        $data = $request->all();
+        $idActivity = $data['idActivity'];
+        $idPhoto = $data['idPhoto'];
+
+        $image = Image::where('id', $idPhoto)->first();
+        $like = new Like(['user_id' => $user->id]);
+        $image->likes()->save($like);
+        return Response::json($data);
+    }
+
+
+    public function unlike($idActivity, $idPhoto) {
+        $user = Auth::user();
+        if(!$user) { return redirect()->route('login'); }
+
+        $like = Like::where('user_id', $user->id)->where('image_id', $idPhoto)->first();
+        $like->delete();
+        return Response::json($like);
+    }
+
+
+
+
+
 
     //page list activité
     public function getList($id) {

@@ -41,15 +41,13 @@
                 <div class="section-react-likes">
                     <span class="section-react-likes-content">
                     @if(!$image->likes->where('user_id', $user->id)->first())
-                        <a href="{{ route('image.get.like', ['imgId' => $image->id, 'activityId' => $activity->id]) }}">
-                            <i class="material-icons fav">favorite</i>
-                        </a> {{ count($image->likes) }}
+                        <i id="like-{{$image->id}}" onclick="like({{$activity->id}}, {{$image->id}})" class="material-icons fav">favorite</i> 
+                        <span id="like_count-{{$image->id}}">{{ count($image->likes) }}</span>
                     @else
-                        <a href="{{ route('image.get.unlike', ['imgId' => $image->id, 'activityId' => $activity->id]) }}">
-                            <i class="material-icons fav-color">favorite</i>
-                        </a> {{ count($image->likes) }}
+                        <i id="like-{{$image->id}}" onclick="unlike({{$activity->id}}, {{$image->id}})" class="material-icons fav-color">favorite</i> 
+                        <span id="like_count-{{$image->id}}">{{ count($image->likes) }}</span>
                     @endif
-                        @if (count($image->likes) <=1 ) personne aime cette photo @else personnes aiment cette photo @endif
+                        <span>@if (count($image->likes) <=1 ) personne aime cette photo @else personnes aiment cette photo @endif</span>
                     </span>
                 </div>
 
@@ -108,4 +106,9 @@
         </div>
 @endif
 
+@endsection
+
+
+@section ('scripts')
+    <script src="{{ asset('js/focus_ajax.js') }}"></script>
 @endsection
