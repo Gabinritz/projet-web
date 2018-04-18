@@ -14,6 +14,16 @@ th, td {
 .thumb {
     cursor: pointer;
     margin-right: 1rem;
-    transition: 0.4s;
 }
 .thumb:hover, .thumb-green { color: #4CAF50; }
+
+.idea__delete {
+    cursor: pointer;
+    transition: 0.4s;
+    &:hover { fill: $mainColor; }
+}
+.idea__accept {
+    cursor: pointer;
+    transition: 0.4s;
+    &:hover { fill: #4CAF50; }
+}

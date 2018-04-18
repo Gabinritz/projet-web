@@ -11,7 +11,7 @@ use Auth;
 use Notification;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
-
+use Response;
 
 class IdeasBoxController extends Controller
 {
@@ -27,31 +27,54 @@ class IdeasBoxController extends Controller
         return view('ideas-box.student.index', ['ideas' => $ideas, 'user' => $user, 'users' => $users]);
     }
 
-    public function getVoteIndex($id) {
-        $user = Auth::user();
-
-        if(!$user) {
-            return redirect()->route('login');
-        }
-
-        $idea = Idea::where('id', $id)->first();
-        $vote = new Vote([
-            'user_id' => $user->id
-        ]);
-        $idea->votes()->save($vote);
-        return redirect()->back();
+// ========== ETUDIANT ==========
+    public function getIdea($id) {
+        $idea = Idea::find($id);
+        return Response::json($idea);
     }
 
-    public function getUnvoteIndex($id) {
+    // VOTER
+    public function vote(Request $request) {
         $user = Auth::user();
+        if(!$user) { return redirect()->route('login'); }
+    
+        $data = $request->all();
+        $id = $data['id'];
+    
+        $idea = Idea::where('id', $id)->first();
+        $vote = new Vote(['user_id' => $user->id]);
+        $idea->votes()->save($vote);
+        return Response::json($data);
+    }
 
-        if(!$user) {
-            return redirect()->route('login');
-        }
-
+    // ANNULER VOTE
+    public function unvote($id) {
+        $user = Auth::user();
+        if(!$user) { return redirect()->route('login'); }
+    
         $vote = Vote::where('idea_id', $id)->where('user_id', $user->id);
         $vote->delete();
-        return redirect()->back();
+        return Response::json($vote);
+    }
+
+    // SOUMETTRE UNE IDEE
+    public function add(Request $request) {
+        $user = Auth::user();
+        if(!$user) { return redirect()->route('login'); }
+
+        $data = $request->all();
+        $name = $data['name'];
+        $description = $data['description'];
+        $place = $data['place'];
+
+        $idea = new Idea([
+            'name' => $name,
+            'description' => $description,
+            'place' => $place,
+            'user_id' => $user->id
+        ]);
+        $idea->save();
+        return Response::json($idea->id);
     }
 
     public function postCreateIdea(Request $request) {
@@ -72,38 +95,66 @@ class IdeasBoxController extends Controller
         return redirect()->route('ideas.index');
     }
 
-    public function postAdminManage(Request $request) {
+
+// ========== BDE ==========
+    // SUPPRIMER
+    public function delete($id) {
         $user = Auth::user();
-        if ($request->hasFile('image')) {
-            $request->file('image');
-            $path = Storage::putFile('public', $request->file('image'));
+        if(!$user) { return redirect()->route('login'); }
+    
+        $idea = Idea::where('id', $id)->first();
+        $idea->delete();
+        return Response::json($idea);
+    }
+
+    // VALIDER
+    public function valid(Request $request) {
+        $user = Auth::user();
+        if(!$user) {
+            return redirect()->route('login');
+        }
+
+        $data = $request->all();
+        if ($data['image'] != NULL) {
+            $path = $request->image->store('public');
+            $request->image = $path;
+        }
+
+        $id = $data['id'];
+        $name = $data['name'];
+        $description = $data['description'];
+        $date = $data['date'];
+        $price = $data['price'];
+        $place = $data['place'];
+        $recurrent = $data['recurrent'];
+        $image = $data['image'];
+
+        if ($path != NULL) {
+            $path = Storage::putFile('public', $image);
             $path = str_replace('public/', '', $path);
         } else {
             $path = 'background.jpg';
         }
 
-        if(!$user) {
-            return redirect()->route('login');
-        }
-        
         $activity = new Activity([
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'date' => $request->input('date'),
-            'place' => $request->input('place'),
+            'name' => $name,
+            'description' => $description,
+            'date' => $date,
+            'place' => $place,
+            'date' => $date,
             'imgUrl' => $path,
-            'price' => $request->input('price'),
-            'recurrent' => $request->input('recurrent')
+            'price' => $price,
+            'recurrent' => $recurrent
         ]);
-        $idea = Idea::where('id', $request->input('idea_id'))->first();
+        $idea = Idea::where('id', json_decode($id))->first();
         $idea->delete();
-        $notification = new Notification([
-            'message' => 'votre idée '.$idea->name.' a été retenue',
-            'user_id' => $idea->user_id,
-            'unread' => true
-        ]);
-        $notification->save();
         $activity->save();
-        return redirect()->back();
+        return Response::json($data);
+        /*         $notification = new Notification([
+                    'message' => 'votre idée '.$idea->name.' a été retenue',
+                    'user_id' => $idea->user_id,
+                    'unread' => true
+                ]);
+                $notification->save(); */
     }
 }

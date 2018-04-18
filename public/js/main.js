@@ -35,35 +35,6 @@ overlay.addEventListener('click', function(e) {
     this.parentNode.classList.remove(activatedClass)
 })
 
-function accept(e) {
-    let form = document.getElementById('addIdea')
-    let accepts = document.getElementsByClassName('accept__btn');
-    let name = document.getElementById('name')
-    let desc = document.getElementById('description')
-    let id = document.getElementById('id')
-
-    for (let i=0; i<accepts.length; i++)  {
-        accepts[i].onclick = function(e) {
-            if (form.classList.contains('hidden')) {
-                form.classList.replace('hidden', 'visible')
-            }
-        name.value = document.getElementById('idea-name-' + i).innerHTML
-        desc.value = document.getElementById('idea-desc-' + i).innerHTML
-        id.value = document.getElementById('idea-id-' + i).innerHTML
-        }
-    }
-}
-
-function expand(e) {
-    let form = document.getElementById('addIdea')
-    let expand = document.getElementById('addIdea__expand')
-    
-    if (form.classList.contains('hidden')) {
-        form.classList.replace('hidden', 'visible')
-    } else {
-        form.classList.replace('visible', 'hidden')
-    }
-}
 
 
 
@@ -132,52 +103,6 @@ function modal(id) {
     }
 }
 
-
-function inputValid(input, valid) {
-    if (valid) {
-        if (input.classList.contains('input__invalid')) {
-            input.classList.replace('input__invalid', 'input__valid')
-        } else { input.classList.add('input__valid') }
-    } else {
-        if (input.classList.contains('input__valid')) {
-            input.classList.replace('input__valid', 'input__invalid')
-        } else { input.classList.add('input__invalid') }
-    }
-}
-
-function checkMail(input) {
-    let regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/
-
-    if (!regex.test(input.value)) {
-        inputValid(input, false)
-        return false
-    } else {
-        inputValid(input, true)
-        return true
-    }
-}
-function checkPassword(input) {
-    let regex = /^(?=.*\d)(?=.*[A-Z])(?!.*[^a-zA-Z0-9@#$^+=])(.{4,16})$/
-
-    if (!regex.test(input.value)) {
-        inputValid(input, false)
-        return false
-    } else {
-        inputValid(input, true)
-        return true
-    }
-}
-
-function checkForm(form) {
-    let mail = checkMail(form.email)
-    let password = checkMail(form.password)
-
-    if (mail && password) {
-        return true
-    } else { 
-        alert("Veuillez remplir correctement tous les champs")
-    }
-}
 
 
 function showNotif(a) {

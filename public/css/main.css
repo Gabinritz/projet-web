@@ -312,11 +312,22 @@ th, td {
 
 .thumb {
   cursor: pointer;
-  margin-right: 1rem;
-  transition: 0.4s; }
+  margin-right: 1rem; }
 
 .thumb:hover, .thumb-green {
   color: #4CAF50; }
+
+.idea__delete {
+  cursor: pointer;
+  transition: 0.4s; }
+  .idea__delete:hover {
+    fill: #F44336; }
+
+.idea__accept {
+  cursor: pointer;
+  transition: 0.4s; }
+  .idea__accept:hover {
+    fill: #4CAF50; }
 
 .hidden {
   display: none; }

@@ -22,28 +22,14 @@ Route::get('/', [
     'uses' => 'BdeController@getIndex',
     'as' => 'index']);
 
-Route::delete('/ideas/{id?}', function($id) {
-    $user = Auth::user();
-    if(!$user) { return redirect()->route('login'); }
-
-    $vote = Vote::where('idea_id', $id)->where('user_id', $user->id);
-    $vote->delete();
-    return Response::json($vote);
-});
-
-Route::post('/ideas', function(Request $request) {
-    $user = Auth::user();
-    if(!$user) { return redirect()->route('login'); }
-
-    $data = $request->all();
-    $id = $data['id'];
-
-    $idea = Idea::where('id', $id)->first();
-    $vote = new Vote(['user_id' => $user->id]);
-    $idea->votes()->save($vote);
-    return Response::json(json_encode($idea));
-});
-
+// [IDEAS] ETUDIANT
+Route::delete('/ideas/vote/{id?}', 'IdeasBoxController@unvote');
+Route::post('/ideas/vote', 'IdeasBoxController@vote');
+Route::post('/ideas/add', 'IdeasBoxController@add');
+// [IDEAS] BDE
+Route::get('/ideas/{id?}', 'IdeasBoxController@getIdea');
+Route::delete('/ideas/{id?}', 'IdeasBoxController@delete');
+Route::post('/ideas', 'IdeasBoxController@valid');
 
 Route::get('mail', [
     'uses' => 'BdeController@sendEmailOrder',
@@ -57,16 +43,6 @@ Route::group(['prefix' => 'ideasbox'], function () {
         'uses' => 'IdeasBoxController@getIndex',
         'as' => 'ideas.index']);
         
-    //Handle vote
-    Route::get('/{id}/vote', [
-        'uses' => 'IdeasBoxController@getVoteIndex',
-        'as' => 'ideas.vote']);
-
-    //Handle unvote
-    Route::get('/{id}/unvote', [
-        'uses' => 'IdeasBoxController@getUnvoteIndex',
-        'as' => 'ideas.unvote']);
-
     //Post Student Idea
     Route::post('create', [
         'uses' => 'IdeasBoxController@postCreateIdea',

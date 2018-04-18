@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Idea extends Model
 {
-    protected $fillable = ['name', 'description', 'user_id'];
+    protected $fillable = ['name', 'description', 'place', 'user_id'];
 
     public function votes() {
         return $this->hasMany('App\Vote');
