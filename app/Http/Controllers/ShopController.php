@@ -7,6 +7,7 @@ use App\Product;
 use App\ShoppingCart;
 use Auth;
 use Mail;
+use App\User;
 
 class ShopController extends Controller
 {
@@ -118,19 +119,24 @@ class ShopController extends Controller
         }
         define('RECIPIENT',  $user->email);
 
-        Mail::send('mails.neworder', array('nick' => 'onsenfout'), function($message)
+        Mail::send('mails.neworder', array('products' => $products, 'totalPrice' => $totalPrice), function($message)
         {
             $message->from('bde-exiast@abi-projet.fr', 'BotBDE');
             $message->to(RECIPIENT)->subject('Confirmation Nouvelle Commande');
         });
 
-        $bdemails = [];
-        foreach(User::where('status', 1)->email as $email) {
-            array_push($bdemails, $email);
-        }
-
-        Mail::send('mails.neworder', array('nick' => 'onsenfout'), function($message)
+        Mail::send('mails.neworder', array('products' => $products, 'totalPrice' => $totalPrice), function($message)
         {
+
+            $bdemails = [];
+            $bdeMembers = User::where('status', 1)->get();
+        
+            foreach($bdeMembers as $bdemember) {
+                $i =0;
+                array_push($bdemails, $bdemember->email);
+                $i++;
+            }
+
             $message->from('bde-exiast@abi-projet.fr', 'BotBDE');
             $message->to($bdemails)->subject('Confirmation Nouvelle Commande');
         });
