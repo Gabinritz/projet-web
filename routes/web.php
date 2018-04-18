@@ -16,10 +16,6 @@ Route::get('/', [
     'uses' => 'BdeController@getIndex',
     'as' => 'index']);
 
-Route::get('mail', [
-    'uses' => 'BdeController@sendEmailOrder',
-    'as' => 'mail']);
-
 //Ideas
 Route::group(['prefix' => 'ideasbox'], function () { 
 
@@ -136,6 +132,12 @@ Route::group(['prefix' => 'shop'], function () {
         'uses' => 'ShopController@getIndex',
         'as' => 'shop.index']);
 
+    //filtr
+    Route::post('/', [
+        'uses' => 'ShopController@filterProducts',
+        'as' => 'shop.index'
+    ]);
+
     //panier
     Route::get('shoppingcart', [
         'uses' => 'ShopController@getShoppingCart',
@@ -151,24 +153,11 @@ Route::group(['prefix' => 'shop'], function () {
         'as' => 'shop.removefromcart'
     ]);
 
-    //commander
+    //passer commande
     Route::get('order', [
         'uses' => 'ShopController@getOrder',
-        'as' => 'shop.order']);
-    //post gérer produit
-    Route::post('admin/manage', [
-        'uses' => 'ShopController@postAdminManage',
-        'as' => 'shop.admin.manage.post']);
-
-    //admin créer produit
-    Route::get('admin/create', [
-        'uses' => 'ShopController@getAdminCreate',
-        'as' => 'shop.admin.create']);
-
-    // post créer produit
-    Route::post('admin/create', [
-        'uses' => 'ShopController@postAdminCreate',
-        'as' => 'shop.admin.create.post']);
+        'as' => 'shop.order'
+    ]);
 });
 
 Auth::routes();

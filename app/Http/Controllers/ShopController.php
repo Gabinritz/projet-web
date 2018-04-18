@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\ShoppingCart;
 use Auth;
+use Mail;
 
 class ShopController extends Controller
 {
@@ -21,8 +22,23 @@ class ShopController extends Controller
         $bestSellers = Product::orderBy('soldnumber', 'DESC')->take(3)->get();
         $categories = Product::select('category')->distinct()->get();
         $user = Auth::user();
+
         return view('shop.student.index', ['products' => $products, 'user' => $user, 'bestsellers' => $bestSellers, 'categories' => $categories]);
     }
+
+    public function filterProducts(Request $request) {
+        $user = Auth::user();
+
+        if(!$user) {
+            return redirect()->route('login');
+        }
+
+        $products = Product::where('category', $request->input('category'))->get();
+        $bestSellers = Product::orderBy('soldnumber', 'DESC')->take(3)->get();
+        $categories = Product::select('category')->distinct()->get();
+        $user = Auth::user();
+        return view('shop.student.index', ['products' => $products, 'user' => $user, 'bestsellers' => $bestSellers, 'categories' => $categories]);
+    } 
 
     public function getShoppingCart() {
         
@@ -79,36 +95,46 @@ class ShopController extends Controller
         return redirect()->back();
     }
 
-    public function postOrder() {
+    public function getOrder() {
         $user = Auth::user();
 
         if(!$user) {
             return redirect()->route('login');
         }
         
-        $products = Product::all();
-        $user = Auth::user();
-        return view('shop.student.order', ['products' => $products, 'user' => $user]);
-    }
+        $carts = ShoppingCart::where('user_id', $user->id)->get();
+        $productsId = [];
 
-    public function getAdminDelete() {
+        foreach($carts as $cart) {
+            array_push($productsId, $cart->product_id);
+        }
+        ShoppingCart::where('user_id', $user->id)->delete();
+        $products = Product::whereIn('id', $productsId)->get();
+        Product::whereIn('id', $productsId)->increment('soldnumber');
+        $totalPrice = 0;
 
-        $user = Auth::user();
+        foreach($products as $product) {
+            $totalPrice += $product->price;
+        }
+        define('RECIPIENT',  $user->email);
 
-        if(!$user || $user->status != 1) {
-            return redirect()->route('login');
+        Mail::send('mails.neworder', array('nick' => 'onsenfout'), function($message)
+        {
+            $message->from('bde-exiast@abi-projet.fr', 'BotBDE');
+            $message->to(RECIPIENT)->subject('Confirmation Nouvelle Commande');
+        });
+
+        $bdemails = [];
+        foreach(User::where('status', 1)->email as $email) {
+            array_push($bdemails, $email);
         }
 
-        return redirect()->route('shop.admin.manage');
-    } 
+        Mail::send('mails.neworder', array('nick' => 'onsenfout'), function($message)
+        {
+            $message->from('bde-exiast@abi-projet.fr', 'BotBDE');
+            $message->to($bdemails)->subject('Confirmation Nouvelle Commande');
+        });
 
-    public function postAdminCreate() {
-
-        $user = Auth::user();
-
-        if(!$user || $user->status != 1) {
-            return redirect()->route('login');
-        }
-        return redcirect()->route('shop.student.index');
+        return view('shop.student.order', ['user' => $user]);
     }
 }

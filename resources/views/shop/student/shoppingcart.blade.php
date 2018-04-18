@@ -10,5 +10,5 @@
     <div><a href="{{route('shop.removefromcart', ['shoppingCartId' => $product->id])}}">Retirer du panier</a></div>
     @endforeach
     <div>Prix total</div>
-    <button type="submit">Passer Commande</button>
+    <button><a href="{{route('shop.order')}}">Commander</a></button>
 @endsection

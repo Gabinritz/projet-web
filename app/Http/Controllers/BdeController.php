@@ -61,7 +61,7 @@ class BdeController extends Controller
     }
 
 
-    public function sendEmailOrder() {
+/*     public function sendEmailOrder() {
  
             Mail::send('mails.neworder', array('nick' => 'onsenfout'), function($message)
         {
@@ -70,5 +70,5 @@ class BdeController extends Controller
         });
                      
         return redirect()->route('index');
-    }
+    } */
 }

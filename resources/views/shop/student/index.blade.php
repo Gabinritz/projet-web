@@ -2,15 +2,13 @@
 @section('content')
 
     <div>Affiner la recherche</div>
-    <form action="" method="post">
+    <form action="{{route('shop.index')}}" method="post">
         <select name="category" placeholder="Catégorie">
-            <option value="NULL">Aucune</option>
             @foreach($categories as $category)
-            <option value={{$category->name}}>{{$category->name}}</option>
+                <option value={{$category->category}}>{{$category->category}}</option>
             @endforeach
         </select>
-        <input type="number" placeholder="prix min" name="minprice" value="NULL">
-        <input type="number" placeholder="prix max" name="maxprice" value="NULL">
+        {{ csrf_field() }}
         <input type="submit">
     </form>
     <span>Balise de recherche</span>
