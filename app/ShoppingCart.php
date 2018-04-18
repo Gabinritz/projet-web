@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShoppingCart extends Model
 {
-    protected $fillable = ['total_price', 'user_id', 'product_id'];
+    protected $fillable = ['user_id', 'product_id'];
 
+/*     public function products() {
+        return $this->hasMany('App\Product', 'product_id');
+    } */
+    
     public function user() {
         return $this->belongsTo('App\User', 'user_id');
-    }
-
-    public function products() {
-        return $this->hasMany('App\P roduct', 'product_id')->withTimestampts();
     }
 }

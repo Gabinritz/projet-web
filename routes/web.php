@@ -141,16 +141,20 @@ Route::group(['prefix' => 'shop'], function () {
         'uses' => 'ShopController@getShoppingCart',
         'as' => 'shop.shoppingcart']);
 
+    Route::get('addtocart/{productId}', [
+        'uses' => 'ShopController@addToShoppingCart',
+        'as' => 'shop.addtocart'
+    ]);
+
+    Route::get('removefromcart/{shoppingCartId}', [
+        'uses' => 'ShopController@removeFromShoppingCart',
+        'as' => 'shop.removefromcart'
+    ]);
+
     //commander
     Route::get('order', [
         'uses' => 'ShopController@getOrder',
         'as' => 'shop.order']);
-
-    //gestion produit
-    Route::get('admin/manage', [
-        'uses' => 'ShopController@getAdminManage',
-        'as' => 'shop.admin.manage']);
-
     //post gérer produit
     Route::post('admin/manage', [
         'uses' => 'ShopController@postAdminManage',
@@ -159,7 +163,7 @@ Route::group(['prefix' => 'shop'], function () {
     //admin créer produit
     Route::get('admin/create', [
         'uses' => 'ShopController@getAdminCreate',
-        'as' => 'shop.admin.createe']);
+        'as' => 'shop.admin.create']);
 
     // post créer produit
     Route::post('admin/create', [

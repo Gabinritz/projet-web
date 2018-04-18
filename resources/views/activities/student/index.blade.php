@@ -37,7 +37,7 @@
             @else
                 <a href="{{ route('activities.signup.post', ['id' => $activity->id]) }}"><button class="card__btn">S'INSCRIRE</button></a>
             @endif
-            @if($user->status = 1)
+            @if($user->status == 1)
                 <a class="card__list" href="{{ route('activities.list', ['id' => $activity->id]) }}">Liste des inscrits</a>
             @endif
         </div>

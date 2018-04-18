@@ -25,9 +25,9 @@
                     @if($idea->user_id == $user->id)
                         <i class="material-icons thumb thumb-black">thumb_up</i>
                     @elseif(!$idea->votes->where('user_id', $user->id)->first())
-                        <i class="material-icons thumb thumb-black"><a href="{{ route('ideas.vote', ['id' => $idea->id]) }}">thumb_up</a></i>
+                        <a href="{{ route('ideas.vote', ['id' => $idea->id]) }}"><i class="material-icons thumb thumb-black">thumb_up</i></a>
                     @else
-                        <i class="material-icons thumb thumb-green"><a href="{{ route('ideas.unvote', ['id' => $idea->id]) }}">thumb_up</a></i>
+                        <a href="{{ route('ideas.unvote', ['id' => $idea->id]) }}"><i class="material-icons thumb thumb-green">thumb_up</i></a>
                     @endif
                     <span class="likes">{{ count($idea->votes) }}</span>
                 @endif

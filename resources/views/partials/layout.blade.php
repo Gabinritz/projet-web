@@ -23,7 +23,15 @@
                         <a href="{{ route('shop.index') }}"><li class="menu-item-4">BOUTIQUE</li></a>
                         @if($user)
                             <a href="#"><i class="material-icons" id="notif__button" onclick="showNotif(this)">email</i></a>
-                            <div id="notif__box" class="card card__activity" style="display: none; position: absolute; width: 400px; height: 200px; z-index: 9999;"></div>
+                            <div id="notif__box" class="card card__activity" style="display: none; position: absolute; width: 400px; height: 200px; z-index: 9999;">
+                                @if(!count($user->notifications))
+                                    <div style='position: relative; top: 40%; left: 20%;'>Vous n'avez pas de notifications</div>
+                                @else
+                                @foreach($user->notifications as $notification)
+                                    <div>{{ $notification->message }}</div>
+                                @endforeach
+                                @endif
+                            </div>
                             <a href="{{ route('logout') }}"><li class="menu-item-5">{{ $user->firstname .' '. $user->name }}</li></a>
                         @else
                         <a href="{{ route('login') }}"><li class="menu-item-5">S'INSCRIRE / SE CONNECTER</li></a>
