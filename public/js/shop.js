@@ -1,33 +1,53 @@
 $('#search').keyup(function(e) {
     let input = $(this)
     let val = input.val()
-    if (val == '') {
-        $('#filter .card.card__activity').show()
-    }
-    let regexp = '\\b(.*)(a)(.*)(k)(.*)\\b'
-    for(let i in val) {
+    if(val == '') { $("#filter .card.card__activity").show() }
+    let regexp = '\\b(.*)'
+    for (let i in val) {
         regexp += '('+val[i]+')(.*)'
     }
     regexp += '\\b'
-    console.log($('#filter').find('.card.card__activity>.card__content>h3'))
-    $('#filter .card.card__activity').show()
-    $('#filter').find('.card.card__activity>.card__content>h3').each(function() {
+    $('#filter h3>.card__title').show()
+    $('#filter').find('h3').each(function() {
         let name = $(this)
         let results = name.text().match(new RegExp(regexp, 'i'))
-        if (results) {
-            let string = ''
-            for (let i in results) {
-                if(i>0) {
-                    if(i%2 == 0) {
-                        string+='<h3>'+results[i]+'</h3>'
-                    } else {
-                        string += results[i]
-                    }
-                }
-            }
-            name.empty().append(string)
-        } else {
-            name.parent().parent().hide()
+        console.log(results)
+        if(!results) {
+            name.parent().parent().parent().parent().hide()
         }
     })
 })
+
+let closeAdd = document.getElementById('close__add')
+let modalAdd = document.getElementById('modal__add')
+let btnAdd = document.getElementById('product__add')
+
+btnAdd.onclick = function() {
+    modalAdd.style.display = "flex";
+}
+closeAdd.onclick = function() {
+    modalAdd.style.display = "none";
+}
+window.onclick = function(event) {
+    if (event.target == modalAdd) {
+        modalAdd.style.display = "none";
+    }
+}
+
+
+function deleted() {
+    let closeDel = document.getElementById('close__del')
+    let modalDel = document.getElementById('modal__del')
+    let btnDel = document.getElementById('product__del')
+    modalDel.style.display = 'flex'
+
+    closeDel.onclick = function() {
+        modalDel.style.display = "none"
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modalDel) {
+            modalDel.style.display = "none";
+        }
+    }
+}

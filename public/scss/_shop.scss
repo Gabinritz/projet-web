@@ -70,9 +70,9 @@ select:focus {
 
 #selectCategory {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     margin-bottom: 64px;
 }
-#categorybtn {
-    margin-left: 32px;
-}
+
+#product__add { background-color: #4CAF50; }
+#product__del { background-color: #F44336; }

@@ -1,4 +1,4 @@
-let url = '/activities'
+let url = '/projet-web/public/activities'
 $.ajaxSetup({
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
 });

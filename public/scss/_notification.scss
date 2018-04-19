@@ -1,0 +1,6 @@
+.notif {
+    display: inline-block;
+    color: $mainColor;
+    margin-bottom: 16px;
+    &:last-child { margin-bottom: 0; }
+}
