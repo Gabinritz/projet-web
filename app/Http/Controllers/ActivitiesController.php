@@ -55,6 +55,28 @@ class ActivitiesController extends Controller
     }
 
 
+    public function comment(Request $request) {
+        $user = Auth::user();
+        if(!$user) { return redirect()->route('login'); }
+
+        $data = $request->all();
+        $idPhoto = $data['idPhoto'];
+        $content = $data['comment'];
+        
+        $image = Image::find($idPhoto);
+        $comment = new Comment([
+            'user_id' => $user->id,
+            'content' => $content
+        ]);
+        $image->comments()->save($comment);
+        $result = [
+            'user' => ''.$user->firstname.' '.$user->name.'',
+            'content' => $content
+        ];
+
+        return Response::json($result);
+    }
+
 
 
 

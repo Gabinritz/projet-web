@@ -716,8 +716,6 @@ hr {
       background-color: #FAFAFA;
       border-radius: 2px;
       padding: 1rem; }
-      .section-react .section-react-comments .section-react-comments-bloc:last-child {
-        margin-bottom: 0; }
       .section-react .section-react-comments .section-react-comments-bloc .section-react-comments-user {
         color: #d90119;
         font-weight: 500; }

@@ -1,0 +1,125 @@
+.container.container-activity {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;    
+}
+
+.card__activity {
+    background-color: #fff;
+    text-align: left;
+    padding: 0;
+    display: inline-block;
+    margin: 0.5rem;
+    flex: 0 0 calc(33.333% - 1rem);
+    border-radius: 2px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+@media screen and (max-width: 1200px) {
+    .card__activity { flex: 0 0 calc(50% - 1rem) }
+}
+@media screen and (max-width: 992px) {
+    .card__activity { flex: 0 0 calc(100% - 1rem) }
+}
+@media screen and (max-width: 768px) {
+    .container.container-activity { width: 540px; }
+}
+@media screen and (max-width: 576px) {
+    .container.container-activity { width: auto; }
+}
+
+.card__header {
+    height: 200px;
+    background-color: $logoColor;
+    border-radius: 2px 2px 0 0;
+}
+
+.card__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 1;
+    border-radius: 2px 2px 0 0;
+}
+
+.card__content {
+    padding: 0 16px;
+}
+
+.card__title {
+    color: $lightPrimary;
+    font-size: $headlineSize;
+    font-weight: $headlineWeight;
+    padding-top: 24px;
+}
+.card__subtitle {
+    color: $lightSecondary;
+    font-size: $subheaderSize;
+    font-weight: $subheaderWeight;
+    padding-top: 12px;
+}
+
+.card__text {
+    font-size: $bodySize;
+    font-weight: $bodyWeight;
+    padding: 16px 0;
+    height: 80px;
+    overflow: auto;
+}
+
+hr {
+    height: 1px;
+    margin: 0;
+    border: none;
+    background-color: $lightDisabled;
+}
+
+.card__datas {
+    padding: 16px 0;
+}
+.card__data-title {
+    font-size: $subheaderSize;
+    font-weight: $titleWeight;
+    display: inline-block;
+    width: 40%;
+}
+.card__data-value {
+    color: $logoColor;
+}
+.card__data {
+    padding-top: 16px;
+    &:first-child { padding-top: 0; }
+}
+
+.card__actions {
+    padding: 8px;
+}
+.card__btn {
+    background-color: transparent;
+    color: $logoColor;
+    cursor: pointer;
+    border: none;
+    border-radius: 2px;
+    font-size: $buttonSize;
+    font-weight: $buttonWeight;
+    padding: 12px 16px;
+    margin-right: 8px;
+    transition: 0.4s ease-in-out;
+    &:hover { background-color: rgba(153,153,153,0.2); }
+    &.disabled { 
+        cursor: not-allowed;
+        color: $lightDisabled;
+        &:hover { background-color: transparent; }
+     }
+}
+
+
+.card__list {
+    font-size: $buttonSize;
+    font-weight: $buttonWeight;
+    color: #2196F3;
+    transition: 0.4s ease-in-out;
+    &:hover { color: #3F51B5; }
+}

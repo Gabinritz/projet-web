@@ -8,8 +8,10 @@
         @foreach($activity->images as $image)
             <figure class="grid__item" onclick="modal({{$i}})">
                 <span class="item__text">
-                    <i class="material-icons">comment</i> {{ count($image->comments) }}
-                    <i class="material-icons">favorite</i> {{ count($image->likes) }}
+                    <i class="material-icons">favorite</i> 
+                    <span id="item_count_likes-{{$image->id}}">{{ count($image->likes) }}</span>
+                    <i class="material-icons">comment</i> 
+                    <span id="item_count_comments-{{$image->id}}">{{ count($image->comments) }}</span>
                 </span>
                 <img src="{{asset('storage/'.$image->imgUrl.'')}}" alt="Photo {{$activity->name}} {{$i}}" class="item__img">
             </figure>
@@ -29,8 +31,14 @@
                 <img src="{{asset('storage/'.$image->imgUrl.'')}}" alt="{{$j}}" id="img-{{$j}}" class="modal-img">
             </section>
             <div class="section-react-preview" id="preview-{{$j}}">
-                <span><i class="material-icons">favorite</i> {{ count($image->likes) }}</span>
-                <span><i class="material-icons">comment</i> {{ count($image->comments) }}</span>
+                <span>
+                    <i class="material-icons">favorite</i>
+                    <span id="preview_count_likes-{{$image->id}}">{{ count($image->likes) }}</span>
+                </span>
+                <span>
+                    <i class="material-icons">comment</i> 
+                    <span id="preview_count_comments-{{$image->id}}">{{ count($image->comments) }}</span>
+                </span>
             </div>
             <section class="section-react" id="react-{{$j}}">
                 @if ($user->status == 1)
@@ -52,7 +60,8 @@
                 </div>
 
                 <div class="section-react-comments">
-                    @foreach($image->comments as $comment)
+                    <div class="section-react-comments-contents" id="contents-{{$image->id}}">
+                        @foreach($image->comments as $comment)
                         <div class="section-react-comments-bloc">
                             <span class="section-react-comments-user">
                                 {{$comment->user->where('id', $comment->user_id)->first()->firstname}} {{$comment->user->where('id', $comment->user_id)->first()->name}}
@@ -60,18 +69,20 @@
                             <span class="section-react-comments-content">{{$comment->content}}</span>
                             @if ($user->status == 1) <a href="{{ route('image.post.uncom', ['activityId' => $activity->id, 'comId' => $comment->id]) }}"><i class="material-icons xx">clear</i></a> @endif
                         </div>
-                    @endforeach
-                    <form action="{{ route('image.post.com', ['imgid' => $image->id, 'id' => $activity->id]) }}" method="post">
-                        @csrf
-                        <input class="section-react-comments-add" type="text" placeholder="Ajouter un commentaire" name="comment" required>
-                        <button class="comment-send" type="submit"></button>
-                    </form>
-                    
+                        @endforeach
+                    </div>
+                        <form class="formComment" method="post">
+                                @csrf
+                            <input class="section-react-comments-add" id="comment-{{$image->id}}" type="text" placeholder="Ajouter un commentaire" name="comment" required>
+                                <input type="hidden" id="comment-id" name="id" value="{{$image->id}}">
+                                <button class="comment-send" type="submit"></button>
+                            </form>
+                            
+                        </div>
+                    </section>
                 </div>
-            </section>
-        </div>
-    </div>
-    <?php $j++; ?>
+            </div>
+            <?php $j++; ?>
 @endforeach
 
 {{-- @if($user && $activity->participates->where('user_id', $user->id)->first()) --}}
