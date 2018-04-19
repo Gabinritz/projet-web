@@ -169,6 +169,35 @@ Route::group(['prefix' => 'shop'], function () {
     ]);
 });
 
+Route::group(['prefix' => 'shop'], function () { 
+
+//unreadnotif
+Route::get('readnotif/{notificationId}', [
+    'uses' => 'BdeController@notificationRead',
+    'as' => 'read.notif'
+]);
+
+Route::get('reportphoto/{imageId}', [
+    'uses' => 'ActivitiesController@reportPhoto',
+    'as' => 'report.photo'
+]);
+
+Route::get('reportcomment/{commentId}', [
+    'uses' => 'ActivitiesController@reportComment',
+    'as' => 'report.comment'
+]);
+
+Route::get('reportactivity/{activityId}', [
+    'uses' => 'ActivitiesController@reportActivity',
+    'as' => 'report.activity'
+]);
+
+Route::get('deleteactivity/{activityId}', [
+    'uses' => 'ActivitiesController@deleteActivity',
+    'as' => 'delete.activity'
+]);
+});
+
 Auth::routes();
 
 //Login page
