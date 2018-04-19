@@ -5,10 +5,11 @@
     <div>Panier vide</div>
     @endif
     @foreach($products as $product)
-    <div>{{$product->name}}</div>
-    <div>{{$product->price}}</div>
+    <div>Nom : {{$product->name}}</div>
+    <div>Prix : {{$product->price}}</div>
+    <div>Quantité : {{$product->quantity}}</div>
     <div><a href="{{route('shop.removefromcart', ['shoppingCartId' => $product->id])}}">Retirer du panier</a></div>
     @endforeach
-    <div>Prix total</div>
+<div>Prix total : {{$totalPrice}} euros</div>
     <button><a href="{{route('shop.order')}}">Commander</a></button>
 @endsection

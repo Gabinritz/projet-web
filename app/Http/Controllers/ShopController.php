@@ -58,8 +58,14 @@ class ShopController extends Controller
         }
 
         $products = Product::whereIn('id', $productsId)->get();
+        $totalPrice = 0;
 
-        return view('shop.student.shoppingcart', ['user' => $user, 'products' => $products]);
+        foreach($products as $product) {
+            $product->quantity = ShoppingCart::where('product_id', $product->id)->where('user_id', $user->id)->first()->quantity;
+            $totalPrice += $product->price * $product->quantity;
+        }
+
+        return view('shop.student.shoppingcart', ['user' => $user, 'products' => $products, 'totalPrice' => $totalPrice]);
     }
 
     public function addToShoppingCart($productId) {
@@ -71,18 +77,27 @@ class ShopController extends Controller
         }
 
         $product = Product::find($productId);
-        
-        $shoppingcart = new ShoppingCart([
+
+        $quantity = ShoppingCart::where('product_id', $productId)->where('user_id', $user->id)->first();
+        if($quantity) {
+            ShoppingCart::where('product_id', $productId)->where('user_id', $user->id)->increment('quantity');
+        }
+        else {
+            $shoppingcart = new ShoppingCart([
             'user_id' => $user->id,
-            'product_id' => $product->id
-        ]);
-        $shoppingcart->save();
+            'product_id' => $product->id,
+            'quantity' => 1
+            ]);
+            $shoppingcart->save();
+        }
+        
+
 
         return redirect()->back();
 
     }
 
-    public function removeFromShoppingCart($shoppingCartId) 
+    public function removeFromShoppingCart($productId) 
     {
         $user = Auth::user();
 
@@ -90,8 +105,14 @@ class ShopController extends Controller
             return redirect()->route('login');
         }
 
-        $product = ShoppingCart::find($shoppingCartId);
-        $product->delete();
+        $quantity = ShoppingCart::where('product_id', $productId)->where('user_id', $user->id)->first();
+        if($quantity->quantity == 1) {
+            $product = ShoppingCart::where('product_id', $productId)->where('user_id', $user->id);
+            $product->delete();
+        }
+        else {
+            ShoppingCart::where('product_id', $productId)->where('user_id', $user->id)->decrement('quantity');
+        }
 
         return redirect()->back();
     }

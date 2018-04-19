@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShoppingCart extends Model
 {
-    protected $fillable = ['user_id', 'product_id'];
+    protected $fillable = ['user_id', 'product_id', 'quantity'];
 
 /*     public function products() {
         return $this->hasMany('App\Product', 'product_id');
