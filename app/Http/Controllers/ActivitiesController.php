@@ -201,6 +201,82 @@ class ActivitiesController extends Controller
         return redirect()->route('activities.focus', ['id' => $activityId]);
     }
 
+    public function reportActivity($activityId) {
+        $user = Auth::user();
+        //check si BDE
+        if(!$user || !$user->status == 2) {
+            return redirect()->route('login');
+        }
+        $activity = Activity::find($activityId);
+        $bdeMembers = User::where('status', 1)->get();
+
+        $content = 'L\'activité '.$activity->name.' doit etre supprimée';
+
+        foreach($bdeMembers as $member) {
+            $notification = new Notification([
+                'message' => $content,
+                'user_id' => $member->user_id,
+                'unread' => true
+            ]);
+            $notification->save();
+        }
+
+        return redirect()->back();
+    }
+
+    public function reportComment($commentId) {
+        $user = Auth::user();
+        //check si BDE
+        if(!$user || !$user->status == 2) {
+            return redirect()->route('login');
+        }
+        $activity = Activity::find($activityId);
+        $bdeMembers = User::where('status', 1)->get();
+
+        $comment = Comment::find($commentId);
+        $autor = User::where('id', $comment->user_id);
+        $photo = Image::where('id', $comment->img_id);
+
+        $content = "Le commentaire : '".$comment->content."' de ".$autor->firstname." ".$author->name." sur la photo ".$photo->name." doit être supprimé";
+
+        foreach($bdeMembers as $member) {
+            $notification = new Notification([
+                'message' => $content,
+                'user_id' => $member->user_id,
+                'unread' => true
+            ]);
+            $notification->save();
+        }
+
+        return redirect()->back();
+    }
+
+    public function reportPhoto($ImageId) {
+        $user = Auth::user();
+        //check si BDE
+        if(!$user || !$user->status == 2) {
+            return redirect()->route('login');
+        }
+        $photo = Image::find($ImageId);
+        $autor = User::where('id', $photo->user_id);
+        $activity = Activity::where('id', $photo->activity_id);
+
+        $bdeMembers = User::where('status', 1)->get();
+
+        $content = 'La photo : '.$photo->name.' de '.$author->firstname.' '.$author->name.' sur l\'activité '.$activity->name.' doit être supprimée';
+
+        foreach($bdeMembers as $member) {
+            $notification = new Notification([
+                'message' => $content,
+                'user_id' => $member->user_id,
+                'unread' => true
+            ]);
+            $notification->save();
+        }
+
+        return redirect()->back();
+    }
+
     public function deleteActivity($activityId) {
         $user = Auth::user();
         //check si BDE

@@ -118,35 +118,40 @@ class ShopController extends Controller
     }
 
     public function getOrder() {
+                
         $user = Auth::user();
 
         if(!$user) {
             return redirect()->route('login');
         }
-        
+
         $carts = ShoppingCart::where('user_id', $user->id)->get();
+
         $productsId = [];
 
         foreach($carts as $cart) {
             array_push($productsId, $cart->product_id);
         }
-        ShoppingCart::where('user_id', $user->id)->delete();
+
         $products = Product::whereIn('id', $productsId)->get();
-        Product::whereIn('id', $productsId)->increment('soldnumber');
         $totalPrice = 0;
 
         foreach($products as $product) {
-            $totalPrice += $product->price;
+            $product->quantity = ShoppingCart::where('product_id', $product->id)->where('user_id', $user->id)->first()->quantity;
+            $totalPrice += $product->price * $product->quantity;
         }
+        Product::whereIn('id', $productsId)->increment('soldnumber');
+        Product::whereIn('id', $productsId)->decrement('stock');
+
         define('RECIPIENT',  $user->email);
 
-        Mail::send('mails.neworder', array('products' => $products, 'totalPrice' => $totalPrice), function($message)
+        Mail::send('mails.neworder', array('products' => $products, 'totalPrice' => $totalPrice, 'Bde' => 0, 'user' => $user), function($message)
         {
             $message->from('bde-exiast@abi-projet.fr', 'BotBDE');
             $message->to(RECIPIENT)->subject('Confirmation Nouvelle Commande');
         });
 
-        Mail::send('mails.neworder', array('products' => $products, 'totalPrice' => $totalPrice), function($message)
+        Mail::send('mails.neworder', array('products' => $products, 'totalPrice' => $totalPrice, 'Bde' => 1, 'user' => $user), function($message)
         {
 
             $bdemails = [];
