@@ -40,11 +40,8 @@
                     @elseif($user->status == 2)
                     <div class="section-admin">
                         <span><a href="{{ route('report.photo', ['imageId' => $image->id]) }}">Signaler la photo</a></span>
-                    @endif
-                
                     </div>
-                    
-                @endif
+                    @endif
                 <div class="section-react-likes">
                     <span class="section-react-likes-content">
                     @if(!$image->likes->where('user_id', $user->id)->first())
