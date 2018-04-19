@@ -256,14 +256,14 @@ class ActivitiesController extends Controller
         if(!$user || !$user->status == 2) {
             return redirect()->route('login');
         }
-        $activity = Activity::find($activityId);
+
         $bdeMembers = User::where('status', 1)->get();
 
         $comment = Comment::find($commentId);
-        $autor = User::where('id', $comment->user_id);
-        $photo = Image::where('id', $comment->img_id);
+        $autor = User::find($comment->user_id);
+        $photo = Image::find($comment->image_id);
 
-        $content = "Le commentaire : '".$comment->content."' de ".$autor->firstname." ".$author->name." sur la photo ".$photo->name." doit être supprimé";
+        $content = "Le commentaire : '".$comment->content."' de ".$autor->firstname." ".$autor->name." sur la photo ".$photo->name." doit être supprimé";
 
         foreach($bdeMembers as $member) {
             $i = 0;
@@ -286,12 +286,12 @@ class ActivitiesController extends Controller
             return redirect()->route('login');
         }
         $photo = Image::find($ImageId);
-        $autor = User::where('id', $photo->user_id);
-        $activity = Activity::where('id', $photo->activity_id);
+        $autor = User::find($photo->user_id);
+        $activity = Activity::find($photo->activity_id);
 
         $bdeMembers = User::where('status', 1)->get();
 
-        $content = 'La photo : '.$photo->name.' de '.$author->firstname.' '.$author->name.' sur l\'activité '.$activity->name.' doit être supprimée';
+        $content = 'La photo : '.$photo->name.' de '.$autor->firstname.' '.$autor->name.' sur l\'activité '.$activity->name.' doit être supprimée';
 
         foreach($bdeMembers as $member) {
             $i = 0;

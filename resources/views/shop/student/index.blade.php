@@ -3,17 +3,24 @@
 
 <div class="container" style="margin-top: 48px;">
     <h3>Affiner la recherche</h3>
-    <form action="{{route('shop.index')}}" method="post">
-        <span class="seeShop"><a href="{{route('shop.shoppingcart')}}">Voir mon panier</a></span><br><br>
-        <select name="category" placeholder="Catégorie">
-            @foreach($categories as $category)
-                <option value={{$category->category}}>{{$category->category}}</option>
-            @endforeach
-        </select>
+    <span class="seeShop"><a href="{{route('shop.shoppingcart')}}">Voir mon panier</a></span><br><br>
+    <form action="{{route('shop.index')}}" method="post" id="selectCategory">
+        <div class="selectfield">
+            <select name="category" placeholder="Catégorie">
+                <option value="" disabled selected>Choisir une catégorie</option>
+                @foreach($categories as $category)
+                    <option value={{$category->category}}>{{$category->category}}</option>
+                @endforeach
+            </select>  
+        </div>
         {{ csrf_field() }}
-        <button type="submit" class="btn">FILTRER</button><br><br>
+        <button type="submit" id="categorybtn" class="btn">FILTRER</button><br><br>
     </form>
-    <input type="text" name="search" id="search">
+    <div class="group">      
+            <input type="text" name="search" onkeyup="checkSearch(this)">
+            <span class="bar"></span>
+            <label>Rechercher</label>
+        </div>
 </div>
 
 

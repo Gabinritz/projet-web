@@ -847,4 +847,38 @@ i {
   color: #d90119;
   font-size: 24px; }
 
+/* ==========  Select Field Variables ========== */
+/* ==========  Select Field ========== */
+select {
+  height: 48px;
+  font-family: inherit;
+  background-color: transparent;
+  width: 100%;
+  padding: 4px 0;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.87);
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0, 0.12); }
+
+select:focus {
+  outline: none; }
+
+.selectfield select {
+  appearance: none; }
+
+.selectfield {
+  display: inline-block;
+  width: 50%;
+  margin-right: 32px;
+  font-family: 'Roboto','Helvetica','Arial',sans-serif;
+  position: relative; }
+
+#selectCategory {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 64px; }
+
+#categorybtn {
+  margin-left: 32px; }
+
 /*# sourceMappingURL=main.css.map */

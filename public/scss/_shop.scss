@@ -35,3 +35,44 @@
     color: $logoColor;
     font-size: 24px;
 }
+
+/* ==========  Select Field Variables ========== */
+$color-black: "0,0,0";
+$select-background-color: transparent;
+$select-border-color: unquote("rgba(#{$color-black}, 0.12)") !default;
+$select-font-size: 16px;
+$select-padding: 4px;
+
+/* ==========  Select Field ========== */
+select {
+    height: 48px;
+    font-family: inherit;
+    background-color: transparent;
+    width: 100%;
+    padding: $select-padding 0;
+    font-size: $select-font-size;
+    color: $lightPrimary;
+    border: none;
+    border-bottom: 1px solid $select-border-color;
+}
+
+select:focus {
+  outline: none}
+
+.selectfield select {appearance: none}
+.selectfield {
+    display: inline-block;
+    width: 50%;
+    margin-right: 32px;
+    font-family: 'Roboto','Helvetica','Arial',sans-serif;
+    position: relative;
+}
+
+#selectCategory {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 64px;
+}
+#categorybtn {
+    margin-left: 32px;
+}

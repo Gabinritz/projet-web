@@ -92,9 +92,8 @@
             </div>
             <?php $j++; ?>
 @endforeach
-
-{{-- @if($user && $activity->participates->where('user_id', $user->id)->first()) --}}
-@if (1)
+{{-- 
+@if($user && $activity->participates->where('user_id', $user->id)->first()) --}}
 <div class="card hidden slideUp" id="addIdea">
         <form method="post" class="form login__form" enctype="multipart/form-data" action="{{ route('activites.focus.image.post', ['id' => $activity->id]) }}" >
             <div class="group">   
@@ -123,8 +122,8 @@
 
     <div class="addIdea__fixed" id="addIdea__expand" onclick="expand()">
             <span>Ajouter une photo</span>
-        </div>
-@endif
+        </div>{{-- 
+@endif --}}
 
 @endsection
 

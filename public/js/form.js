@@ -16,6 +16,13 @@ function checkX(input) {
         inputValid(input, false)
     } else { inputValid(input, true) }
 }
+function checkSearch(input) {
+    if (input.value.length>0) {
+        input.classList.add('input__valid')
+    } else {
+        input.classList.remove('input__valid')
+    }
+}
 
 function checkFile(input) {
     if (input.files.length == 0) {
