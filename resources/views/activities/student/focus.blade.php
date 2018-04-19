@@ -45,7 +45,11 @@
                     <div class="section-admin">
                         <span><a href="{{ route('delete.img', ['activityId' => $activity->id, 'imgId' => $image->id]) }}">Supprimer la photo</a></span>
                     </div>
-                @endif
+                    @elseif($user->status == 2)
+                    <div class="section-admin">
+                        <span><a href="{{ route('report.photo', ['imageId' => $image->id]) }}">Signaler la photo</a></span>
+                    </div>
+                    @endif
                 <div class="section-react-likes">
                     <span class="section-react-likes-content">
                     @if(!$image->likes->where('user_id', $user->id)->first())
@@ -67,7 +71,11 @@
                                 {{$comment->user->where('id', $comment->user_id)->first()->firstname}} {{$comment->user->where('id', $comment->user_id)->first()->name}}
                             </span>
                             <span class="section-react-comments-content">{{$comment->content}}</span>
-                            @if ($user->status == 1) <a href="{{ route('image.post.uncom', ['activityId' => $activity->id, 'comId' => $comment->id]) }}"><i class="material-icons xx">clear</i></a> @endif
+                            @if ($user->status == 1) 
+                            <a href="{{ route('image.post.uncom', ['activityId' => $activity->id, 'comId' => $comment->id]) }}"><i class="material-icons xx">clear</i></a>
+                            @elseif($user->status == 2)
+                            <a href="{{ route('report.comment', ['commentId' => $comment->id]) }}">signaler</a>
+                            @endif
                         </div>
                         @endforeach
                     </div>

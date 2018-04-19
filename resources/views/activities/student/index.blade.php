@@ -11,6 +11,11 @@
     <div class="card__content">
         <div class="card__primary">
             <h3 class="card__title">{{$activity->name}}</h3>
+            @if($user->status == 1)
+            <a href="{{ route('delete.activity', ['activityId' => $activity->id]) }}">Supprimer Activité</a>
+            @elseif($user->status == 2)
+            <a href="{{ route('report.activity', ['activityId' => $activity->id]) }}">Signaler Activité</a>
+            @endif
             <h4 class="card__subtitle">@if ($activity->recurrent == 1) Récurrent @else Ponctuel @endif</h4>
         </div>
         <div class="card__text">
