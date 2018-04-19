@@ -32,7 +32,7 @@ function like(idActivity, idPhoto) {
         dataType: 'json',
         success: function(data) {
             console.log(data)
-            $('#like-'+idPhoto).css('color', '#212121')
+            $('#like-'+idPhoto).css('color', '#F44336')
             $('#like-'+idPhoto).attr('onclick', 'unlike('+idActivity+','+idPhoto+')')
             document.getElementById('like_count-'+idPhoto).innerHTML++
             document.getElementById('item_count_likes-'+idPhoto).innerHTML++
@@ -67,6 +67,7 @@ $('.formComment').submit(function(e) {
             </div>')
             document.getElementById('item_count_comments-'+idPhoto).innerHTML++
             document.getElementById('preview_count_comments-'+idPhoto).innerHTML++
+            $('#comment-'+idPhoto).val('')
         },
         error: function(data) {
             console.log('Error : ', data)

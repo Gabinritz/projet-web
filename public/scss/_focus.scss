@@ -276,3 +276,8 @@
 .fav, .fav-color:hover { color: #212121; }
 .fav:hover, .fav-color { color: $mainColor; }
 i { vertical-align: text-bottom; }
+
+
+.fav {
+  cursor: pointer;
+}

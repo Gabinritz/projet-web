@@ -1,15 +1,19 @@
 @extends ('partials.layout', ['title' => 'Boite à idées'])
 @section('content')
-    <div>Mon Panier</div>
+<div class="container">
+    <h3>Mon Panier</h3>
     @if(!count($products))
-    <div>Panier vide</div>
+    <span>Panier vide</span>
     @endif
     @foreach($products as $product)
-    <div>Nom : {{$product->name}}</div>
-    <div>Prix : {{$product->price}}</div>
-    <div>Quantité : {{$product->quantity}}</div>
-    <div><a href="{{route('shop.removefromcart', ['shoppingCartId' => $product->id])}}">Retirer du panier</a></div>
+    <ul>
+        <li>Nom : {{$product->name}}</li>
+        <li>Prix : {{$product->price}}</li>
+        <li>Quantité : {{$product->quantity}}</li>
+        <li><a href="{{route('shop.removefromcart', ['shoppingCartId' => $product->id])}}">Retirer du panier</a></li>
+    </ul>
     @endforeach
-<div>Prix total : {{$totalPrice}} euros</div>
+    <div>Prix total : {{$totalPrice}} euros</div>
     <button><a href="{{route('shop.order')}}">Commander</a></button>
+</div>
 @endsection

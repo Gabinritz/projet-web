@@ -453,6 +453,7 @@ th, td {
   flex-wrap: wrap; }
 
 .card__activity {
+  position: relative;
   background-color: #fff;
   text-align: left;
   padding: 0;
@@ -561,6 +562,11 @@ hr {
   transition: 0.4s ease-in-out; }
   .card__list:hover {
     color: #3F51B5; }
+
+.signal {
+  position: absolute;
+  top: 0;
+  right: 0; }
 
 .focus__wrapper {
   margin: 2em auto;
@@ -806,6 +812,9 @@ hr {
 i {
   vertical-align: text-bottom; }
 
+.fav {
+  cursor: pointer; }
+
 .btn__shop:before {
   content: ' ';
   display: inline-block;
@@ -833,5 +842,9 @@ i {
   font-size: 24px;
   font-weight: 500;
   color: #4CAF50; }
+
+.seeShop {
+  color: #d90119;
+  font-size: 24px; }
 
 /*# sourceMappingURL=main.css.map */

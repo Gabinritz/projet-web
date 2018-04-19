@@ -1,33 +1,83 @@
 @extends ('partials.layout', ['title' => 'Boite à idées'])
 @section('content')
 
-    <div>Affiner la recherche</div>
+<div class="container" style="margin-top: 48px;">
+    <h3>Affiner la recherche</h3>
     <form action="{{route('shop.index')}}" method="post">
+        <span class="seeShop"><a href="{{route('shop.shoppingcart')}}">Voir mon panier</a></span><br><br>
         <select name="category" placeholder="Catégorie">
             @foreach($categories as $category)
                 <option value={{$category->category}}>{{$category->category}}</option>
             @endforeach
         </select>
         {{ csrf_field() }}
-        <input type="submit">
+        <button type="submit" class="btn">FILTRER</button><br><br>
     </form>
-    <span>Balise de recherche</span>
-    <span><a href="{{route('shop.shoppingcart')}}">Voir mon panier</a></span>
+    <input type="text" name="search" id="search">
+</div>
 
-    <div>Les meilleures ventes</div>
+
+<div class="container">
+    <h3 style="margin: 32px 0 16px 0;">Les meilleures ventes</h3>
+</div>
+<div class="container container-activity" style="margin-top: 0; margin-bottom: 64px;">    
     @foreach($bestsellers as $bestseller)
-    <div>{{$bestseller->name}}</div>
-    <div>{{$bestseller->category}}</div>
-    <div>{{$bestseller->description}}</div>
-    <div>{{$bestseller->price}}</div>
-    <div><a href="{{ route('shop.addtocart', ['productId' => $bestseller->id]) }}">Ajouter au panier</a></div>
+    <div class="card card__activity">
+            <div class="card__header">
+                <img alt="Image" class="card__image" src="{{asset('img/'.$bestseller->imgUrl.'')}}">
+            </div>
+            <div class="card__content">
+                <div class="card__primary-shop">
+                    <div class="card__left">
+                        <h3 class="card__title">{{$bestseller->name}}</h3>
+                        <h4 class="card__subtitle">{{$bestseller->category}}</h4>
+                    </div>
+                    <div class="card__right">
+                        <span class="card__price">{{$bestseller->price}} €</span>
+                    </div>
+                </div>
+                <div class="card__text text-shop">
+                    <span class="card__description">{{$bestseller->description}}</span>
+                </div>
+                <div class="card__actions">
+                        <a href="{{ route('shop.addtocart', ['productId' => $bestseller->id]) }}"><button class="card__btn btn__shop">AJOUTER AU PANIER</button></a>
+                </div>
+            </div>
+        </div>
     @endforeach
-    <div>Tous les articles</div>
+</div>
+
+<div class="container">
+        <h3  style="margin: 32px 0 16px 0;">Tous les articles</h3>
+    </div>
+<div class="container container-activity container-shop"  id="filter" style="margin-top: 0;">
     @foreach($products as $product)
-    <div>{{$product->name}}</div>
-    <div>{{$product->category}}</div>
-    <div>{{$product->description}}</div>
-    <div>{{$product->price}}</div>
-    <a href="{{ route('shop.addtocart', ['productId' => $product->id]) }}">Ajouter au panier</a>
+    <div class="card card__activity">
+        <div class="card__header">
+            <img alt="Image" class="card__image" src="{{asset('img/'.$product->imgUrl.'')}}">
+        </div>
+        <div class="card__content">
+            <div class="card__primary-shop">
+                <div class="card__left">
+                    <h3 class="card__title">{{$product->name}}</h3>
+                    <h4 class="card__subtitle">{{$product->category}}</h4>
+                </div>
+                <div class="card__right">
+                    <span class="card__price">{{$product->price}} €</span>
+                </div>
+            </div>
+            <div class="card__text text-shop">
+                <span class="card__description">{{$product->description}}</span>
+            </div>
+            <div class="card__actions">
+                    <a href="{{ route('shop.addtocart', ['productId' => $product->id]) }}"><button class="card__btn btn__shop">AJOUTER AU PANIER</button></a>
+            </div>
+        </div>
+    </div>
     @endforeach
+</div>
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/shop.js') }}"></script>
 @endsection

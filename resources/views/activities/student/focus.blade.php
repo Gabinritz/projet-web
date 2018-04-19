@@ -49,10 +49,10 @@
                 <div class="section-react-likes">
                     <span class="section-react-likes-content">
                     @if(!$image->likes->where('user_id', $user->id)->first())
-                        <i id="like-{{$image->id}}" onclick="like({{$activity->id}}, {{$image->id}})" class="material-icons fav">favorite</i> 
+                        <i id="like-{{$image->id}}" onclick="like({{$activity->id}}, {{$image->id}})" class="material-icons fav fav-black">favorite</i> 
                         <span id="like_count-{{$image->id}}">{{ count($image->likes) }}</span>
                     @else
-                        <i id="like-{{$image->id}}" onclick="unlike({{$activity->id}}, {{$image->id}})" class="material-icons fav-color">favorite</i> 
+                        <i id="like-{{$image->id}}" onclick="unlike({{$activity->id}}, {{$image->id}})" class="material-icons fav fav-color">favorite</i> 
                         <span id="like_count-{{$image->id}}">{{ count($image->likes) }}</span>
                     @endif
                         <span>@if (count($image->likes) <=1 ) personne aime cette photo @else personnes aiment cette photo @endif</span>
@@ -91,12 +91,13 @@
         <form method="post" class="form login__form" enctype="multipart/form-data" action="{{ route('activites.focus.image.post', ['id' => $activity->id]) }}" >
             <div class="group">   
                 <input type="text" id="name" name="name" required
+                onkeyup="checkText(this)"
                 <span class="bar"></span>
                 <label>Titre de la photo</label>
             </div>
 
             <div class="group">
-                <input type="file" name="image" id="image">
+                <input type="file" name="image" id="image" onfocus="checkFile(this)" required>
                 <span class="bar"></span>
                 <label>Ajouter une image</label>
             </div>

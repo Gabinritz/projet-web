@@ -83,20 +83,20 @@
             </div>
 
             <div class="group">
-                <input type="number" name="price" id="price">
+                <input type="number" name="price" id="price" onkeyup="checkNumber(this)">
                 <span class="bar"></span>
                 <label>Ajouter un prix</label>
             </div>
 
             <div class="group">
-                <input type="radio" name="recurrent" id="recurrent" value="1" required>Oui
-                <input type="radio" name="recurrent" id="recurrent" value="0" required>Non
+                <input type="radio" name="recurrent" id="recurrent" value="1" required onblur="checkX(this)">Oui
+                <input type="radio" name="recurrent" id="recurrent" value="0" required onblur="checkX(this)">Non
                 <span class="bar"></span>
                 <label>Activité récurrente</label>
             </div>
 
             <div class="group">
-                <input type="file" name="image" id="image">
+                <input type="file" name="image" id="image" onblur="checkFile(this)">
                 <span class="bar"></span>
                 <label>Ajouter une image</label>
             </div>
