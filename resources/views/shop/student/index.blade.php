@@ -1,6 +1,7 @@
 @extends ('partials.layout', ['title' => 'Boutique'])
 @section('content')
 
+@if($user->status == 1)
 <div class="container" style="text-align: center; margin-top: 32px;">
     <button class="btn product__btn" id="product__add">AJOUTER UN PRODUIT</button>
     <button class="btn product__btn" id="product__del" onclick="deleted()">SUPPRIMER UN PRODUIT</button>
@@ -10,23 +11,39 @@
     <div class="general__modal-content">
         <span class="close" id="close__add">&times</span>
         <h4>AJOUT D'UN PRODUIT</h4>
-        <form method="POST" action="">
+        <form method="POST" action="{{ route('addNewProduct') }}" enctype="multipart/form-data">
                 <div class="group">
-                    <input type="text" name="name" onkeyup="checkText(this)">
+                    <input type="text" name="name" onkeyup="checkText(this)" required>
                     <span class="bar"></span>
                     <label>Nom</label>
                 </div>
                 <div class="group">      
-                    <input type="text" name="categorie" onkeyup="checkText(this)">
+                    <input type="text" name="categorie" onkeyup="checkText(this)" required>
                     <span class="bar"></span>
                     <label>Catégorie</label>
                 </div>
                 <div class="group">      
-                    <input type="text" name="price" onkeyup="checkNumber(this)">
+                    <input type="text" name="description" onkeyup="checkText(this)" required>
+                    <span class="bar"></span>
+                    <label>Description</label>
+                </div>
+                <div class="group">      
+                    <input type="number" name="price" onkeyup="checkNumber(this)" required>
                     <span class="bar"></span>
                     <label>Prix</label>
                 </div>
+                <div class="group">      
+                    <input type="number" name="stock" onkeyup="checkNumber(this)" required>
+                    <span class="bar"></span>
+                    <label>Stock</label>
+                </div>
+                <div class="group">
+                    <input type="file" name="image" id="image" onfocus="checkFile(this)">
+                    <span class="bar"></span>
+                    <label>Image</label>
+                </div>
 
+                @csrf
                 <button type="submit" class="btn general__btn">VALIDER</button>
         </form>
     </div>
@@ -36,20 +53,21 @@
     <div class="general__modal-content">
         <span class="close" id="close__del">&times</span>
         <h4>SUPPRESSION D'UN PRODUIT</h4>
-        <form method="POST" action="">
+        <form method="POST" action="{{ route('deleteproduct') }}">
                 <div class="selectfield" style="margin-bottom: 32px;">
-                        <select name="category" placeholder="Catégorie">
-                            <option value="" disabled selected>Choisir une catégorie</option>
+                        <select name="productId" placeholder="Produit">
+                            <option value="" disabled selected>Choisir le produit à supprimer</option>
                             @foreach($products as $product)
                                 <option value={{$product->id}}>{{$product->name}}</option>
                             @endforeach
                         </select>  
                     </div>
                 <button type="submit" class="btn general__btn">VALIDER</button>
-        </form>
+            @csrf
+            </form>
     </div>
 </div>
-    
+@endif
 
 <div class="container">
         <h3 style="margin: 32px 0 16px 0;">Les meilleures ventes</h3>
@@ -58,7 +76,7 @@
         @foreach($bestsellers as $bestseller)
         <div class="card card__activity">
                 <div class="card__header">
-                    <img alt="Image" class="card__image" src="{{asset('img/'.$bestseller->imgUrl.'')}}">
+                    <img alt="Image" class="card__image" src="{{asset('storage/'.$bestseller->imgUrl.'')}}">
                 </div>
                 <div class="card__content">
                     <div class="card__primary-shop">
@@ -73,9 +91,15 @@
                     <div class="card__text text-shop">
                         <span class="card__description">{{$bestseller->description}}</span>
                     </div>
+                    @if($bestseller->stock == 0)
+                    <div class="card__actions" style="color : red; font-size : 150%">
+                        Produit Epuisé
+                    </div>
+                    @else
                     <div class="card__actions">
                             <a href="{{ route('shop.addtocart', ['productId' => $bestseller->id]) }}"><button class="card__btn btn__shop">AJOUTER AU PANIER</button></a>
                     </div>
+                    @endif
                 </div>
             </div>
         @endforeach
@@ -111,7 +135,7 @@
     @foreach($products as $product)
     <div class="card card__activity">
         <div class="card__header">
-            <img alt="Image" class="card__image" src="{{asset('img/'.$product->imgUrl.'')}}">
+            <img alt="Image" class="card__image" src="{{asset('storage/'.$product->imgUrl.'')}}">
         </div>
         <div class="card__content">
             <div class="card__primary-shop">
@@ -126,9 +150,15 @@
             <div class="card__text text-shop">
                 <span class="card__description">{{$product->description}}</span>
             </div>
+            @if($product->stock > 0)
             <div class="card__actions">
                     <a href="{{ route('shop.addtocart', ['productId' => $product->id]) }}"><button class="card__btn btn__shop">AJOUTER AU PANIER</button></a>
             </div>
+            @else
+            <div class="card__actions" style="color : red; font-size : 150%">
+                Produit Epuisé
+            </div>
+            @endif
         </div>
     </div>
     @endforeach

@@ -128,13 +128,6 @@
                 <span class="bar"></span>
                 <label>Description (255 max)</label>
             </div>
-
-            <div class="group">      
-                <input type="text"  id="place" name="place" required onkeyup="checkText(this)">
-                <span class="bar"></span>
-                <label>Lieu</label>
-            </div>
-
             {{ csrf_field() }}
 
             <div class="submit">

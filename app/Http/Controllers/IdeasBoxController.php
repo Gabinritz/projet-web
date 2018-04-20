@@ -65,19 +65,16 @@ class IdeasBoxController extends Controller
         $data = $request->all();
         $name = $data['name'];
         $description = $data['description'];
-        $place = $data['place'];
 
         $idea = new Idea([
             'name' => $name,
             'description' => $description,
-            'place' => $place,
             'user_id' => $user->id
         ]);
         $idea->save();
         $result = [
             'name' => $idea->name,
             'description' => $idea->description,
-            'place' => $idea->place,
             'organisateur' => ''.$user->firstname.' '.$user->name.''
         ];
 

@@ -16,6 +16,7 @@ use App\Idea;
 use App\Vote;
 use App\Activity;
 use App\User;
+use App\Storage;
 
 //Index
 Route::get('/', [
@@ -151,6 +152,18 @@ Route::group(['prefix' => 'shop'], function () {
     Route::get('shoppingcart', [
         'uses' => 'ShopController@getShoppingCart',
         'as' => 'shop.shoppingcart']);
+
+    //ajouterProduit
+    Route::post('addproduct', [
+        'uses' => 'ShopController@addProduct',
+        'as' => 'addNewProduct'
+    ]);
+
+    //supprimerProduit
+    Route::post('deleteproduct', [
+        'uses' => 'ShopController@deleteProduct',
+        'as' => 'deleteproduct'
+    ]);
 
     //ajouter au panier
     Route::get('addtocart/{productId}', [

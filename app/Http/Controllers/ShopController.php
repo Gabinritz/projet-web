@@ -8,6 +8,8 @@ use App\ShoppingCart;
 use Auth;
 use Mail;
 use App\User;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 
 class ShopController extends Controller
 {
@@ -44,6 +46,56 @@ class ShopController extends Controller
         $user = Auth::user();
         return view('shop.student.index', ['products' => $products, 'user' => $user, 'bestsellers' => $bestSellers, 'categories' => $categories]);
     } 
+
+    //créer produit
+    public function addProduct(Request $request) {
+        $user = Auth::user();
+
+        if(!$user && $user->status != 1) {
+            return redirect()->route('login');
+        }
+
+        if ($request->hasFile('image')) {
+            $request->file('image');
+            $path = Storage::putFile('public', $request->file('image'));
+            $path = str_replace('public/', '', $path);
+        } else {
+            $path = 'background.jpg';
+        }
+
+
+        $product = new Product([
+            'name' => $request->input('name'),
+            'price' => $request->input('price'),
+            'description' => $request->input('description'),
+            'category' => $request->input('categorie'),
+            'stock' => $request->input('stock'),
+            'soldnumber' => 0,
+            'imgUrl' => $path
+            
+        ]);
+        $product->save();
+
+        return redirect()->back();
+    }
+
+    //supprimer produit
+    public function deleteProduct(Request $request) {
+        $user = Auth::user();
+
+        if(!$user && $user->status != 1) {
+            return redirect()->route('login');
+        }
+
+        $productId = $request->input('productId');
+        $product = Product::find($productId);
+        $product->delete();
+        $shopppingCarts = ShoppingCart::where('product_id', $productId);
+        $shopppingCarts->delete();
+
+        return redirect()->back();
+
+    }
 
     //acces au panier
     public function getShoppingCart() {
