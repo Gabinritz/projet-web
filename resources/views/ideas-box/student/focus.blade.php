@@ -1,1 +1,0 @@
-focus sur une ancienne activité

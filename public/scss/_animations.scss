@@ -1,0 +1,21 @@
+.slideUp {
+    animation-name: slideUp;
+    animation-duration: 0.5s;
+    animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+  
+@keyframes slideUp {
+    from {bottom: -350px;} 
+    to {bottom: 2rem}
+}
+
+.slideDown {
+    animation-name: slideDown;
+    animation-duration: 0.5s;
+    animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+  
+@keyframes slideDown {
+    from {bottom: 2rem;} 
+    to {bottom: -350px;}
+}

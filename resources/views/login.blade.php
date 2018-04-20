@@ -7,17 +7,20 @@
     </div>
 </div>
 
-<div class="card login__card" id="login">
+<div class="card login__card test" id="login">
     <h2>Connexion</h2>
-    <form action="" method="post" class="login__form">
+    <form method="POST" class="form login__form" action="{{ route('logtry') }}" onsubmit="return checkForm(this)">
+        @csrf
         <div class="group">      
-            <input type="text" required>
+            <input type="email" name="email" value="{{ old('email') }}" required autofocus
+                onkeyup="checkMail(this)">
             <span class="bar"></span>
             <label>Adresse mail</label>
         </div>
         
         <div class="group">      
-            <input type="password" required>
+            <input type="password" name="password" required
+                onkeyup="checkPassword(this)">
             <span class="bar"></span>
             <label>Mot de passe</label>
         </div>
@@ -29,29 +32,34 @@
     <p class="login__noaccount">Vous n'avez pas de compte ? <span class="login__change" onclick="changeLogin(1)">Inscrivez-vous</span></p>
 </div>
 
-<div class="card login__card hidden" id="register">
+<div class="card login__card hidden test" id="register">
     <h2>Inscription</h2>
-    <form action="" method="post" class="login__form">
-        <div class="group">      
-            <input type="text" required>
-            <span class="bar"></span>
-            <label>Nom</label>
-        </div>
-        <div class="group">      
-            <input type="text" required>
-            <span class="bar"></span>
-            <label>Prénom</label>
-        </div>
-        <div class="group">      
-            <input type="text" required>
-            <span class="bar"></span>
-            <label>Adresse mail</label>
-        </div>
-        <div class="group">      
-            <input type="password" required>
-            <span class="bar"></span>
-            <label>Mot de passe</label>
-        </div>
+    <form method="POST" action="{{ route('registertry') }}" class="form login__form" onsubmit="return checkForm(this)">
+        @csrf
+            <div class="group">      
+                <input type="text" 
+                name="name" 
+                value="{{ old('name') }}" required autofocus>
+                <span class="bar"></span>
+                <label>Nom</label>
+            </div>
+            <div class="group">      
+                <input type="text" name="firstname" value="{{ old('firstname') }}" required>
+                <span class="bar"></span>
+                <label>Prénom</label>
+            </div>
+            <div class="group">      
+                <input type="email" name="email" value="{{ old('email') }}" required 
+                    onkeyup="checkMail(this)" >
+                <span class="bar"></span>
+                <label>Adresse mail</label>
+            </div>
+            <div class="group">      
+                <input type="password" name="password" required 
+                    onkeyup="checkRegex(this)">
+                <span class="bar"></span>
+                <label>Mot de passe</label>
+            </div>
 
         <div class="submit">
             <button type="submit" class="btn login__submit">S'INSCRIRE</button>
@@ -61,6 +69,4 @@
     </div>
 
 <div class="bot"></div>
-
-<script src="{{ asset('js/main.js') }}"></script>
 @endsection

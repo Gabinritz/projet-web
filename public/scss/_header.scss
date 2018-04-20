@@ -1,0 +1,159 @@
+header {
+    background-color: #FFFFFF;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 10vh;
+    padding: 0 5%;
+    a { margin-right: 2rem; }
+}
+
+#logo, nav, li {
+    display: inline-block;
+}
+
+#logo {
+    height: 8vh;
+}
+
+li {
+    color: $dark;
+    font-weight: 500;
+    &:last-child { margin-right: 0; }
+    &:hover { color: $logoColor; }
+}
+
+.button {
+    text-transform: uppercase;
+    float: right;
+    text-decoration: none;
+    padding: 0 16px;
+}
+
+
+#hamburger, #hamburger-content {
+    display: inline;
+}
+
+#hamburger-button {
+    display: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 30px;
+    padding: 0;
+    float: right;
+}
+
+#hamburger-overlay {
+    display: none;
+    position: fixed;
+    z-index: 998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .4);
+}
+
+#hamburger-sidebar {
+    display: none;
+    position: fixed;
+    width: 84%;
+    z-index: 999;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #FFF;
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform .2s ease-out;
+}
+#hamburger-sidebar li {
+    display: block;
+    &:hover { background-color: #EEEEEE; }
+    padding-right: 1rem;
+}
+#hamburger-sidebar-header {
+    background-color: $logoColor;
+    height: 8rem;
+    display: flex;
+    #logo-link { 
+        margin: auto; 
+        #hamburger-logo { height: 6rem; }
+    }
+
+}
+#hamburger-sidebar-body {
+    padding: 16px 8px;
+}
+#hamburger-sidebar-body li:before {
+    content: ' ';
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 4px;
+    margin-right: 16px;
+    width: 24px;
+    height: 24px;
+}
+#hamburger-sidebar-body .menu-item-1:before {
+    background-image: url(../img/ic_event_done_black_48px.svg);
+    background-size: contain;
+}
+#hamburger-sidebar-body .menu-item-2:before {
+    background-image: url(../img/ic_event_black_48px.svg);
+    background-size: contain;
+}
+#hamburger-sidebar-body .menu-item-3:before {
+    background-image: url(../img/ic_inbox_black_48px.svg);
+    background-size: contain;
+}
+#hamburger-sidebar-body .menu-item-4:before {
+    background-image: url(../img/ic_shopping_cart_black_48px.svg);
+    background-size: contain;
+}
+#hamburger-sidebar-body .menu-item-5:before {
+    background-image: url(../img/ic_account_circle_black_48px.svg);
+    background-size: contain;
+}
+
+#hamburger-sidebar-body .button {
+    margin-top: 16px;
+    text-align: center;
+    float: none;
+    display: block;
+    height: auto;
+    line-height: inherit;
+    padding: 10px;
+}
+
+
+@media screen and (max-width: 1200px) {
+    nav {
+        line-height: 4rem;
+        a { margin-right: 0; font-size: 0.9rem;}
+    }
+
+    #hamburger-content {
+        display: none;
+    }
+
+    #hamburger-button, #hamburger-sidebar,
+    .hamburger-activated #hamburger-overlay {
+        display: block;
+    }
+
+    .hamburger-activated #hamburger-sidebar {
+        transform: translateX(0);
+    }
+}
+
+@media screen and (max-height: 500px) {
+    header {
+        height: 6rem;
+    }
+    #logo {
+        height: 5rem;
+    }
+}
