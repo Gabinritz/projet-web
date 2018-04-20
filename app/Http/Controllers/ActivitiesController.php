@@ -26,12 +26,13 @@ class ActivitiesController extends Controller
         if(!$user) {
             return redirect()->route('login');
         }
-
+        
+        //retourne les activités à la vue
         $activities = Activity::where('date', '>=', date('Y-m-d'))->take(20)->get();
         return view('activities.student.index', ['activities' => $activities, 'user' => $user]);
     }
 
-
+    //Like une photo d'activité
     public function like(Request $request) {
         $user = Auth::user();
         if(!$user) { return redirect()->route('login'); }
@@ -46,7 +47,7 @@ class ActivitiesController extends Controller
         return Response::json($data);
     }
 
-
+    //unlike une photo d'activité
     public function unlike($idActivity, $idPhoto) {
         $user = Auth::user();
         if(!$user) { return redirect()->route('login'); }
@@ -197,7 +198,7 @@ class ActivitiesController extends Controller
         $image->delete();
         return redirect()->route('activities.focus', ['id' => $activityId]);
     }
-
+    //signaler activité par Cesi
     public function reportActivity($activityId) {
         $user = Auth::user();
         //check si BDE
@@ -222,7 +223,7 @@ class ActivitiesController extends Controller
 
         return redirect()->back();
     }
-
+    //signaler un commentaire
     public function reportComment($commentId) {
         $user = Auth::user();
         //check si BDE
@@ -252,6 +253,7 @@ class ActivitiesController extends Controller
         return redirect()->back();
     }
 
+    //signalé la photo par cesi
     public function reportPhoto($ImageId) {
         $user = Auth::user();
         //check si BDE
@@ -280,6 +282,7 @@ class ActivitiesController extends Controller
         return redirect()->back();
     }
 
+    //supprimer activité par bde
     public function deleteActivity($activityId) {
         $user = Auth::user();
         //check si BDE
@@ -324,9 +327,10 @@ class ActivitiesController extends Controller
         $csv->getNewLine();
         $status = 0;
          
-
+        //on écrit ligne par ligne
         foreach($activity->participates as $participant) {
 
+            //cherche statut étudiant
             if($participant->user->where('id', $participant->user_id)->first()->status = 0) {
                 $status = 'Etudiant'; 
             }

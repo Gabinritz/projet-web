@@ -38,17 +38,17 @@ Route::post('/activities/{id?}/like/{photo?}', 'ActivitiesController@like');
 //Ideas
 Route::group(['prefix' => 'ideasbox'], function () { 
 
-    //Index Student Ideas
+    //Index Ideée
     Route::get('/', [
         'uses' => 'IdeasBoxController@getIndex',
         'as' => 'ideas.index']);
         
-    //Post Student Idea
+    //Post idée
     Route::post('create', [
         'uses' => 'IdeasBoxController@postCreateIdea',
         'as' => 'ideas.create.post']);
 
-    //Post Admin Activity
+    //Post activité par bde
     Route::post('admin/manage', [
         'uses' => 'IdeasBoxController@postAdminManage',
         'as' => 'ideas.admin.manage.post']);
@@ -63,57 +63,57 @@ Route::group(['prefix' => 'activities'], function () {
         'uses' => 'ActivitiesController@getIndex',
         'as' => 'activities.index']);
 
-    //Handle Inscription
+    //iscription pour activité
     Route::get('signup/{id}', [
         'uses' => 'ActivitiesController@postSignUp',
         'as' => 'activities.signup.post']);
 
-    //Activities Old
+    //index activités passées
     Route::get('past', [
         'uses' => 'ActivitiesController@getPast',
         'as' => 'activities.past']);
 
-    //Focus
+    //Focus sur ancienne activitée
     Route::get('past/{id}', [
         'uses' => 'ActivitiesController@getFocus',
         'as' => 'activities.focus']);
 
-    //List
+    //récupérer liste inscrits
     Route::get('past/list/{id}', [
         'uses' => 'ActivitiesController@getList',
         'as' => 'activities.list']);
         
-    //PostImage
+    //poster image pour activité
     Route::post('past/{id}/image', [
         'uses' => 'ActivitiesController@postImage',
         'as' => 'activites.focus.image.post'
     ]);
 
-    //HandleLike
+    //like image activité
     Route::get('past/{id}/like/{imgid}', [
         'uses' => 'ActivitiesController@getLike',
         'as' => 'image.get.like'
     ]);
 
-    //HandleUnlike
+    //unlike image activité
     Route::get('past/{id}/unlike/{imgid}', [
         'uses' => 'ActivitiesController@getUnlike',
         'as' => 'image.get.unlike'
     ]);
 
-    //PostComment
+    //commenter image activité
     Route::post('past/{id}/comment/{imgid}', [
         'uses' => 'ActivitiesController@postComment',
         'as' => 'image.post.com'
     ]);
 
-    //Uncomment
+    //supprimer commentaires
     Route::get('past/{activityId}/uncomment/{comId}', [
         'uses' => 'ActivitiesController@getUncomment',
         'as' => 'image.post.uncom'
     ]);
 
-    //DeleteImg
+    //supprimer image
     Route::get('past/{activityId}/deleteimg/{imgId}', [
         'uses' => 'ActivitiesController@deleteImg',
         'as' => 'delete.img'
@@ -141,7 +141,7 @@ Route::group(['prefix' => 'shop'], function () {
         'uses' => 'ShopController@getIndex',
         'as' => 'shop.index']);
 
-    //filtr
+    //filtrer
     Route::post('/', [
         'uses' => 'ShopController@filterProducts',
         'as' => 'shop.index'
@@ -152,11 +152,13 @@ Route::group(['prefix' => 'shop'], function () {
         'uses' => 'ShopController@getShoppingCart',
         'as' => 'shop.shoppingcart']);
 
+    //ajouter au panier
     Route::get('addtocart/{productId}', [
         'uses' => 'ShopController@addToShoppingCart',
         'as' => 'shop.addtocart'
     ]);
 
+    //supprimer article du panier
     Route::get('removefromcart/{shoppingCartId}', [
         'uses' => 'ShopController@removeFromShoppingCart',
         'as' => 'shop.removefromcart'
@@ -169,35 +171,39 @@ Route::group(['prefix' => 'shop'], function () {
     ]);
 });
 
-Route::group(['prefix' => 'shop'], function () { 
+//gérer le notifs
+Route::group(['prefix' => 'notif'], function () { 
 
-//unreadnotif
+//lire la notif
 Route::get('readnotif/{notificationId}', [
     'uses' => 'BdeController@notificationRead',
     'as' => 'read.notif'
 ]);
-
+//signaler photo par cesi
 Route::get('reportphoto/{imageId}', [
     'uses' => 'ActivitiesController@reportPhoto',
     'as' => 'report.photo'
 ]);
-
+//signaler commentaire par cesi
 Route::get('reportcomment/{commentId}', [
     'uses' => 'ActivitiesController@reportComment',
     'as' => 'report.comment'
 ]);
 
+//signaler activité par cesi
 Route::get('reportactivity/{activityId}', [
     'uses' => 'ActivitiesController@reportActivity',
     'as' => 'report.activity'
 ]);
 
+//supprimer activité par bde
 Route::get('deleteactivity/{activityId}', [
     'uses' => 'ActivitiesController@deleteActivity',
     'as' => 'delete.activity'
 ]);
 });
 
+//routes d'authentification
 Auth::routes();
 
 //Login page

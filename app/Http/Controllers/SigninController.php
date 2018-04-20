@@ -9,11 +9,13 @@ use App\User;
 
 class SigninController extends Controller
 {
+    //post quand un utilisateur se connecte
     public function userSignin(Request $request) {
         $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required'
         ]);
+        //vérification email et mot de passe
         if (Auth::attempt(['email' => $request->input('email'), 
                         'password' => $request->input('password')], $request->has('remember'))) {
             return redirect()->route('index');
@@ -22,6 +24,7 @@ class SigninController extends Controller
 
     } 
 
+    //post pour inscription user
     public function userRegister(Request $request) {
         $this->validate($request, [
             'firstname' => 'required',
@@ -29,9 +32,10 @@ class SigninController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
-
+        
+        //si email a déja été prit
         if(User::where('email', '=', $request->input('email'))->first()) {
-            return $request->input('email').' déja prit';
+            return view('mailnonavaible', ['email' => $request->input('email')]);
         }
         $user = new User([
             'name' => $request->input('name'),

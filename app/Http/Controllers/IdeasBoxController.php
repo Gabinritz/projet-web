@@ -139,11 +139,5 @@ class IdeasBoxController extends Controller
         $idea->delete();
         $activity->save();
         return Response::json($data);
-        /*         $notification = new Notification([
-                    'message' => 'votre idée '.$idea->name.' a été retenue',
-                    'user_id' => $idea->user_id,
-                    'unread' => true
-                ]);
-                $notification->save(); */
     }
 }

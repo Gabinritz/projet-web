@@ -9,6 +9,7 @@ use Mail;
 
 class BdeController extends Controller
 {
+    //page d'accueil du site
     public function getIndex() {
         if (!Auth::check()) {
             $user = null;
@@ -17,12 +18,12 @@ class BdeController extends Controller
         $user = Auth::user();
         return view('welcome', ['user' => $user]);
     }
-
+    //page de login
     public function getLogin() {
         return view('login');
     }
 
-    
+    //Passe une notif de non-lue a lue
     public function notificationRead($notificationId) {
 
         if (!Auth::check()) {
