@@ -88,6 +88,8 @@ class ActivitiesController extends Controller
     //avoir liste activités passées
     public function getPast() {
         $user = Auth::user();
+        if(!$user) { return redirect()->route('login'); }
+        
         $activities = Activity::where('date', '<', date('Y-m-d'))->take(20)->get();
         return view('activities.student.past', ['user' => $user, 'activities' => $activities]);
     }
