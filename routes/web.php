@@ -34,7 +34,7 @@ Route::post('/ideas', 'IdeasBoxController@valid');
 // [FOCUS] LIKE
 Route::delete('/activities/{id?}/like/{photo?}', 'ActivitiesController@unlike');
 Route::post('/activities/{id?}/like/{photo?}', 'ActivitiesController@like');
-
+Route::post('/activities/photos/{photo?}', 'ActivitiesController@comment');
 //Ideas
 Route::group(['prefix' => 'ideasbox'], function () { 
 

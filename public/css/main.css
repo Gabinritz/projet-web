@@ -39,6 +39,52 @@ a {
 @media screen and (max-width: 576px) {
   .container {
     width: auto; } }
+.general__modal {
+  display: none;
+  /* Hidden by default */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  /* Stay in place */
+  z-index: 99999;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: hidden;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */ }
+  .general__modal h4 {
+    margin-bottom: 32px; }
+  .general__modal .general__modal-content {
+    text-align: center;
+    background-color: #fefefe;
+    padding: 32px;
+    border: 1px solid #888;
+    width: 75%;
+    height: auto; }
+    .general__modal .general__modal-content .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold; }
+    .general__modal .general__modal-content .close:hover,
+    .general__modal .general__modal-content .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer; }
+
+.general__btn {
+  display: block;
+  margin: auto; }
+
 header {
   background-color: #FFFFFF;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -453,6 +499,7 @@ th, td {
   flex-wrap: wrap; }
 
 .card__activity {
+  position: relative;
   background-color: #fff;
   text-align: left;
   padding: 0;
@@ -561,6 +608,11 @@ hr {
   transition: 0.4s ease-in-out; }
   .card__list:hover {
     color: #3F51B5; }
+
+.signal {
+  position: absolute;
+  top: 0;
+  right: 0; }
 
 .focus__wrapper {
   margin: 2em auto;
@@ -716,8 +768,6 @@ hr {
       background-color: #FAFAFA;
       border-radius: 2px;
       padding: 1rem; }
-      .section-react .section-react-comments .section-react-comments-bloc:last-child {
-        margin-bottom: 0; }
       .section-react .section-react-comments .section-react-comments-bloc .section-react-comments-user {
         color: #d90119;
         font-weight: 500; }
@@ -808,6 +858,16 @@ hr {
 i {
   vertical-align: text-bottom; }
 
+.fav {
+  cursor: pointer; }
+
+.notif {
+  display: inline-block;
+  color: #F44336;
+  margin-bottom: 16px; }
+  .notif:last-child {
+    margin-bottom: 0; }
+
 .btn__shop:before {
   content: ' ';
   display: inline-block;
@@ -835,5 +895,46 @@ i {
   font-size: 24px;
   font-weight: 500;
   color: #4CAF50; }
+
+.seeShop {
+  color: #d90119;
+  font-size: 24px; }
+
+/* ==========  Select Field Variables ========== */
+/* ==========  Select Field ========== */
+select {
+  height: 48px;
+  font-family: inherit;
+  background-color: transparent;
+  width: 100%;
+  padding: 4px 0;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.87);
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0, 0.12); }
+
+select:focus {
+  outline: none; }
+
+.selectfield select {
+  appearance: none; }
+
+.selectfield {
+  display: inline-block;
+  width: 50%;
+  margin-right: 32px;
+  font-family: 'Roboto','Helvetica','Arial',sans-serif;
+  position: relative; }
+
+#selectCategory {
+  display: flex;
+  justify-content: left;
+  margin-bottom: 64px; }
+
+#product__add {
+  background-color: #4CAF50; }
+
+#product__del {
+  background-color: #F44336; }
 
 /*# sourceMappingURL=main.css.map */
