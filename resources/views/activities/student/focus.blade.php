@@ -8,8 +8,10 @@
         @foreach($activity->images as $image)
             <figure class="grid__item" onclick="modal({{$i}})">
                 <span class="item__text">
-                    <i class="material-icons">comment</i> {{ count($image->comments) }}
-                    <i class="material-icons">favorite</i> {{ count($image->likes) }}
+                    <i class="material-icons">favorite</i> 
+                    <span id="item_count_likes-{{$image->id}}">{{ count($image->likes) }}</span>
+                    <i class="material-icons">comment</i> 
+                    <span id="item_count_comments-{{$image->id}}">{{ count($image->comments) }}</span>
                 </span>
                 <img src="{{asset('storage/'.$image->imgUrl.'')}}" alt="Photo {{$activity->name}} {{$i}}" class="item__img">
             </figure>
@@ -29,8 +31,14 @@
                 <img src="{{asset('storage/'.$image->imgUrl.'')}}" alt="{{$j}}" id="img-{{$j}}" class="modal-img">
             </section>
             <div class="section-react-preview" id="preview-{{$j}}">
-                <span><i class="material-icons">favorite</i> {{ count($image->likes) }}</span>
-                <span><i class="material-icons">comment</i> {{ count($image->comments) }}</span>
+                <span>
+                    <i class="material-icons">favorite</i>
+                    <span id="preview_count_likes-{{$image->id}}">{{ count($image->likes) }}</span>
+                </span>
+                <span>
+                    <i class="material-icons">comment</i> 
+                    <span id="preview_count_comments-{{$image->id}}">{{ count($image->comments) }}</span>
+                </span>
             </div>
             <section class="section-react" id="react-{{$j}}">
                 @if ($user->status == 1)
@@ -45,10 +53,10 @@
                 <div class="section-react-likes">
                     <span class="section-react-likes-content">
                     @if(!$image->likes->where('user_id', $user->id)->first())
-                        <i id="like-{{$image->id}}" onclick="like({{$activity->id}}, {{$image->id}})" class="material-icons fav">favorite</i> 
+                        <i id="like-{{$image->id}}" onclick="like({{$activity->id}}, {{$image->id}})" class="material-icons fav fav-black">favorite</i> 
                         <span id="like_count-{{$image->id}}">{{ count($image->likes) }}</span>
                     @else
-                        <i id="like-{{$image->id}}" onclick="unlike({{$activity->id}}, {{$image->id}})" class="material-icons fav-color">favorite</i> 
+                        <i id="like-{{$image->id}}" onclick="unlike({{$activity->id}}, {{$image->id}})" class="material-icons fav fav-color">favorite</i> 
                         <span id="like_count-{{$image->id}}">{{ count($image->likes) }}</span>
                     @endif
                         <span>@if (count($image->likes) <=1 ) personne aime cette photo @else personnes aiment cette photo @endif</span>
@@ -56,7 +64,8 @@
                 </div>
 
                 <div class="section-react-comments">
-                    @foreach($image->comments as $comment)
+                    <div class="section-react-comments-contents" id="contents-{{$image->id}}">
+                        @foreach($image->comments as $comment)
                         <div class="section-react-comments-bloc">
                             <span class="section-react-comments-user">
                                 {{$comment->user->where('id', $comment->user_id)->first()->firstname}} {{$comment->user->where('id', $comment->user_id)->first()->name}}
@@ -68,32 +77,34 @@
                             <a href="{{ route('report.comment', ['commentId' => $comment->id]) }}">signaler</a>
                             @endif
                         </div>
-                    @endforeach
-                    <form action="{{ route('image.post.com', ['imgid' => $image->id, 'id' => $activity->id]) }}" method="post">
-                        @csrf
-                        <input class="section-react-comments-add" type="text" placeholder="Ajouter un commentaire" name="comment" required>
-                        <button class="comment-send" type="submit"></button>
-                    </form>
-                    
+                        @endforeach
+                    </div>
+                        <form class="formComment" method="post">
+                                @csrf
+                            <input class="section-react-comments-add" id="comment-{{$image->id}}" type="text" placeholder="Ajouter un commentaire" name="comment" required>
+                                <input type="hidden" id="comment-id" name="id" value="{{$image->id}}">
+                                <button class="comment-send" type="submit"></button>
+                            </form>
+                            
+                        </div>
+                    </section>
                 </div>
-            </section>
-        </div>
-    </div>
-    <?php $j++; ?>
+            </div>
+            <?php $j++; ?>
 @endforeach
 
-{{-- @if($user && $activity->participates->where('user_id', $user->id)->first()) --}}
-@if (1)
+@if($user && $activity->participates->where('user_id', $user->id)->first())
 <div class="card hidden slideUp" id="addIdea">
         <form method="post" class="form login__form" enctype="multipart/form-data" action="{{ route('activites.focus.image.post', ['id' => $activity->id]) }}" >
             <div class="group">   
                 <input type="text" id="name" name="name" required
+                onkeyup="checkText(this)"
                 <span class="bar"></span>
                 <label>Titre de la photo</label>
             </div>
 
             <div class="group">
-                <input type="file" name="image" id="image">
+                <input type="file" name="image" id="image" onfocus="checkFile(this)" required>
                 <span class="bar"></span>
                 <label>Ajouter une image</label>
             </div>

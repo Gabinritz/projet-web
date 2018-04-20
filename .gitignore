@@ -2,7 +2,6 @@
 /public/hot
 /public/storage
 /public/.sass-cache
-/public/scss
 /storage/*.key
 /vendor
 /.idea

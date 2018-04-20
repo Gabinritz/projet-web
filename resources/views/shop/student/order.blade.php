@@ -1,5 +1,8 @@
 @extends ('partials.layout', ['title' => 'Boite à idées'])
 @section('content')
-<div>Commande bien validée</div>
-<div>Un mail de confirmation vous été envoyé</div>
+<div class="accueil">
+    <h1>Commande bien validée</h1>
+    <h2>Un mail de confirmation vous été envoyé</h2>
+
+</div>
 @endsection

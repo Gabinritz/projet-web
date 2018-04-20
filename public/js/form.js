@@ -11,6 +11,25 @@ function inputValid(input, valid) {
 }
 
 
+function checkX(input) {
+    if (0) {
+        inputValid(input, false)
+    } else { inputValid(input, true) }
+}
+function checkSearch(input) {
+    if (input.value.length>0) {
+        input.classList.add('input__valid')
+    } else {
+        input.classList.remove('input__valid')
+    }
+}
+
+function checkFile(input) {
+    if (input.files.length == 0) {
+        inputValid(input, false)
+    } else { inputValid(input, true) }
+}
+
 function checkText(input) {
     if(input.value.length < 1) {
         inputValid(input, false)
@@ -23,7 +42,7 @@ function checkText(input) {
 }
 
 function checkNumber(input) { // isNaN
-    if(input.value.length < 1) {
+    if(input.value.length < 0) {
         inputValid(input, false)
         return false
     } else {

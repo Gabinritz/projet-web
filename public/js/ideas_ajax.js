@@ -1,4 +1,4 @@
-let url = '/ideas'
+let url = '/bde-website/public/ideas'
 $.ajaxSetup({
     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
 });

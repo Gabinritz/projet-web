@@ -39,12 +39,14 @@
             <div class="group">      
                 <input type="text" 
                 name="name" 
-                value="{{ old('name') }}" required autofocus>
+                value="{{ old('name') }}" required 
+                onkeyup="checkText(this)"
+                autofocus>
                 <span class="bar"></span>
                 <label>Nom</label>
             </div>
             <div class="group">      
-                <input type="text" name="firstname" value="{{ old('firstname') }}" required>
+                <input type="text" name="firstname" value="{{ old('firstname') }}" required onkeyup="checkText(this)">
                 <span class="bar"></span>
                 <label>Prénom</label>
             </div>
@@ -56,7 +58,7 @@
             </div>
             <div class="group">      
                 <input type="password" name="password" required 
-                    onkeyup="checkRegex(this)">
+                    onkeyup="checkPassword(this)">
                 <span class="bar"></span>
                 <label>Mot de passe</label>
             </div>
